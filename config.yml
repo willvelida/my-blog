@@ -1,9 +1,11 @@
 baseURL: 'https://mango-cliff-0548b1d1e.1.azurestaticapps.net/'
 title: 'Will Velida'
 theme: 'PaperMod'
-paginate: 9
+paginate: 5
 
 enableRobotsTXT: true
+googleAnalytics: UA-91960027-1
+enableEmoji: true
 
 params:
   profileMode:
@@ -31,6 +33,7 @@ params:
   ShowPostNavLinks: true
   author: "Will Velida"
   env: production
+  ShowCodeCopyButtons: true
 
 outputs:
   home:
