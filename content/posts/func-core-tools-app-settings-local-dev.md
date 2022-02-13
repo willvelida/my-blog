@@ -5,6 +5,10 @@ draft: false
 tags: ["Azure","C#","Serverless","Azure Functions"]
 ShowToc: true
 TocOpen: true
+cover:
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kbkpfcw43p59n1nl3wrj.png
+    alt: "Azure Functions Logo"
+    caption: 'Using Azure Functions Core tools, we can pull our app settings from our Function and use them during local development.'
 ---
 
 *Update: If you prefer watching videos to reading, I made a video on my [YouTube channel](https://www.youtube.com/channel/UCgV0RWjqmZ-Zl6vfoH2Wqjg) that covers this content*
