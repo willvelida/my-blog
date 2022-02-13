@@ -1,33 +1,54 @@
 baseURL: 'https://mango-cliff-0548b1d1e.1.azurestaticapps.net/'
 title: 'Will Velida'
 theme: 'PaperMod'
+paginate: 9
 
 enableRobotsTXT: true
 
 params:
-    profileMode:
-        enabled: true
-        title: "Will Velida" # optional default will be site title
-        subtitle: "I code, I blog, I speak"
-        imageUrl: "https://pbs.twimg.com/profile_images/1391280978056806402/Y2FzLmYh_400x400.jpg" # optional
-        imageTitle: "This is me" # optional
-        imageWidth: 120 # custom size
-        imageHeight: 120 # custom size
-        buttons:
-          - name: Archive
-            url: "/archive"
-          - name: Github
-            url: "https://github.com/"
+  profileMode:
+      enabled: true
+      title: "Will Velida" # optional default will be site title
+      subtitle: "I code, I blog, I speak"
+      imageUrl: "https://pbs.twimg.com/profile_images/1391280978056806402/Y2FzLmYh_400x400.jpg" # optional
+      imageTitle: "This is me" # optional
+      imageWidth: 120 # custom size
+      imageHeight: 120 # custom size
+      buttons:
+        - name: Blog
+          url: "/posts"
 
-    socialIcons: # optional
-        - name: "github"
-          url: "https://github.com/willvelida"
-        - name: "twitter"
-          url: "https://twitter.com/willvelida"
+  socialIcons: # optional
+      - name: "github"
+        url: "https://github.com/willvelida"
+      - name: "twitter"
+        url: "https://twitter.com/willvelida"
+      - name: "linkedin"
+        url: "https://www.linkedin.com/in/willvelida/"
+
+  ShowShareButtons: true
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  author: "Will Velida"
+  env: production
+
+outputs:
+  home:
+    - HTML 
+    - RSS 
+    - JSON
 
 menu:
   main:
     - identifier: about
-      name: about
+      name: About
       url: /about/
       weight: 10
+    - identifier: blog
+      name: Blog
+      url: /posts/
+      weight: 20
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 30
