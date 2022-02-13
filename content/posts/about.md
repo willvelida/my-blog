@@ -1,6 +1,7 @@
 ---
 title: "About me"
 date: 2022-02-13T19:02:55+13:00
+url: /about/
 draft: false
 ---
 
