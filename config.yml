@@ -24,3 +24,10 @@ params:
           url: "https://github.com/willvelida"
         - name: "twitter"
           url: "https://twitter.com/willvelida"
+
+menu:
+  main:
+    - identifier: about
+      name: about
+      url: /about/
+      weight: 10
