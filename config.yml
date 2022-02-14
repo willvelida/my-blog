@@ -45,13 +45,13 @@ menu:
   main:
     - identifier: about
       name: About
-      url: /about/
+      url: /about
       weight: 10
     - identifier: blog
       name: Blog
-      url: /posts/
+      url: /posts
       weight: 20
     - identifier: search
       name: Search
-      url: /search/
+      url: /search
       weight: 30
