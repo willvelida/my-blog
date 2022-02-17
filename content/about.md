@@ -8,7 +8,7 @@ draft: false
 
 ## Hi there, I'm Will (He/Him)
 
-I'm a Customer Engineer for Microsoft working in the Fast Track for Azure team! My focus is on Azure Apps (App Service, Containers, Functions!) and I'm based in Auckland, New Zealand.
+I'm a Customer Engineer for Microsoft working in the Fast Track for Azure team! My focus is on Azure Apps (App Service, Containers, Functions!) and I'm based in Auckland, New Zealand. Even though I work for Microsoft, this blog contains my own opinions.
 
 ### ⚡ Languages and Technologies
 
