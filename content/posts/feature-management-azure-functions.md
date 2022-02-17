@@ -1,7 +1,7 @@
 ---
 title: "Implementing Feature Flags in Azure Functions with Azure App Configuration"
 date: 2022-02-17T18:14:32+13:00
-draft: true
+draft: false
 tags: ["Azure","C#","Serverless","Azure Functions", "Azure App Configuration"]
 ShowToc: true
 TocOpen: true
@@ -25,6 +25,8 @@ If you want to follow along with this article, you'll need:
 
 - An Azure Subscription.
 - Visual Studio 2022 with the **Azure Development** workload.
+
+If you want to browse the code and follow along, the sample is available on [my GitHub](https://github.com/willvelida/azure-app-configuration-dotnet-demo).
 
 ## Creating our Azure App Configuration store.
 
@@ -124,7 +126,8 @@ Let's break this code down:
 
 - We're using [Dependency Injection](https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection) for our Function and adding Azure App Configuration as an configuration source.
 - Within the ```ConfigureAppConfiguration``` method, we call ```AddAzureAppConfiguration``` to use App Configuration as our config source and add the ```UseFeatureFlags()``` method to load our feature flags.
-- The ```Select("_")``` method loads just our feature flags. If we wanted to load configuration alongside our feature flags.
+- The ```Select("_")``` method loads just our feature flags. If we wanted to load configuration alongside our feature flags, we would use a different key to select them. This is just a dummy key. If you omit the ```Select()``` method entirely, all configuration will be loaded into your Function.
+- In our ```Configure()``` method, we then add our App Configuration service and feature manager through Dependency Injection.
 
 Now that we've set up our Startup file, we can now create our Function. We're going to be creating a HTTP trigger which makes a simple GET call to our Function endpoint.
 
@@ -179,6 +182,32 @@ namespace FeatureFunction.Functions
 ```
 
 Let's break this down:
+
+We first create a constructor to inject our services for both our configuration and feature manager:
+
+```csharp
+private readonly IFeatureManagerSnapshot _featureManagerSnapshot;
+private readonly IConfigurationRefresher _configurationRefresher;
+
+public GetFeature(IFeatureManagerSnapshot featureManagerSnapshot, IConfigurationRefresherProvider configurationRefresher)
+{
+    _featureManagerSnapshot = featureManagerSnapshot;
+    _configurationRefresher = configurationRefresher.Refreshers.First();
+}
+```
+
+Then within our Function, we can call the ```RefreshAsync()``` to refresh any feature flags that are in our App Configuration. This method enabled us to disable and enable features within our App Configuration store without having to redeploy our code for the feature to take effect. 
+
+Feature flags have a default cache expiration of 30 seconds, but you can configure this to have a smaller or greater expiration period by setting the ```FeatureFlagsOptions.CacheExpirationInterval``` property when passing to the ```UseFeatureFlags``` method in your ```Startup.cs``` file.
+
+We then have an if statement that checks to see if our feature has been enabled and if so, set the message to say that our feature has been enabled or not like so:
+
+```csharp
+if (await _featureManagerSnapshot.IsEnabledAsync("MyAwesomeFeature"))
+        message = "MyAwesomeFeature has been enabled!";
+```
+
+In this code snippet, we're just checking the binary state of our Feature (whether it is enabled or not). Feature Flags can be targeted at [specific users or groups](https://docs.microsoft.com/en-us/azure/azure-app-configuration/howto-targetingfilter-aspnet-core) or we can filter them by a [percentage of users](https://docs.microsoft.com/en-us/azure/azure-app-configuration/howto-targetingfilter-aspnet-core).
 
 Now that our function code has been written, let's test it out!
 
