@@ -51,6 +51,10 @@ menu:
       name: Blog
       url: /posts/
       weight: 20
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 20
     - identifier: search
       name: Search
       url: /search/
