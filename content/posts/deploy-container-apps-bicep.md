@@ -1,7 +1,7 @@
 ---
 title: "Creating and Provisioning Azure Container Apps with Bicep"
 date: 2022-02-18T20:47:30+13:00
-draft: true
+draft: false
 tags: ["Azure","Bicep","Serverless","Container Apps","Containers", "Infrastructure as Code"]
 ShowToc: true
 TocOpen: true
