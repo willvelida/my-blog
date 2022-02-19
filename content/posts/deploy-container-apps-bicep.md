@@ -6,7 +6,7 @@ tags: ["Azure","Bicep","Serverless","Container Apps","Containers", "Infrastructu
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://willvelidastorage.blob.core.windows.net/blogimages/deploycontainerappsbicep5.png
+    image: https://willvelidastorage.blob.core.windows.net/blogimages/deploycontainerappsbicep4.png
     alt: "Azure Container Apps Logo"
     caption: 'Using Bicep, we can deploy Azure Container Apps quickly and easily!'
 ---
