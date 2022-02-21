@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Azure Container Apps"
+title: "Azure Container Apps Explained"
 date: 2022-02-14T19:35:31+13:00
 draft: true
 ShowToc: true
