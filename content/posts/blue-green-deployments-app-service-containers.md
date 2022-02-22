@@ -39,6 +39,59 @@ Let's start off by setting up our infrastructure pipeline. Here, I want to creat
 
 ### Creating our Azure Resources
 
+First, let's create the Azure Container Registry that we need to store our container images. We can do this in Bicep like so:
+
+Azure Container Registry Bicep code:
+
+```bicep
+param registryName string
+param registryLocation string
+param registrySku string
+
+resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-09-01' = {
+  name: registryName
+  location: registryLocation
+  sku: {
+    name: registrySku
+  }
+  identity: {
+    type: 'SystemAssigned'
+  }
+}
+```
+
+Here, we're giving our container registry a name, location and sku which we will pass through as parameters.
+
+The important thing to note here is that we're creating a [System Assigned Managed Identity for our Container Registry](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication-managed-identity). So rather than enabling admin access on this Container Registry, we'll be using a managed identity for our ACR which will allow us to assign permissions and roles for the ACR without having to supply registry credentials. 
+
+There are a number of ways that we can authenitcate with Azure Container Registry, so I'd encourage you to check [this guide](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication?tabs=azure-cli) out to see what options are best for your scenario.
+
+Next up. we'll create our App Service Plan. To do this, we can write the following Bicep code:
+
+```bicep
+param appServicePlanName string
+param appServicePlanLocation string
+param appServicePlanSkuName string
+param appServicePlanCapacity int
+
+resource appServicePlan 'Microsoft.Web/serverfarms@2021-02-01' = {
+  name: appServicePlanName
+  location: appServicePlanLocation
+  sku: {
+    name: appServicePlanSkuName
+    capacity: appServicePlanCapacity
+  }
+  kind: 'linux'
+  properties: {
+    reserved: true
+  }
+}
+
+
+
+output appServicePlanId string = appServicePlan.id
+```
+
 App Service Bicep code:
 
 ```bicep
@@ -136,59 +189,6 @@ resource appServiceSlotAcrPullRoleAssignment 'Microsoft.Authorization/roleAssign
 }
 ```
 
-App Service Plan Bicep code:
-
-```bicep
-param appServicePlanName string
-param appServicePlanLocation string
-param appServicePlanSkuName string
-param appServicePlanCapacity int
-
-resource appServicePlan 'Microsoft.Web/serverfarms@2021-02-01' = {
-  name: appServicePlanName
-  location: appServicePlanLocation
-  sku: {
-    name: appServicePlanSkuName
-    capacity: appServicePlanCapacity
-  }
-  kind: 'linux'
-  properties: {
-    reserved: true
-  }
-}
-
-output appServicePlanId string = appServicePlan.id
-```
-
-Azure Container Registry Bicep code:
-
-```bicep
-param registryName string
-param registryLocation string
-param registrySku string
-param greenSlotName string
-param blueSlotName string
-
-resource greenSlot 'Microsoft.Web/sites@2021-02-01' existing = {
-  name: greenSlotName
-}
-
-resource blueSlot 'Microsoft.Web/sites/slots@2021-02-01' existing = {
-  name: blueSlotName
-}
-
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-09-01' = {
-  name: registryName
-  location: registryLocation
-  sku: {
-    name: registrySku
-  }
-  identity: {
-    type: 'SystemAssigned'
-  }
-}
-```
-
 Our main.bicep code:
 
 ```bicep
@@ -210,8 +210,6 @@ module containerRegistry 'containerRegistry.bicep' = {
     registryLocation: location 
     registryName: acrName
     registrySku: acrSku
-    greenSlotName: appServiceName
-    blueSlotName: appServiceSlotName
   }
 }
 
@@ -258,6 +256,81 @@ paramters.json file
 ```
 
 ### Deploying our resources with GitHub Actions
+
+Now that our Bicep code has been written, we can deploy it using GitHub Actions.
+
+Here is our workflow file:
+
+```yaml
+name: Deploy Azure Infrastructure
+
+on:
+  push:
+    paths:
+      - 'deploy/*'
+  workflow_dispatch:
+
+jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Bicep Linter
+        run: az bicep build --file ./deploy/main.bicep
+
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: azure/login@v1
+        name: Sign in to Azure
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - uses: azure/arm-deploy@v1
+        name: Run preflight validation
+        with:
+          deploymentName: ${{ github.run_number }}
+          resourceGroupName: ${{ secrets.AZURE_RG }}
+          template: ./deploy/main.bicep
+          parameters: ./deploy/parameters.json
+          deploymentMode: Validate
+
+  preview:
+    runs-on: ubuntu-latest
+    needs: [lint, validate]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: azure/login@v1
+        name: Sign in to Azure
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - uses: Azure/cli@v1
+        name: Run what-if
+        with:
+          inlineScript: |
+            az deployment group what-if --resource-group ${{ secrets.AZURE_RG }} --template-file ./deploy/main.bicep --parameters ./deploy/parameters.json
+  deploy:
+    runs-on: ubuntu-latest
+    environment: Dev
+    needs: preview
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+      - name: Deploy Bicep File
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: ${{ secrets.AZURE_RG }}
+          template: ./deploy/main.bicep
+          parameters: ./deploy/parameters.json
+          failOnStdErr: false
+```
 
 ## Deploying our container to App Service
 
