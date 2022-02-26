@@ -562,7 +562,7 @@ Finally, we initiate the swap to the production slot by using the AZ CLI. Here a
 
 As with out green slot, we should get a URL. Since this is our production slot, our URL won't have a slot name within it's URL.
 
-Navigate to the URL and you can see that we've successful swapped to our green slot!
+Navigate to the URL and you can see that we've successfully swapped to our green slot!
 
 ![Our shiny new production app](https://willvelidastorage.blob.core.windows.net/blogimages/bluegreenapp6.png)
 
