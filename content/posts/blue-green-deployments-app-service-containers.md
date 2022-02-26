@@ -33,11 +33,11 @@ Imagine you're working on an application and you build a container image that pa
 
 Should anything not work as expected, we can abandon the deployment of our new container image without affecting our users, since traffic will be redirected to our green slot containing our exiting image.
 
-In Azure App Service, we can set up staging environments using deployment slots. By using Blue/Green deployments, we can warm up instances in a slot before we swap slots to production traffic, elminating downtime for our application. 
+In Azure App Service, we can set up staging environments using deployment slots. By using Blue/Green deployments, we can warm up instances in a slot before we swap slots to production traffic, eliminating downtime for our application. 
 
 Please note, that your App Service Plan must be either at the **Standard**, **Premium** or **Isolated** tier. 
 
-## Preparing our infrastrucutre
+## Preparing our infrastructure
 
 Let's start off by setting up our infrastructure pipeline. Here, I want to create my App Service that has both a blue and green slot, an Azure Container Registry to store my images, then I want to be able to deploy my Bicep template using GitHub Actions.
 
@@ -68,7 +68,7 @@ Here, we're giving our container registry a name, location and sku which we will
 
 The important thing to note here is that we're creating a [System Assigned Managed Identity for our Container Registry](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication-managed-identity). So rather than enabling admin access on this Container Registry, we'll be using a managed identity for our ACR which will allow us to assign permissions and roles for the ACR without having to supply registry credentials. 
 
-There are a number of ways that we can authenitcate with Azure Container Registry, so I'd encourage you to check [this guide](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication?tabs=azure-cli) out to see what options are best for your scenario.
+There are a number of ways that we can authenticate with Azure Container Registry, so I'd encourage you to check [this guide](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-authentication?tabs=azure-cli) out to see what options are best for your scenario.
 
 Next up. we'll create our App Service Plan. To do this, we can write the following Bicep code:
 
@@ -417,7 +417,7 @@ Once our role has been created, we can set up the following secrets in GitHub Ac
 | ---------- | --------- |
 | REGISTRY_LOGIN_SERVER | The login server name of your registry (all lowercase). Example: myregistry.azurecr.io |
 | REGISTRY_USERNAME | The ```clientId``` from the JSON output from the service principal creation |
-| REGISTRY_PASSWORD | The clientSecret from the JSON output from the service principal creation |
+| REGISTRY_PASSWORD | The ```clientSecret``` from the JSON output from the service principal creation |
 
 ### Pushing our container image to Azure Container Registry
 
@@ -457,7 +457,7 @@ jobs:
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/hellobluegreenwebapp:latest
 ```
 
-We login to Azure using our Service Principal connection and then log into our Azure Container Registry. Once that's successfull, we build and push our container image to our ACR.
+We login to Azure using our Service Principal connection and then log into our Azure Container Registry. Once that's successful, we build and push our container image to our ACR.
 
 You can view the Dockerfile that I'm using [here](https://github.com/willvelida/azure-apps-for-containers-bluegreen-poc/blob/main/src/Dockerfile).
 
@@ -472,7 +472,7 @@ Once this has been built and pushed to our Azure Container Registry, we should b
 
 Once our image has been pushed to Azure Container Registry, we can deploy it to our Blue slot. In the snippet below, we log into Azure, then retrieve our Application name using a inline script and set it to a output variable that we can use in a later step in this stage.
 
-We then deploy our image to our Blue slot using the output variable we set as the App name, with the image that we've pushed to our ACR and explicity tell the task to deploy the image to our ```blue``` slot:
+We then deploy our image to our Blue slot using the output variable we set as the App name, with the image that we've pushed to our ACR and explicitly tell the task to deploy the image to our ```blue``` slot:
 
 ```yaml
 deploy-to-blue-slot:
@@ -503,7 +503,7 @@ deploy-to-blue-slot:
 
 ### Verify that the blue slot works
 
-n this sample, we can verify whether or not our deployment to the blue slot was successful by simply navigating to the blue slot of our App Service.
+In this sample, we can verify whether or not our deployment to the blue slot was successful by simply navigating to the blue slot of our App Service.
 
 The URL for our blue slot will take the following format:
 
