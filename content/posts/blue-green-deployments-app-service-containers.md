@@ -1,6 +1,6 @@
 ---
 title: "Implementing Blue/Green Deployments with Azure Web Apps for Containers"
-date: 2022-02-21T21:25:40+13:00
+date: 2022-02-26
 draft: false
 tags: ["Azure","Bicep","App Service","Containers", "Infrastructure as Code", "GitHub Actions"]
 ShowToc: true
