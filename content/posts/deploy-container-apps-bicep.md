@@ -142,8 +142,8 @@ resource todoApiContainerApp 'Microsoft.Web/containerApps@2021-03-01' = {
       }
       registries: [
         {
-          server: containerRegistry.name
-          username: containerRegistry.properties.loginServer
+          server: containerRegistry.properties.loginServer
+          username: acrUserName
           passwordSecretRef: 'container-registry-password'
         }
       ]

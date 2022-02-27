@@ -1,15 +1,46 @@
 ---
 title: "Building and Deploying Container Images to Azure Container Apps with GitHub Actions"
-date: 2022-02-27T19:24:11+13:00
+date: 2022-02-29
 draft: true
 tags: ["Azure","Serverless","Azure Container Apps","Containers", "Docker", "GitHub Actions"]
 ShowToc: true
 TocOpen: true
+cover:
+    image: https://willvelidastorage.blob.core.windows.net/blogimages/deploycontainerappsbicep4.png
+    alt: "Azure Container Apps Logo"
+    caption: 'Using GitHub Actions, we can deploy new versions of our Container Apps as our images are updated'
 ---
 
 In a previous [blog post](https://www.willvelida.com/posts/deploy-container-apps-bicep/), I talked about how we can provision an Azure Container App using Bicep and deploying our Bicep template using GitHub Actions.
 
 We'll now turn our attention to updating the images that our Container App uses by building the new image, deploying it to Azure Container registry and then pulling the newly built image from our registry to our Container App.
+
+As part of my infrastructure deployment, I defined a container image as part of my Bicep like so:
+
+```bicep
+    template: {
+      containers: [
+        {
+          name: todoApiContainerName
+          image: 'mcr.microsoft.com/azuredocs/containerapps-helloworld:latest'
+          resources: {
+            cpu: '0.5'
+            memory: '1Gi'
+          }         
+        }
+      ]
+      scale: {
+        minReplicas: 1
+        maxReplicas: 1
+      }
+    }
+```
+
+So when my Container App was deployed, I had a public endpoint that showed the following page:
+
+![image](https://willvelidastorage.blob.core.windows.net/blogimages/deploycontainerappsbicep4.png)
+
+As we update our application, we'll need to update the image and deploy it to our Container App without performing a full infrastructure deployment. This is what we'll be focusing on in this article.
 
 Before we start, please bear in mind that Azure Container Apps are **currently in preview!**. That means that this post was correct as of the time of writing! As the service reaches GA (please don't ask me when, I don't know), the methods you read here may have changed drastically. (*Note to self, when that happens update this article!*)
 
@@ -61,6 +92,21 @@ We need to save this JSON ouput as a **Secret** in our GitHub repo. You can do t
 | REGISTRY_LOGIN_SERVER | The login server name of your registry (all lowercase). Example: myregistry.azurecr.io |
 | REGISTRY_USERNAME | The ```clientId``` from the JSON output from the service principal creation |
 | REGISTRY_PASSWORD | The ```clientSecret``` from the JSON output from the service principal creation |
+
+We also need to grant our GitHub Actions service principal with the permissions to both pull and push images to our Azure Container Registry. We can grant this by running the following AZ CLI commands:
+
+```bash
+# Get the id of our Azure Container Registry
+registryId=$(az acr show --name <registry-name> --query id --output tsv)
+
+# Grant the 'AcrPush' role to our service principal
+az role assignment create --assignee <ClientId> --scope $registryId --role AcrPush
+
+# Grant the 'AcrPull' role to our service principal
+az role assignment create --assignee <ClientId> --scope $registryId --role AcrPull
+```
+
+Use the ```clientId``` of the Service Principal that was generated when you created it for the ```--assignee``` parameter.
 
 ## Building our container image and pushing it to Azure Container Registry
 
@@ -129,7 +175,15 @@ jobs:
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/bookstoreapi:${{ github.sha }}
 ```
 
+Let's break down what this ```build-container-image``` job is doing:
+
+- We first log into Azure using the Service Principal credentials we generated for our GitHub Actions workflow. This will allow our workflow to deploy resources and make changes to our Azure environment.
+- We then log into our Azure Container Registry using our Service Principal credentials. Our Service Principal has permissions to pull and push images from our Container Registry, which we need for our deployment.
+- We then run the ```docker build``` and ```docker push``` commands in the ```run``` step. We are in the working directory for our application, so we don't need to do any funky formatting to point to our ```Dockerfile```. For my image versioning, I'm just using the git commit hash, but you can apply whatever versioning you think you need for your app. Once our ```Dockerfile``` has successfully built, we push it to our Azure Container Registry.
+
 ## Deploying our container image to Azure Container Apps.
+
+Now that our image has been pushed to our Azure Container Registry, we can create a job in our GitHub Action workflow file to deploy our image to our Container App:
 
 ```yaml
 deploy-container-app:
@@ -154,6 +208,21 @@ deploy-container-app:
           az containerapp update -n velidabookstoreapi -g todocontainerapp-rg -i ${{ secrets.REGISTRY_LOGIN_SERVER }}/bookstoreapi:${{ github.sha }} --registry-login-server ${{ secrets.REGISTRY_LOGIN_SERVER }} --registry-username  ${{ secrets.REGISTRY_USERNAME }} --registry-password ${{ secrets.REGISTRY_PASSWORD }} --debug
 ```
 
+Again, let's break this down:
+
+- We log into Azure using the Service Principal credentials we generated for our GitHub Actions workflow.
+- We then run inline AZ CLI commands to deploy our image:
+  - The ```az containerapp``` command is still in preview and are not part of the main AZ CLI command set yet, so we need to install an extension before we can start using those commands. We do so by running ```az extension add```. We add the ```--yes``` parameter to install the extension without asking for confirmation. Check the docs for more details on [az extension add](https://docs.microsoft.com/en-us/cli/azure/extension?view=azure-cli-latest#az-extension-add).
+  - Once that's been completed, we then run the ```az containerapp update``` command to deploy our new image. We pass in the credentials needed to authenticate to our Azure Container Registry so that we pull our image into our Container App.
+
+Now that everything's been set up, we can run our workflow file to deploy our new image:
+
+![image](https://willvelidastorage.blob.core.windows.net/blogimages/containerappsgithubactions1.jpg)
+
+Navigating to my Container App, I can see that my new image has been deployed. So instead of the hello world example provided by the good folks on the Container Apps team, my Container App is now using my image instead:
+
+![image](https://willvelidastorage.blob.core.windows.net/blogimages/containerappsgithubactions2.jpg)
+
 ## Alternative approach
 
 As part of the preview, we can work with Azure Container Apps using the Azure CLI. One of the commands at our disposal allows us to generate a GitHub Actions workflow using the following command:
@@ -174,11 +243,30 @@ az containerapp github-action add \
   --token <YOUR_GITHUB_PERSONAL_ACCESS_TOKEN>
 ```
 
-With this command, we 
+With this command, this generates a GitHub Action worflow file for us that we can use as a basis to deploy our container images to Azure Container Apps as we update them!
 
-## Playing around with the AZ CLI
+## What else can we do with az containerapp commands?
+
+With the ```az containerapp``` extension, we have a couple of options available to us to manage our Azure Container Apps! For example, we can use the ```az containerapp update``` command to split traffic between our Container Apps revisions like so:
+
+```bash
+az containerapp update --name $APP_NAME --resource-group $RESOURCE_GROUP --traffic-weight $CURRENT_REVISION=80,latest=20
+```
+
+We can also activate revisions using the following command:
+
+```bash
+az containerapp revision activate \
+  --name <REVISION_NAME> \
+  --app <CONTAINER_APP_NAME> \
+  --resource-group <RESOURCE_GROUP_NAME>
+```
+
+Check out [this documentation](https://docs.microsoft.com/en-us/azure/container-apps/revisions-manage?tabs=bash) to see what other commands you can use with the ```az containerapp``` extension
 
 ## Conclusion
+
+Even though Azure Container Apps is still in preview, we can use GitHub Actions to build and deploy our container images as we update them. As you would expect from a preview service, there are limits to what is supported (no support for managed identities yet, so we have to use a lot of admin access here). But as this service heads towards GA, I'm sure we'll more support for this (Again, please don't ask me when ACA is going GA, I have no idea 🤷)
 
 If you want a reference to the code that we've written in this post, you can do so in this [GitHub repository](https://github.com/willvelida/bookstore-containerapps).
 
