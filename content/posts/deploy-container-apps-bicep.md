@@ -2,7 +2,7 @@
 title: "Creating and Provisioning Azure Container Apps with Bicep"
 date: 2022-02-18T20:47:30+13:00
 draft: false
-tags: ["Azure","Bicep","Serverless","Container Apps","Containers", "Infrastructure as Code"]
+tags: ["Azure","Bicep","Serverless","Azure Container Apps","Containers", "Infrastructure as Code"]
 ShowToc: true
 TocOpen: true
 cover:
@@ -359,8 +359,6 @@ Awesome! We've just deployed a Azure Container App in a Container App environmen
 As you can see, we can manage and deploy our Container Apps using Bicep! As this awesome product grows, more features will be released meaning that our we can extend our Bicep template further ([vNet integration comes to mind](https://techcommunity.microsoft.com/t5/apps-on-azure-blog/azure-container-apps-virtual-network-integration/ba-p/3096932))
 
 If you want a reference to the code that we've written in this post, you can do so in this [GitHub repository](https://github.com/willvelida/bookstore-containerapps).
-
-In a future post, we'll deploy our Bicep template via GitHub actions rather than running AZ CLI commands on our local machine each time we want to deploy our Container Apps.
 
 If you have any questions, feel free to reach out to me on twitter [@willvelida](https://twitter.com/willvelida)
 
