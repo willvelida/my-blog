@@ -1,12 +1,12 @@
 ---
 title: "Building and Deploying Container Images to Azure Container Apps with GitHub Actions"
-date: 2022-02-29
-draft: true
+date: 2022-02-28
+draft: false
 tags: ["Azure","Serverless","Azure Container Apps","Containers", "Docker", "GitHub Actions"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://willvelidastorage.blob.core.windows.net/blogimages/deploycontainerappsbicep4.png
+    image: https://willvelidastorage.blob.core.windows.net/blogimages/containerappsgithubactions3.jpg
     alt: "Azure Container Apps Logo"
     caption: 'Using GitHub Actions, we can deploy new versions of our Container Apps as our images are updated'
 ---
