@@ -83,7 +83,7 @@ This command assigns the *contributor* permission to your GitHub Action workflow
 }
 ```
 
-We need to save this JSON ouput as a **Secret** in our GitHub repo. You can do this by selecting **Settings** then **Secrets** and clicking on **New** to create the secret. We'll need to create the following secrets:
+We need to save this JSON output as a **Secret** in our GitHub repo. You can do this by selecting **Settings** then **Secrets** and clicking on **New** to create the secret. We'll need to create the following secrets:
 
 | **Secret** | **Value** |
 | ---------- | --------- |
@@ -243,7 +243,9 @@ az containerapp github-action add \
   --token <YOUR_GITHUB_PERSONAL_ACCESS_TOKEN>
 ```
 
-With this command, this generates a GitHub Action worflow file for us that we can use as a basis to deploy our container images to Azure Container Apps as we update them!
+With this command, this generates a GitHub Action workflow file for us that we can use as a basis to deploy our container images to Azure Container Apps as we update them!
+
+Taking this approach means we have to generate our own GitHub personal access token (PAT). If you don't know how to do that, check out this [guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ## What else can we do with az containerapp commands?
 
@@ -266,7 +268,7 @@ Check out [this documentation](https://docs.microsoft.com/en-us/azure/container-
 
 ## Conclusion
 
-Even though Azure Container Apps is still in preview, we can use GitHub Actions to build and deploy our container images as we update them. As you would expect from a preview service, there are limits to what is supported (no support for managed identities yet, so we have to use a lot of admin access here). But as this service heads towards GA, I'm sure we'll more support for this (Again, please don't ask me when ACA is going GA, I have no idea 🤷)
+Even though Azure Container Apps is still in preview, we can use GitHub Actions to build and deploy our container images as we update them. As you would expect from a preview service, there are limits to what is supported (no support for managed identities yet, so we have to use a lot of admin access here). But as this service heads towards GA, I'm sure we'll more support for this (Again, please don't ask me when Container Apps are going GA, I have no idea 🤷)
 
 If you want a reference to the code that we've written in this post, you can do so in this [GitHub repository](https://github.com/willvelida/bookstore-containerapps).
 
