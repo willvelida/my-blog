@@ -132,7 +132,7 @@ If we want to build a binary and keep it, we can run the following.
 go build main.go
 ```
 
-What this command does is create an executable for us called *main.exe* (or just *main* if you're on Mac) in the diectory where our Go file is. To run this, we just call the executable and it should print out ```Hello, World!``` again. If we want to give our executable a name, we can define that name like so:
+What this command does is create an executable for us called *main.exe* (or just *main* if you're on Mac) in the directory where our Go file is. To run this, we just call the executable and it should print out ```Hello, World!``` again. If we want to give our executable a name, we can define that name like so:
 
 ```bash
 go build -o hello_world main.go
