@@ -152,6 +152,6 @@ In this post, we took a very small and simple step into types in Go. The purpose
 
 If you have any questions, feel free to reach out to me on twitter [@willvelida](https://twitter.com/willvelida) and I'll try and help out the best I can.
 
-In my next post, we'll take another small step into the world of Go and discuss variables and types.
+In my next post, we'll start building Go programs using If, if/else and else/if statements.
 
 Until next time, Happy coding! 🤓🖥️
