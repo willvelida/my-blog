@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n686eyhzu42as4tyd2vm.png
     alt: "Go lang"
-    caption: 'Now that we've set up our environment, let's dive into Go types!'
+    caption: 'Using Visual Studio Code, we can develop applications in Go quickly and easily!'
 ---
 
 So the Golang learning adventure continues! We have our [developer environment](https://www.willvelida.com/posts/setting-up-dev-environment-golang/) setup so we're ready to dive into more Golang code.
@@ -45,7 +45,7 @@ Of course there's a bit more detail to cover here. Starting with number types, G
 
 The zero value (or default value) for all integer types is 0. 
 
-With integers, we have the usual operators that we'd find in other languages: ```+, *, /, -``` and ```%``` for modulus operations. We can also combine any of these operators with ```=``` to modify the value of a variable. For example:
+With integers, we have the usual operators that we'd find in other languages: ```+```, ```*```, ```/```, ```-``` and ```%``` for modulus operations. We can also combine any of these operators with ```=``` to modify the value of a variable. For example:
 
 ```go
 var myNumber int = 10
@@ -53,7 +53,7 @@ myNumber *= 2
 // myNumber is now 20
 ```
 
-We can also perform comparison operations on integers using ```==, !=, >, >=, <,<=```.
+We can also perform comparison operations on integers using ```==```, ```!=```, ```>```, ```>=```, ```<```,```<=```.
 
 Now let's turn our attention to floats. Floats in Go are similar to floats in other programming languages and Go supports two different types of floats: ```float32``` and ```float64```. Floating point literals have a default type of ```float64```. To use floats, we can do so like this:
 
