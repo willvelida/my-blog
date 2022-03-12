@@ -2,7 +2,7 @@
 title: "Setting up our Go Development Environment"
 date: 2022-03-10T18:44:11+13:00
 draft: false
-tags: ["Azure","Golang"]
+tags: ["Azure","Golang", "Programming", "Tutorial"]
 ShowToc: true
 TocOpen: true
 cover:
