@@ -15,6 +15,13 @@ I've spent a lot of time with GitHub Actions lately and it's been a lot of fun. 
 
 This isn't to say that GitHub Actions is better than Azure DevOps, nor vice-versa. This article is purely an informational peice on HOW you can use GitHub Actions to deploy your Functions to Azure. Specifically we'll talk about:
 
-- Why we should deploy Functions via Build Pipelines.
-- Building our Function Artifacts
+- Building our Function App
 - Deploying our Function to Azure
+
+## Setup
+
+## Creating our Build Stage
+
+## Deploying our Function App
+
+## Wrapping up
