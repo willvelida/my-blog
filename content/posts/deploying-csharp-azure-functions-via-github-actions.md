@@ -124,7 +124,7 @@ To read more about the tasks that I'm using here, checkout the following docs:
 
 - [Checkout](https://github.com/actions/checkout)
 - [Setup Dotnet](https://github.com/actions/setup-dotnet)
-- [Upload Artifact](actions/upload-artifact@v1)
+- [Upload Artifact](https://github.com/actions/upload-artifact)
 
 This is a very basic build job that we've defined here. In production scenarios, you'll want to use this stage to run your unit tests for your Functions, perform static code analysis for security checks and perhaps compliance checks to ensure that your code meet the compliance requirements that your company has to adhere to. I've kept this workflow simple, but do make sure you include these tasks in to improve your confidence that your code is reliable and secure. 
 
