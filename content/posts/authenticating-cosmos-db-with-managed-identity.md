@@ -1,6 +1,6 @@
 ---
 title: "Using Managed Identities to authenticate with Azure Cosmos DB"
-date: 2022-03-25
+date: 2022-03-24
 draft: false
 tags: ["Azure","Azure Cosmos DB","Azure Functions","C#", "Bicep", "GitHub Actions", "Azure AD"]
 ShowToc: true
