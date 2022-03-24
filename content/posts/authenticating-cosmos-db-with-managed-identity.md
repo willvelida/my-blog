@@ -22,6 +22,12 @@ In this post, I'll show you how we can use Managed Identities to access our data
 - Configure our CosmosClient to use our Managed Identity.
 - Test our Function to add and read data using the Managed Identity
 
+If you want to see the full code sample for this post, check out this [GitHub repo](https://github.com/willvelida/azure-samples/tree/main/cosmosdb-function-managed-identity).
+
+You can also deploy the sample directly to your Azure Subscription by clicking on the button below:
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwillvelida%2Fazure-samples%2Fmain%2Fcosmosdb-function-managed-identity%2Fdeploy%2Fazuredeploy.json)
+
 ## Why Managed Identities?
 
 As I mentioned earlier, we can use Managed Identities to provide our applications with an identity that uses Azure Active Directory to authenitcate to other resources that support Azure AD authentication. By using managed identities, we don't need to manage credentials, such as managed connection strings in Cosmos DB and there is no additional cost in using Managed Identities.
@@ -76,7 +82,11 @@ resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2021-10-15' = {
 }
 ```
 
+When we deploy our Cosmos DB account, we should see that a System-Assigned Identity for our account has been created by navigating to **Identity** in the sidebar. We'll see that an *Object Id* or *Principal Id* has been generated for our Cosmos DB account (I've blanked it out in the below picture, but it will be a randomly generated GUID):
 
+![system-assigned identity in Cosmos DB](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/crguw31i4s6ycuscl0ga.png)
+
+The *Object Id* is a unique value for an application object that uniquely identifies the object in Azure AD. This Object Id that we have generated will uniquely identify our Azure Cosmos DB account.
 
 ## Creating our Azure Function with a System-Assigned Managed Identity
 
@@ -137,7 +147,17 @@ resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
 }
 ```
 
+Again, in our Bicep code we are using the ```identity``` block and creating a managed identity of type ```SystemAssigned```.
+
+Similar to our Cosmos DB account, we can find the Object Id of our Azure Function by navigating to **Identity** in the sidebar:
+
+![system assigned identity Azure Function](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bhysdaohhlcnfenemsts.png).
+
+Now that we have enabled our System-assigned identities for both our Cosmos DB and Azure Function, we can now create our role assignments that will allow our Function to perform operations against our Cosmos DB account without having to use the connection string.
+
 ## Creating Role Assignments
+
+
 
 ```bicep
 var roleDefinitionId = guid('sql-role-definition-', functionAppPrincipalId, cosmosDbAccount.id)
@@ -183,10 +203,18 @@ resource sqlRoleAssignment 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignm
 
 ## Configuring our CosmosClient to use Managed Identities
 
+You may have noticed earlier in our App Settings for our Function, I've added a setting called ```CosmosDbEndpoint```. 
+
 ```csharp
 return new CosmosClient(configuration["CosmosDbEndpoint"], new DefaultAzureCredential(), cosmosClientOptions);
 ```
 
 ## Testing our Function
+
+![making a request with our function](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7gbmneot3fge78wog2w4.png)
+
+![successful request](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/a9vwpt7je86vpi4dihz8.png)
+
+![item in Cosmos DB](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qrlr8uqosqdi6mn6pk0j.png)
 
 ## Conclusion
