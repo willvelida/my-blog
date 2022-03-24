@@ -1,14 +1,14 @@
 ---
 title: "Using Managed Identities to authenticate with Azure Cosmos DB"
-date: 2022-03-23T18:06:29+13:00
-draft: true
+date: 2022-03-25
+draft: false
 tags: ["Azure","Azure Cosmos DB","Azure Functions","C#", "Bicep", "GitHub Actions", "Azure AD"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://willvelidastorage.blob.core.windows.net/blogimages/containerappsgithubactions3.jpg
-    alt: "Azure Container Apps Logo"
-    caption: 'Using GitHub Actions, we can deploy new versions of our Container Apps as our images are updated'
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/brunyulntyeh5xg3md5m.png
+    alt: "Cosmos DB, Managed Identities, Functions logo"
+    caption: 'We can make authenticated calls to Cosmos DB using System Assigned Managed Identities instead of using connection strings.'
 ---
 
 In Azure, Managed Identities provide our Azure resources with an identity within Azure Active Directory. We can use this identity to authenticate with any service in Azure that supports Azure AD authentication without having to manage credentials. In Azure Cosmos DB, we can use managed identities to provide resources with the roles and permissions required to perform actions on our data (depending on what role we provide the identity) without having to use any connection strings or access keys to do so.
@@ -157,7 +157,28 @@ Now that we have enabled our System-assigned identities for both our Cosmos DB a
 
 ## Creating Role Assignments
 
+Azure Cosmos DB provides a number of built-in roles that allow us to authorize and authenticate data requests using Azure AD identities in a granular manner.
 
+We provide our identities with role definitions that allow them to perform a certain list of allowed accounts. We can apply these roles at the account, database or container level.
+
+The list of these built-in role definitions can be found [here](https://docs.microsoft.com/en-us/azure/cosmos-db/how-to-setup-rbac#permission-model).
+
+For the purposes of this article, we're going to be creating a Custom Role that includes the following actions that we will allow our role to perform over our data:
+
+```bicep
+var dataActions = [
+  'Microsoft.DocumentDB/databaseAccounts/readMetadata'
+  'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/*'
+]
+```
+
+When we make calls to Cosmos DB using the .NET SDK, the SDK issues read-only metadata requests to serve specific data requests. This includes metadata like the partition key you've set on your containers, the list of Azure regions that the account is set in etc.
+
+Since we are using the .NET SDK to make calls to our Cosmos DB account, we'll need to grant the System-Assigned identity the ability to perform actions that need this permission enabled.
+
+We'll also be performing operations on our items in our containers, so we grant the ```Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/*``` permission to our Function so it's able to do so.
+
+We can define our sql roles in Bicep like so:
 
 ```bicep
 var roleDefinitionId = guid('sql-role-definition-', functionAppPrincipalId, cosmosDbAccount.id)
@@ -203,18 +224,47 @@ resource sqlRoleAssignment 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignm
 
 ## Configuring our CosmosClient to use Managed Identities
 
-You may have noticed earlier in our App Settings for our Function, I've added a setting called ```CosmosDbEndpoint```. 
+You may have noticed earlier in our App Settings for our Function, I've added a setting called ```CosmosDbEndpoint```. Instead of using our App Setting ```CosmosDbConnectionString``` which contained our connection string earlier, we can now just use our endpoint:
 
 ```csharp
 return new CosmosClient(configuration["CosmosDbEndpoint"], new DefaultAzureCredential(), cosmosClientOptions);
 ```
 
+Our Cosmos DB endpoint will look like this ```https://<account-name>.documents.azure.com:443/```. Making an unauthorized call to this endpoint returns the following response:
+
+```json
+{
+  "code":"Unauthorized",
+  "message":"Required Header authorization is missing. Ensure a valid Authorization token is passed.\r\nActivityId: 8a9c8eb2-1915-4466-bc8b-e53eaa768965, Microsoft.Azure.Documents.Common/2.14.0"
+}
+```
+
+In order to make an authorized call, we pass in a ```new DefaultAzureCredential()``` into our ```CosmosClient```. This provides a default authentication flow for our application. In other words, this will attempt to authenticate our Azure Function to Azure Cosmos DB using the managed identity that we have assigned it. Since we have created a role assignment for our Azure Function, our Function will be authorized to perform operations against our Cosmos DB account.
+
 ## Testing our Function
+
+Now that everything has been set up, we can test our Function and make sure that it can perform operations against our Cosmos DB account.
+
+For this test, I have a simple [Function](https://github.com/willvelida/azure-samples/blob/main/cosmosdb-function-managed-identity/src/Todo.Api/Todo.Api/Functions/CreateTodoItem.cs) that uses a HTTP Trigger to make a POST request and add a simple Todo Item into our Cosmos DB container.
+
+In the Azure Portal, we can navigate to this Function and test it out. I pass in the below JSON payload that represents the item that I want to persist to Cosmos DB:
 
 ![making a request with our function](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7gbmneot3fge78wog2w4.png)
 
+We should receive a 200 OK response, along with our Todo Item that we've just created in Azure Cosmos DB:
+
 ![successful request](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/a9vwpt7je86vpi4dihz8.png)
+
+Let's navigate to our Container in Cosmos DB. In the Bicep template, I created a ```todos``` container in a ```TodoDB``` database. Navigate to the container and we should see that the Todo item that we created has been successfully persisted to Azure Cosmos DB.
 
 ![item in Cosmos DB](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qrlr8uqosqdi6mn6pk0j.png)
 
 ## Conclusion
+
+As we've seen in this post, we can use a combination of managed identities and role assignments to authenticate to Azure Cosmos DB without having to use the connection string in our applications. 
+
+In this post, we used Azure Functions as an example, but we could do this for any [Azure resource that supports managed identities](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/managed-identities-status).
+
+If you have any questions, feel free to reach out to me on twitter [@willvelida](https://twitter.com/willvelida)
+
+Until next time, Happy coding! 🤓🖥️
