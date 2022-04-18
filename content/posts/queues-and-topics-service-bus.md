@@ -1,17 +1,17 @@
 ---
 title: "Working with Queues and Topics in Azure Service Bus"
 date: 2022-04-18T10:15:15+12:00
-draft: true
+draft: false
 tags: ["Azure","Azure Service Bus","C#", "Bicep", "Messaging"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/brunyulntyeh5xg3md5m.png
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6bjln8ds6kou5ellh653.png
     alt: "Queues and Topics in Azure Service Bus"
     caption: 'In Azure Service, we can send messages to queues and topics, depending on how many consumers of the message we need.'
 ---
 
-Azure Service Bus is a message broker that we can use to send messages to queues or publish messagees to topics so that consumers can subscribe to those topics to receive those messages. In the article, I'll explain what the differences are between queues and topics in Azure Service Bus, how we can provision Service Bus namespaces with either queues or topics using Bicep and then I'll show you how we can send and receives messages from our queue or topic.
+Azure Service Bus is a message broker that we can use to send messages to queues or publish messages to topics so that consumers can subscribe to those topics to receive those messages. In the article, I'll explain what the differences are between queues and topics in Azure Service Bus, how we can provision Service Bus namespaces with either queues or topics using Bicep and then I'll show you how we can send and receives messages from our queue or topic.
 
 I've created a couple of samples that you can refer to as you read through this post. Feel free to deploy the infrastructure code to your own Azure subscription, or code the Service Bus resources yourself using my Bicep templates as a guide:
 
@@ -23,6 +23,8 @@ I've created a couple of samples that you can refer to as you read through this 
 ## What are Queues?
 
 Queues work on a **First In, First Out** (FIFO) basis. This means that clients that receive messages from the queue and then process that message in the order in which they were added to the queue, and they will be the only consumer that processes this message. The queue will store this message until our client is able to process them. To process the message, the client will pull the message off the queue.
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jwvxkb27m6wzss7tu4sj.png)
 
 One of the benefits of using queues is that the producers and consumer of the queue don't have to send and receive the message at the same time. The message will be stored in the queue and will only be processed once the consumer pulls the message off the queue. Producers can keep sending messages to the queue.
 
@@ -110,7 +112,7 @@ Console.WriteLine("Press any key to end the application");
 Console.ReadKey();
 ```
 
-Let's go through the important peices of this code:
+Let's go through the important pieces of this code:
 
 - To work with the Service Bus SDK in C#, we can install the ```Azure.Messaging.ServiceBus``` NuGet package. I've also installed ```Microsoft.Extensions.Configuration``` so I can use an ```appsettings.json``` file for my application settings, which I load in my ```IConfiguration``` object.
 - We can then create a ```ServiceBusClient``` object passing in the connection string of our Service Bus, then we create a ```ServiceBusSender``` object for our queue.
@@ -178,6 +180,8 @@ Let's break this down:
 
 Topics are different to Queues since instead of working with a single consumer, we can have multiple **subscribers** to our topic, who will receive their own copy of the message from the topic. This works in a pub/sub pattern, where we will have messages being published to the topic and have multiple clients subscribe to that topic. 
 
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6bjln8ds6kou5ellh653.png)
+
 In Topics, our consumers don't directly consume the message from our Topic. Instead, we create subscriptions that subscribe to the topic and our consumers receive a copy of a message from the topic. In Azure Service Bus, we can define filters on these subscriptions that determine conditions for messages to be published to a subscription and actions that modifies the message metadata.
 
 ### Create a namespace with a Topic and Subscriber in Bicep
@@ -222,6 +226,8 @@ To see the full ARM Reference API for Azure Service Bus Topics, check out this [
 
 ### Sending and Subscribing to Topics in C#
 
+Now that our Topic and Subscription has been set up, we can create our producer program to send messages to the Topic and a receiver program to subscribe to our topic. Let's start with our producer:
+
 ```csharp
 using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Configuration;
@@ -260,6 +266,10 @@ using (ServiceBusMessageBatch messageBatch = await sender.CreateMessageBatchAsyn
 Console.WriteLine("Press any key to end the application");
 Console.ReadKey();
 ```
+
+This is almost identical to the producer program that I created for our Queue, but in this instance, all we're doing is passing in the name of our Topic to our ```ServiceBusSender``` object.
+
+We can now create our consumer program that will subscribe to our Topic:
 
 ```csharp
 using Azure.Messaging.ServiceBus;
@@ -306,6 +316,8 @@ Task ErrorHandler(ProcessErrorEventArgs args)
     return Task.CompletedTask;
 }
 ```
+
+Again, this is almost identical to our consumer program that we created for our queue. The difference here is for our ```ServiceBusProcessor``` object, we are passing in the name of our Topic, along with the name of our Subscription.
 
 ## Conclusion
 
