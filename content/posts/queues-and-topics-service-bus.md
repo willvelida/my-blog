@@ -13,7 +13,7 @@ cover:
 
 Azure Service Bus is a message broker that we can use to send messages to queues or publish messagees to topics so that consumers can subscribe to those topics to receive those messages. In the article, I'll explain what the differences are between queues and topics in Azure Service Bus, how we can provision Service Bus namespaces with either queues or topics using Bicep and then I'll show you how we can send and receives messages from our queue or topic.
 
-I've created a couple of samples that you can refer to as you read through this post:
+I've created a couple of samples that you can refer to as you read through this post. Feel free to deploy the infrastructure code to your own Azure subscription, or code the Service Bus resources yourself using my Bicep templates as a guide:
 
 | Sample | GitHub Link | Deploy me! |
 | ------ |-------- | -------------- |
@@ -117,7 +117,7 @@ Let's go through the important peices of this code:
 - We then create a ```ServiceBusMessageBatch``` object and add messages to that batch using the ```TryAddMessage()``` method. Once we've added all our messages to the batch, we send them to our queue using the ```SendMessagesAsync()``` method.
 - Once we've sent our messages, we clean up our resources using ```DisposeAsync()``` on both our ```ServiceBusSender``` and ```ServiceBusClient``` objects.
 
-Receiving a message from the queue:
+Now that we've sent our messages to the queue, we can create a program that will consume the messages from that queue:
 
 ```csharp
 using Azure.Messaging.ServiceBus;
@@ -165,6 +165,14 @@ Task ErrorHandler(ProcessErrorEventArgs args)
     return Task.CompletedTask;
 }
 ```
+
+Let's break this down:
+
+- Like our producer program, I'm using both ```Azure.Messaging.ServiceBus``` and ```Microsoft.Extensions.Configuration``` NuGet packages. I'm also using an ```appsettings.json``` file to load my app settings, rather than hard-coding my connection string the class.
+- We create our ```ServiceBusClient``` object as before, but this time instead of a ```ServiceBusSender``` object, we create a ```ServiceBusProcessor``` object so that we can process our messages off the queue.
+- We then create two event handlers to handle the processing of the message. First, our ```MessageHandler(ProcessMessageEventArgs args)``` method that takes the body of the message, writes it to the console and then marks the message as completed, which will delete the message from the service. Second, the ```ErrorHandler(ProcessErrorEventArgs args)``` method will write any exceptions thrown to the console. We use these two event handlers to process the messages from our queue.
+- We then use the ```StartProcessingAsync()``` method to start processing messages from our Service Bus queue. In this code, we just print the message content to the console. Once all our messages are processed, we call the ```StopProcessingAsync()``` method to stop the processing of messages from the queue.
+- Like our producer program, we clean up our objects by using the ```DisposeAsync()``` method.
 
 ## What are Topics?
 
@@ -215,7 +223,42 @@ To see the full ARM Reference API for Azure Service Bus Topics, check out this [
 ### Sending and Subscribing to Topics in C#
 
 ```csharp
+using Azure.Messaging.ServiceBus;
+using Microsoft.Extensions.Configuration;
+
+IConfiguration configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+int numberOfMessages = 3;
+ServiceBusClient serviceBusClient = new ServiceBusClient(configuration["connectionString"]);
 ServiceBusSender sender = serviceBusClient.CreateSender(configuration["topicName"]);
+
+using (ServiceBusMessageBatch messageBatch = await sender.CreateMessageBatchAsync())
+{
+    for (int i = 1; i <= numberOfMessages; i++)
+    {
+        if (!messageBatch.TryAddMessage(new ServiceBusMessage($"Message {i}")))
+        {
+            throw new Exception($"The message {i} is too large to fit in the topic");
+        }
+    }
+
+    try
+    {
+        await sender.SendMessagesAsync(messageBatch);
+        Console.WriteLine($"A batch of {numberOfMessages} messages have been pushed to the topic");
+    }
+    finally
+    {
+        await sender.DisposeAsync();
+        await serviceBusClient.DisposeAsync();
+    }
+}
+
+Console.WriteLine("Press any key to end the application");
+Console.ReadKey();
 ```
 
 ```csharp
