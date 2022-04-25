@@ -37,6 +37,10 @@ In this sample, I'll using C# to demonstrate a number of features in Azure Funct
 
 If you want to deploy this sample as we follow along, you can do so by clicking the button below. You will need your own Azure Subscription.
 
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwillvelida%2Fazure-samples%2Fmain%2Fevent-hubs-streaming-function-app%2Fdeploy%2Fazuredeploy.json)
+
+You can view the code (Infrastructure and Function) [here](https://github.com/willvelida/azure-samples/tree/main/event-hubs-streaming-function-app).
+
 ## Creating our infrastructure with Bicep
 
 For our application, we'll be deploying the following resources:
