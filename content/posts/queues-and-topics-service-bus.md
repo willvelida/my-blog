@@ -17,7 +17,7 @@ I've created a couple of samples that you can refer to as you read through this 
 
 | Sample | GitHub Link | Deploy me! |
 | ------ |-------- | -------------- |
-| **Queues** | [Code]((https://github.com/willvelida/azure-samples/tree/main/service-bus-queues)) | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwillvelida%2Fazure-samples%2Fmain%2Fservice-bus-queues%2Fdeploy%2Fazuredeploy.json) |
+| **Queues** | [Code](https://github.com/willvelida/azure-samples/tree/main/service-bus-queues) | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwillvelida%2Fazure-samples%2Fmain%2Fservice-bus-queues%2Fdeploy%2Fazuredeploy.json) |
 | **Topics** | [Code](https://github.com/willvelida/azure-samples/tree/main/service-bus-topics) | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwillvelida%2Fazure-samples%2Fmain%2Fservice-bus-topics%2Fdeploy%2Fazuredeploy.json) |
 
 ## What are Queues?
