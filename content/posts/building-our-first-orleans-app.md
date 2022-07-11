@@ -28,12 +28,9 @@ Let's dive in!
 
 For this tutorial, we'll be creating three projects:
 
-1. **Grains**
-    1. This project will be a .NET standard project that will contain our Grains that we'll use in the project.
-1. **Silo**
-    1. This will be a .NET Console application. Remember that Silos in Orleans are a host that can host one or more Grains. We can even have a group of Silos in our application that form a Cluster.
-1. **Client**
-    1. This will also be a .NET Console application. This client will be used for communicating with our Grain, connecting to our Cluster and invoke our grain.
+1. **Grains** - This project will be a .NET standard project that will contain our Grains that we'll use in the project.
+1. **Silo** - This will be a .NET Console application. Remember that Silos in Orleans are a host that can host one or more Grains. We can even have a group of Silos in our application that form a Cluster.
+1. **Client** - This will also be a .NET Console application. This client will be used for communicating with our Grain, connecting to our Cluster and invoke our grain.
 
 In my code, I created a single solution to store my projects in. We'll also need to set up references for our projects like so:
 
