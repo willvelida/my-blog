@@ -1,6 +1,6 @@
 ---
 title: "Creating a Azure Kubernetes cluster with an attached Azure Container Registry with Bicep"
-date: 2022-02-18T20:47:30+13:00
+date: 2022-09-11T20:47:30+13:00
 draft: false
 tags: ["Azure Kubernetes Service","Azure","Bicep","Kubernetes","Azure Container Registry","Containers", "Infrastructure as Code"]
 ShowToc: true
@@ -16,6 +16,10 @@ Azure Kubernetes Service (AKS) simplifies deploying a managed Kubernetes cluster
 Azure Container Registry integrates with AKS. We can attach container registries to our AKS clusters using an Azure Active Directory managed identity. We can then assign that managed identity will the AcrPull role assignment that allows our AKS cluster to pull images from our Azure Container Registry.
 
 In this article, we'll create our AKS cluster, Azure Container Registry and role assignments in Bicep, deploy it to Azure, build a container image that we'll push into our private registry and then create the manifest file containing the Kubernetes objects that we'll need to run the application we packaged into our container image.
+
+If you want to deploy this sample, you can do so by clicking the 'Deploy to Azure' button below:
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwillvelida%2Fazure-samples%2Fmain%2Faks-bicep%2Fazure-deploy.json)
 
 ## Creating our resources
 
