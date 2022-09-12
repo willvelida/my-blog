@@ -25,7 +25,7 @@ If you want to deploy this sample, you can do so by clicking the 'Deploy to Azur
 
 Let's start by creating our AKS cluster. We'll keep it simple and create a cluster with 3 nodes that runs Linux workloads:
 
-```json
+```bicep
 @description('Random name for our application')
 param applicationName string = uniqueString(resourceGroup().id)
 
@@ -101,7 +101,7 @@ You'll get a response that tells you where the SSH key pair has been written to.
 
 We can also create our Container Registry in Bicep. For this demo, we'll create a system-assigned identity and enable the admin user so we can autheticate with our container registry on our local machine. For production scenarios, I recommend that you disable the admin user on your container registry:
 
-```json
+```bicep
 @description('The name of our container registry')
 param containerRegistryName string = 'acr${applicationName}'
 
@@ -130,7 +130,7 @@ The roleAssignments resource type is an [**extension resource**](https://docs.mi
 
 We create our role assignment using the following Bicep code:
 
-```json
+```bicep
 var acrPullRoleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
 
 resource acrPullRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
