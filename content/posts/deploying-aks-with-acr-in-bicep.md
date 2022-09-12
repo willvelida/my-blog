@@ -95,7 +95,7 @@ To access the nodes in our AKS clusters, we'll need to connect using an SSH key 
 ssh-keygen -t rsa -b 4096
 ```
 
-You'll get a response that tells you where the SSH key pair has been written to. In the Cloud Shell, run the ```code``` command to open up the file, and copy and paste the contents. This is the value that you'll need to provide your ```sshRSAPublicKey`` parameter.
+You'll get a response that tells you where the SSH key pair has been written to. In the Cloud Shell, run the ```code``` command to open up the file, and copy and paste the contents. This is the value that you'll need to provide your ```sshRSAPublicKey``` parameter.
 
 ## Creating our container registry
 
