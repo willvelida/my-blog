@@ -90,7 +90,7 @@ This task produces a SARIF file that's uploaded to our Security tab within our r
 
 Now that our scan results have been published, we can start to make changes in our Bicep code to remediate these issues. For example, I should set the minimum TLS version on my storage account like so:
 
-```armasm
+```javascript
 resource orderGeneratorStorage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   name: orderGeneratorStorageName
   location: location
