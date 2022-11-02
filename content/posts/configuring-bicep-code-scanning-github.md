@@ -19,6 +19,10 @@ I'm a big fan of treating your infrastructure deployments the same way as you wo
 
 In this article, I'm going to show you how you can set up Defender for DevOps, connect your GitHub account to Defender for DevOps, setting up your GitHub Actions workflow to run the scan and then publish the results of the scan to GitHub so you can remediate issues.
 
+If you prefer, I've also recorded this demo on my YouTube channel:
+
+{{< youtube 5BlZGFiV73E >}}
+
 ## Setting up Defender for DevOps
 
 The first step is to connect our GitHub account to Microsoft Defender for Cloud. Head to the Azure Portal and navigate to Microsoft Defender for Cloud.
