@@ -48,7 +48,7 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Store.dll"]
 ```
 
-This Dockerfile is just building a simple Blazor Server application (It's a pretty generic Dockerfile for all ASP.NET Core applications). 
+This Dockerfile is just building a simple Blazor Server application (It's a pretty generic Dockerfile for all ASP.NET Core applications).
 
 Instead of pushing this to Docker Hub or Azure Container Registry, we're going to set up a GitHub Actions workflow file to push this container image into GHCR.
 
@@ -62,7 +62,7 @@ When GHCR was in Beta, you could use a Personal Access Token (PAT) to authentica
 
 ## Using a Personal Access Token to authenticate to GHCR
 
-I did have some trouble using the ```GITHUB_TOKEN``` initially, so to get started, I used a PAT token. To create one, go to **Settings/Developer settings**, click on *Personal access tokens/Tokens (classic)** and then click on **Generate new token**. To push images to GHCR, you only need the following permissions:
+I did have some trouble using the ```GITHUB_TOKEN``` initially, so to get started, I used a PAT token. To create one, go to **Settings/Developer settings**, click on **Personal access tokens/Tokens (classic)** and then click on **Generate new token**. To push images to GHCR, you only need the following permissions:
 
 - **read:packages**
 - **write:packages**
