@@ -62,7 +62,7 @@ When GHCR was in Beta, you could use a Personal Access Token (PAT) to authentica
 
 ## Using a Personal Access Token to authenticate to GHCR
 
-I did have some trouble using the ```GITHUB_TOKEN``` initially, so to get started, I used a PAT token. to create one, go to **Settings/Developer settings**, click on *Personal access tokens/Tokens (classic)** and then click on **Generate new token**. To push images to GHCR, you only need the following permissions:
+I did have some trouble using the ```GITHUB_TOKEN``` initially, so to get started, I used a PAT token. To create one, go to **Settings/Developer settings**, click on *Personal access tokens/Tokens (classic)** and then click on **Generate new token**. To push images to GHCR, you only need the following permissions:
 
 - **read:packages**
 - **write:packages**
