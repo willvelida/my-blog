@@ -97,25 +97,8 @@ on:
   workflow_dispatch:
 
 jobs:
-    build-store-project:
-        runs-on: ubuntu-latest
-        defaults:
-          run:
-            working-directory: './Store'
-        steps:
-          - name: 'Checkout GitHub Action'
-            uses: actions/checkout@main
-          - name: 'Setup dotnet'
-            uses: actions/setup-dotnet@v1
-            with:
-              dotnet-version: ${{ env.DOTNET_VERSION }}
-          - name: 'Install Dependencies'
-            run: dotnet restore
-          - name: 'Build project'
-            run: dotnet build --no-restore
       push-store-image:
         runs-on: ubuntu-latest
-        needs: [build-store-project]
         defaults:
           run:
             working-directory: './Store'
