@@ -1,6 +1,6 @@
 ---
 title: "Working with Azure SQL Triggers in Azure Functions"
-date: 2022-12-16
+date: 2022-12-15
 draft: false
 tags: ["Azure","Azure Functions","C#", "Azure SQL"]
 ShowToc: true
