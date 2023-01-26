@@ -6,9 +6,9 @@ tags: ["Azure","App Service","Bicep", "App Insights", "Azure Monitor"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hzluuj97pbcc97dthbhm.png
-    alt: "Azure Functions using a Azure SQL Trigger"
-    caption: 'We can now use SQL triggers in Azure Functions to listen to SQL Change Tracking!'
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/68qwdfvjgx7001m2vkjl.png
+    alt: "Availability tests in Application Insights"
+    caption: 'Automate your availability tests in App Service with Bicep'
 ---
 
 One important aspect of any web application is its availability. Azure provides many tools that ensures your application is up and running, one of them being availability tests, which allow you to periodically check the availability of your application. You can also generate alerts should your web application become unavailable.
