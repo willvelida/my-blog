@@ -1,8 +1,8 @@
 ---
-title: "Working with Azure SQL Triggers in Azure Functions"
-date: 2022-12-15
+title: "How to create availability tests for App Service using Bicep"
+date: 2023-01-26
 draft: false
-tags: ["Azure","Azure Functions","C#", "Azure SQL"]
+tags: ["Azure","App Service","Bicep", "App Insights", "Azure Monitor"]
 ShowToc: true
 TocOpen: true
 cover:
