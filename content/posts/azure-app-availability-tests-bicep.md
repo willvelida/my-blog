@@ -6,7 +6,7 @@ tags: ["Azure","App Service","Application Insights", "Bicep", "Azure Monitor"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ldja4fipipapy8iii3nw.png
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hzluuj97pbcc97dthbhm.png
     alt: "Configure availability tests to ensure that you're applications are available to your users!"
     caption: 'Configure availability tests to ensure that you're applications are available to your users!'
 ---
