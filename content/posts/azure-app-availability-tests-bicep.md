@@ -1,14 +1,14 @@
 ---
-title: "How to create availability tests for Azure App Service in Bicep"
-date: 2023-01-26
+title: "Working with Azure SQL Triggers in Azure Functions"
+date: 2022-12-15
 draft: false
-tags: ["Azure","App Service","Application Insights", "Bicep", "Azure Monitor"]
+tags: ["Azure","Azure Functions","C#", "Azure SQL"]
 ShowToc: true
 TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hzluuj97pbcc97dthbhm.png
-    alt: "Configure availability tests to ensure that you're applications are available to your users!"
-    caption: 'Configure availability tests to ensure that you're applications are available to your users!'
+    alt: "Azure Functions using a Azure SQL Trigger"
+    caption: 'We can now use SQL triggers in Azure Functions to listen to SQL Change Tracking!'
 ---
 
 One important aspect of any web application is its availability. Azure provides many tools that ensures your application is up and running, one of them being availability tests, which allow you to periodically check the availability of your application. You can also generate alerts should your web application become unavailable.
