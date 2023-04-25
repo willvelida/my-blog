@@ -4,11 +4,9 @@ date: 2022-02-13T19:02:55+13:00
 draft: false
 ---
 
-![My presenting at a meetup](https://pbs.twimg.com/profile_banners/198597597/1628196732/1500x500)
-
 ## Hi there, I'm Will (He/Him)
 
-I'm a Customer Engineer for Microsoft working in the Fast Track for Azure team! My focus is on Azure Apps (App Service, Containers, Functions!) and I'm based in Auckland, New Zealand. Even though I work for Microsoft, this blog contains my own opinions.
+I'm a Software Engineer and Cloud Architect. My main focus is on Azure Compute (So Functions, Container Apps, App Service) and Cloud Native technologies (such as Kubernetes, Dapr). My main programming language is C#, but I'm also learning how to use Golang and JavaScript.
 
 It's fair to say that my background is a little mixed 😂 I started out life wanting to be a rugby player. So much so I moved all the way to Christchurch, New Zealand straight out of high school. After spending couple of years running into people bigger than me and surviving a couple of earthquakes, I decided to give university study a try.
 
