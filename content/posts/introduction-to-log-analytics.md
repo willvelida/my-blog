@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/y5xq8jse89z335fsb5ss.png
     alt: "Availability tests in Application Insights"
-    caption: 'Automate your availability tests in App Service with Bicep'
+    caption: 'With Log Analytics, we can query logs in Azure Monitor, gaining richer insights into events that occur within our Azure environment.'
 ---
 
 ## What is Log Analytics?
@@ -200,7 +200,7 @@ ContainerAppSystemLogs_CL
 
 As you can see, we now have a nicer result set, simply by using the ```project``` operator.
 
-For the purposes of this article, I've kept the query simple. But what if this was a query that we ran quite often, and other members of our team wanted to run the same query. Rather than them having to write the same KQL query everytime, we can save the log query, by clicking on **Save** (highlighted in the red box below)
+For the purposes of this article, I've kept the query simple. But what if this was a query that we ran quite often, and other members of our team wanted to run the same query. Rather than them having to write the same KQL query every time, we can save the log query, by clicking on **Save** (highlighted in the red box below)
 
 ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/d9lb77bv54y4n3r1g33k.png)
 
@@ -226,7 +226,7 @@ This was a very gentle primer on getting started with Log Analytics. If you're k
 
 - [Structure Log Analytics queries](https://learn.microsoft.com/en-us/training/modules/configure-log-analytics/5-structure-queries) - This will help you structure your Log Analytics queries, with some common operators that you will use when performing KQL queries.
 - [Kusto Query Language overview](https://learn.microsoft.com/en-us/azure/data-explorer/kusto/query/) - Use this as a reference for all operators that you'll use for your KQL queries.
-- [Design a Log Analytics workspace architecture](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/workspace-design) - For all you architects thinking about using Log Analytics, this is a grat resource! You can't just dump logs somewhere and that's it, you'll need to think about security, data ownership, data retention and more, so this is a fantastic document for helping you figuring all that out.
+- [Design a Log Analytics workspace architecture](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/workspace-design) - For all you architects thinking about using Log Analytics, this is a great resource! You can't just dump logs somewhere and that's it, you'll need to think about security, data ownership, data retention and more, so this is a fantastic document for helping you figuring all that out.
 
 As always, if you have any questions, feel free to reach out to me on twitter [@willvelida](https://twitter.com/willvelida)
 
