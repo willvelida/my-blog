@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ybagwwedpcsrokvzlczp.png
     alt: "Implementing Dapr State Management in ASP.NET Core Web APIs"
-    caption: 'Dapr's State Management API simplifies handling state in distributed architectures.'
+    caption: "Dapr's State Management API simplifies handling state in distributed architectures."
 ---
 
 In distributed architectures, we'll usually have a number of independent stateless services that serve a purpose (set around a domain, such as ordering items, storing items in a catalog, handling authentication etc.)
