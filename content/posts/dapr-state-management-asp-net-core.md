@@ -1,6 +1,6 @@
 ---
 title: "Implementing Dapr State Management in ASP.NET Core Web APIs"
-date: 2023-06-15
+date: 2023-06-14
 draft: false
 tags: ["Dapr","Dotnet","ASP.NET Core", "Azure Cosmos DB"]
 ShowToc: true
@@ -16,6 +16,8 @@ In distributed architectures, we'll usually have a number of independent statele
 While services should strive to be stateless, there will be some services that need to track state in order to fufil a business operation or function. Dapr has a state management build block that simplifies state tracking and enables you to store state across a variety of data stores.
 
 In this article, we'll discuss what State Management is in Dapr, and how we can implement it in an .NET ASP.NET Core Web API. We'll then configure our state management component and test our API to see how it works in action.
+
+To view the full sample that I'll use in this article, check out the [sample on my GitHub!](https://github.com/willvelida/dapr-resources/tree/main/StateManagement)
 
 ## What is State Management in Dapr
 
