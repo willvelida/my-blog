@@ -6,9 +6,9 @@ tags: ["Dapr","Dotnet","ASP.NET Core", "Azure Cosmos DB"]
 ShowToc: true
 TocOpen: true
 cover:
-  image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j2h5diedl3uyneomby1c.png
-  alt: "Implementing Dapr State Management in ASP.NET Core Web APIs"
-  caption: 'Dapr's State Management API simplifies handling state in distributed architectures.'
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ybagwwedpcsrokvzlczp.png
+    alt: "Implementing Dapr State Management in ASP.NET Core Web APIs"
+    caption: 'Dapr's State Management API simplifies handling state in distributed architectures.'
 ---
 
 In distributed architectures, we'll usually have a number of independent stateless services that serve a purpose (set around a domain, such as ordering items, storing items in a catalog, handling authentication etc.)
