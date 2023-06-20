@@ -2,7 +2,7 @@
 title: "Building Simple Dapr Cron Jobs with ASP.NET Core Web APIs"
 date: 2023-06-19
 draft: false
-tags: ["Dapr","Dotnet","ASP.NET Core", "Azure Cosmos DB"]
+tags: ["Dapr","Dotnet","ASP.NET Core"]
 ShowToc: true
 TocOpen: true
 cover:
