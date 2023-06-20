@@ -19,7 +19,7 @@ The Dapr framework provides bindings that support cron jobs. Cron jobs uses a co
 
 This article is going to cover how to configure a basic Dapr cron job in a ASP.NET Web API. I'll cover how to set up a cron binding component, configure the Web API to subscribe to the cron binding and then finally, run it to see it in action.
 
-This sample is going to be super simple, so don't expect it to break the internet (or whatever the kids are saying this days). We're just here to see how Dapr cron jobs work at a basic level.
+This sample is going to be super simple, so don't expect it to break the internet (or whatever the kids are saying this days). We're just here to see how Dapr cron jobs work at a basic level. If you want to follow along with the full code sample used in this article, check out [my GitHub](https://github.com/willvelida/dapr-resources/tree/main/CronJobs).
 
 Let's dive in! 🚀
 
@@ -136,6 +136,8 @@ Once we've run our Dapr CLI command, we should see our message being logged to t
 In this article, I talked about how we can use cron jobs in Dapr to run applications on a schedule, such as background workers or cleanup jobs. I showed you how you can configure your Cron job as a YAML component, wire it up to a ASP.NET Core Web API and then we ran our cron job to see it in action.
 
 In the future, I'll be looking to build something a little more complex using Dapr cron jobs. Once I've got something cool to share, I'll let you y'all know! 😀
+
+If you want the full code sample used in this article, check out [my GitHub](https://github.com/willvelida/dapr-resources/tree/main/CronJobs).
 
 If you have any questions on the above, feel free to reach out to me on twitter [@willvelida](https://twitter.com/willvelida)
 
