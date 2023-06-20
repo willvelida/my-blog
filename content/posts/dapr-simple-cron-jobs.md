@@ -11,7 +11,7 @@ cover:
     caption: "Using Cron job bindings in Dapr, we can run background workers and tasks on a schedule"
 ---
 
-I've been thinking about migrating one of my side projects from Azure Functions to the Dapr framework to make it more portable. One of the most important components of this architecture is the ability to refresh an authentication token that enables each Function app to retrieve data from an external API. In an Azure Functions architecture, we can use timer triggers to perform scheduled jobs simply. 
+I've been thinking about migrating one of my side projects from Azure Functions to the Dapr framework to make it more portable. One of the most important components of this architecture is the ability to [refresh an authentication token that enables each Function app to retrieve data from an external API](https://medium.com/geekculture/building-a-token-refresh-service-for-the-fitbit-api-with-azure-functions-and-c-55027bf9d267). In an Azure Functions architecture, we can use timer triggers to perform scheduled jobs simply. 
 
 The issue here is that Functions have an opinionated programming model. While this does make integrations between components simple, this can lock us into the Azure Functions hosting model, limiting the portability that I'd like my architecture to achieve.
 
