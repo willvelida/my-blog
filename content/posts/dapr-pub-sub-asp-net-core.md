@@ -2,7 +2,7 @@
 title: "Implementing Dapr Pub/Sub in ASP.NET Core Web APIs"
 date: 2023-08-14
 draft: true
-tags: ["Dapr","Dotnet","ASP.NET Core", "Azure Cosmos DB"]
+tags: ["Dapr","Dotnet","ASP.NET Core", "Azure Service Bus", "Messaging"]
 ShowToc: true
 TocOpen: true
 cover:
@@ -31,8 +31,21 @@ In this article, we'll be building the following:
 
 Dapr Pub/Sub has a variety of features available that simplifies Pub/Sub capabilities in your application, so I'd recommend taking a look at the [Dapr documentation on Pub/Sub](https://docs.dapr.io/developing-applications/building-blocks/pubsub/pubsub-overview/) if you want to gain a deeper understanding.
 
-
 ## Configuring Dapr in our Web API
+
+To see Dapr Pub/Sub in action, we'll build two ASP.NET Core Web APIs: One to handle the publishing of an Bookshop order message, another to subscribe to the topic that our orders will be sent to so they can receive the message.
+
+To see the full code for this project, please check out [this repository](https://github.com/willvelida/dapr-resources/tree/main/PubSub) on my GitHub.
+
+To work with Dapr in an ASP.NET Core Web, we'll need to install the ```Dapr.AspNetCore``` package. For this tutorial, we'll need to install this package in both our API's. To do this, we can run the following NET CLI command in our Web API projects:
+
+```bash
+dotnet add package Dapr.AspNetCore
+```
+
+Alternatively, you can use the NuGet Package Manager in Visual Studio to install it.
+
+This package will allow you to interact with Dapr applications through the Dapr Client and build routes and controllers in your ASP.NET applications using Dapr.
 
 ## Implementing our Pub/Sub logic
 
@@ -41,3 +54,7 @@ Dapr Pub/Sub has a variety of features available that simplifies Pub/Sub capabil
 ## Testing our API
 
 ## Conclusion
+
+If you have any questions on the above, feel free to reach out to me on twitter (or X, whichever suits you) [@willvelida](https://twitter.com/willvelida)
+
+Until next time, Happy coding! 🤓🖥️
