@@ -151,7 +151,7 @@ namespace Bookshop.Subscriber.Controllers
 
         [Dapr.Topic("dapr-pubsub", "orderstopic")]
         [HttpPost("orderreceived")]
-        public async Task<IActionResult> OrderReceived(Order order)
+        public async Task<IActionResult> OrderReceived([FromBody] Order order)
         {
             if (order is not null)
             {
