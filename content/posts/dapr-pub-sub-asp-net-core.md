@@ -6,7 +6,7 @@ tags: ["Dapr","Dotnet","ASP.NET Core", "Azure Service Bus", "Messaging"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tr78hpwthfhjxr5a9zvs.png
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ihtfh2rwbezmo90zri4w.png
     alt: "Implementing Dapr Pub/Sub in ASP.NET Core Web APIs"
     caption: "Dapr's Pub/Sub API simplifies the implementation of pub/sub functionality in distributed architectures."
 ---
