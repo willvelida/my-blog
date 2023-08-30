@@ -8,7 +8,7 @@ draft: false
 
 I'm a Lead Software Engineer for Azeniz, based in Melbourne, Australia! My main focus is on Azure Compute (So Functions, Container Apps, App Service) and Cloud Native technologies (such as Kubernetes, Dapr). My main programming language is C#, but I'm also learning how to use Golang.
 
-It's fair to say that my background is a little mixed 😂 I started out life wanting to be a rugby player. So much so I moved all the way to Christchurch, New Zealand straight out of high school. After spending couple of years running into people bigger than me and surviving a couple of earthquakes, I decided to give university study a try.
+It's fair to say that my background is a little mixed 😂 I started out life wanting to be a rugby player. So much so I moved all the way to Christchurch, New Zealand straight out of high school. After spending couple of years running into people bigger than me and surviving a couple of earthquakes, I went to university.
 
 I moved up to Auckland, where I began studying Commerce at the University of Auckland. I intended to major in Economics and Finance, but after a particularly boring lecture I decided to change track. I opted for Information System and liked it so much I ended up continuing into postgraduate study, earning First-class honours 👨‍🎓
 
