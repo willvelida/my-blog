@@ -1,7 +1,7 @@
 ---
 title: "Getting started with Azure Cognitive Search in C#"
 date: 2023-09-27
-draft: true
+draft: false
 tags: ["Azure","Azure Cognitive Search","AI", "C#", "Bicep"]
 ShowToc: true
 TocOpen: true
