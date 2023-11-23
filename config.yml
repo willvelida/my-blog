@@ -12,7 +12,7 @@ params:
       enabled: true
       title: "Will Velida" # optional default will be site title
       subtitle: "I code, I blog, I speak"
-      imageUrl: "https://media.licdn.com/dms/image/C5603AQEJ6RoJqRklIw/profile-displayphoto-shrink_400_400/0/1668105239730?e=1697673600&v=beta&t=h-gMa-4b0ZAa8BnSpnduTYmlthFNhzo4BgfZai8ctHM" # optional
+      imageUrl: "https://avatars.githubusercontent.com/u/8111944?v=4" # optional
       imageTitle: "This is me" # optional
       imageWidth: 120 # custom size
       imageHeight: 120 # custom size
