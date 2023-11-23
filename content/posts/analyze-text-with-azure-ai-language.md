@@ -11,7 +11,7 @@ cover:
     caption: 'With Azure AI Language services, we can perform powerful text analytics on text, such as Named-Entity Recognition, and Language Detection'
 ---
 
-How much text data do you produce on a daily basis? This could be in the form of an email you send to a colleague, or posts you send on social media. You may have gone to a new resturant and given them a review online, or you could have created some documents such as contracts as part of your work. Now imagine all that data being created on a global scale. How can we apply AI to this vast amount of text data to extract insights from it?
+How much text data do you produce on a daily basis? This could be in the form of an email you send to a colleague, or posts you send on social media. You may have gone to a new restaurant and given them a review online, or you could have created some documents such as contracts as part of your work. Now imagine all that data being created on a global scale. How can we apply AI to this vast amount of text data to extract insights from it?
 
 The Azure AI Language services provides an API for common text analysis tasks that you can use within your own application code. 
 
