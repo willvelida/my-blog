@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0ffa6wtm2n2al0dz6sn2.png
     alt: "A 3D digital illustration in wide format depicting a data management concept. In the center, a large envelope labeled 'CLAIM CHECK' radiates with a blue glow and hovers above a futuristic messaging platform, symbolizing its delivery. To the right, a cube marked 'PAYLOAD' is connected to the platform via a glowing orange data stream, representing its storage in an external service. On the left, an abstract device represents the splitting of the message into the claim check and payload. The background features a network of lines and nodes, suggestive of a high-tech data transfer system."
-    caption: 'Using the Claim-Check patter, we can process large message without impacting our service bus and throttling our clients.'
+    caption: 'Using the Claim-Check pattern, we can process large message without impacting our service bus and throttling our clients.'
 ---
 
 The **Claim-Check** pattern, or Reference-Based Messaging, is a pattern where we split a large message into a claim check and a payload. The claim check is sent to our message broker and the payload will be stored in an external data store.
