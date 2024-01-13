@@ -1,5 +1,5 @@
 ---
-title: "The Claim Check Pattern (reference-based messaging)"
+title: "The Claim-Check Pattern (reference-based messaging)"
 date: 2024-01-13
 draft: false
 tags: ["Azure","Architecture", "Messaging", "Cloud Design Patters"]
