@@ -2,7 +2,7 @@
 title: "The Claim-Check Pattern (reference-based messaging)"
 date: 2024-01-13
 draft: false
-tags: ["Azure","Architecture", "Messaging", "Cloud Design Patters"]
+tags: ["Azure","Architecture", "Messaging", "Cloud Design Patterns"]
 ShowToc: true
 TocOpen: true
 cover:
@@ -65,7 +65,7 @@ Another factor to consider is that since you'll be storing the message payload i
 
 In this article, we discussed the **Claim-Check** pattern and how we can use it to process messages that are larger in size than our message broker can handle.
 
-If you want to read more about this patterns, check out the following resources:
+If you want to read more about this pattern, check out the following resources:
 
 - [Claim-Check pattern on Enterprise Integration Patterns](https://www.enterpriseintegrationpatterns.com/patterns/messaging/StoreInLibrary.html)
 - [Azure Architecture doc on the Claim-Check pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/claim-check)
