@@ -1,13 +1,14 @@
 ---
 title: "The Competing Consumers Pattern"
-date: 2024-01-16
+date: 2024-01-15
 draft: false
 tags: ["Azure","Architecture", "Messaging", "Cloud Design Patterns"]
 ShowToc: true
 TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/70lpttvdgbod5rl2k18m.png
-    alt: 'A conceptual 3D rendering depicting the 'Competing Consumers' model in message processing. Multiple futuristic robotic arms, representing consumers, extend towards a central, glowing digital messaging channel. This channel is overflowing with luminous data messages, illustrating a high volume of information. The robotic arms are engaged in grabbing and processing these messages, symbolizing the concepts of optimizing throughput, enhancing scalability, and distributing workload. The scene is set against a sleek, high-tech backdrop, emphasizing advanced technology and digital processing.'
+    alt: "A conceptual 3D rendering depicting the 'Competing Consumers' model in message processing. Multiple futuristic robotic arms, representing consumers, extend towards a central, glowing digital messaging channel. This channel is overflowing with luminous data messages, illustrating a high volume of information. The robotic arms are engaged in grabbing and processing these messages, symbolizing the concepts of optimizing throughput, enhancing scalability, and distributing workload. The scene is set against a sleek, high-tech backdrop, emphasizing advanced technology and digital processing."
+    caption: 'Competing Consumers can enable multiple consumers to process messages received on the same message broker. Multiple messages can be processed concurrently to optimize the throughput and scalability of our application.'
 ---
 
 Applications running in the cloud should expect to handle a large number of requests. One method of dealing with large amounts of requests is to pass them through a message broker to a consumer service that handles these requests asynchronously. This helps ensure that requests are being processed without throttling or degrading the performance of our applications.
@@ -28,7 +29,7 @@ As I mentioned earlier, the Computing Consumers pattern enables multiple consume
 
 Using this pattern, we can use a message queue to communicate between the applications and instances of the consumer service. Your application will post messages to the queue, and instances of your consumer service will receive messages from the queue and process them. This allows the pool of consumer services to handle messages from any instance of your application, like so:
 
-![A schematic diagram illustrating a message queuing system in Azure Service Bus. On the left, multiple application instances, represented by lightning bolt icons, are generating messages. These messages are directed towards a central Azure Service Bus Message Queue, depicted as a series of envelopes lined up in a queue. On the right side of the queue, there's a consumer service instance pool, indicated by a vertical rectangle filled with lightning bolt icons, processing the messages from the queue. The diagram represents the flow of messages from producers to a managed message queue and then to the consumers.](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lsd0rmp2qsk2g2wphakd.png)
+![A schematic diagram illustrating a message queuing system in Azure Service Bus. On the left, multiple application instances, represented by lightning bolt icons, are generating messages. These messages are directed towards a central Azure Service Bus Message Queue, depicted as a series of envelopes lined up in a queue. On the right side of the queue, there's a consumer service instance pool, indicated by a vertical rectangle filled with lightning bolt icons, processing the messages from the queue. The diagram represents the flow of messages from producers to a managed message queue and then to the consumers](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lsd0rmp2qsk2g2wphakd.png)
 
 ## What benefits can the Competing Consumers pattern provide?
 
