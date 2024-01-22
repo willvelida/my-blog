@@ -53,7 +53,7 @@ The persistence mechanism of your chosen queue technology is also important here
 
 ## Conclusion
 
-In this article, we discussed the **Queue-Based Load Leveling** pattern is, how we can use it to prevent traffic overloading external services, what other benefits this pattern provides, and some things we need to keep in mind when using queue-based load leveling.
+In this article, we discussed what the **Queue-Based Load Leveling** pattern is, how we can use it to prevent traffic overloading external services, what other benefits this pattern provides, and some things we need to keep in mind when using queue-based load leveling.
 
 If you want to read more about this pattern, check out the following resources:
 
