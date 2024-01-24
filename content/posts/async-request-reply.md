@@ -61,7 +61,7 @@ However, if you're required to have a response streamed to your client applicati
 
 ## Conclusion
 
-In this article, we discussed the Asynchronous Request-Reply pattern does, some issues and considerations we need to keep in mind when implementing this pattern, as well as when we should (and shouldn't) use this pattern.
+In this article, we discussed what the Asynchronous Request-Reply pattern does, some issues and considerations we need to keep in mind when implementing this pattern, as well as when we should (and shouldn't) use it.
 
 If you want to read more about this pattern, check out the following resources:
 
