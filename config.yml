@@ -36,6 +36,7 @@ params:
   author: "Will Velida"
   env: production
   ShowCodeCopyButtons: true
+  timeZone: "Australia/Victoria"
 
 outputs:
   home:
