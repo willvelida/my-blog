@@ -1,6 +1,6 @@
 ---
 title: "The Sequential Convoy Pattern"
-date: 2024-01-27
+date: 2024-01-26
 draft: false
 tags: ["Azure","Architecture", "Messaging", "Cloud Design Patterns"]
 ShowToc: true
