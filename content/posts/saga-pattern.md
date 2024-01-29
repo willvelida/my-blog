@@ -25,7 +25,7 @@ In this article, I'll do a quick refresh on what ACID transactions mean, before 
 
 Transactions are a single unit of work that can be made up of multiple operations. Within a transaction, events change state on entities, and commands capture all the information required to perform an action on an entity.
 
-Transactions must be ACID. In a microservices architect, ACID means:
+Transactions must be ACID. In a microservices architecture, ACID means:
 
 - **Atomicity** is a set of operations that must occur together or none at all.
 - **Consistency** means that the transaction takes data from one valid state to another.
