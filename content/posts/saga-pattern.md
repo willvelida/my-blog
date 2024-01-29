@@ -1,5 +1,5 @@
 ---
-title: "The Saga Pattern"
+title: "Managing Distributed Transactions with the Saga Pattern"
 date: 2024-01-29
 draft: false
 tags: ["Azure","Architecture", "Messaging", "Cloud Design Patterns"]
