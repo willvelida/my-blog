@@ -11,21 +11,23 @@ cover:
     caption: "Radius is a open-source cloud-native platform that bridges the gap between application developers and platform engineers to build and operate cloud-native applications."
 ---
 
-Earlier on this week, I gave a presentation to two user groups on the Radius project. T
+Earlier on this week, I gave a presentation to two user groups on the Radius project. If you want to check them out you can view them here:
 
-If you want to check them out you can view them here:
+This one is from [Coding Nights NZ](https://www.meetup.com/coding-night-nz/), run by Microsoft MVP Marcel Medina:
 
 {{< youtube 2TogDyJHHJs >}}
+
+The other is from the [Azure Community Enthusiasts User Group](https://www.meetup.com/azure-community-enthusiasts/), run by Microsoft MVP Nicholas Chang:
 
 {{< youtube vV9R3owCdcQ >}} 
 
 Following these two talks, I wanted to write a blog post on setting up a basic Radius application on a Azure Kubernetes Service cluster, which is what we'll go through now 🙂
 
-I hope after NDC Sydney, I'll have some time to do some YouTube content on Radius. But for now, let's get stuck in and build a Radius application from scratch. I'll start by giving a brief explanation of what Radius is, then we'll jump into creating an AKS cluster in Azure, setting up our local machine to use Radius, then build our first Radius application.
+I hope after [NDC Sydney](https://ndcsydney.com/agenda/implementing-scalable-messaging-patterns-in-azure-0tmf/0llvl0k1t9i), I'll have some time to do some YouTube content on Radius. But for now, let's get stuck in and build a Radius application from scratch. I'll start by giving a brief explanation of what Radius is, then we'll jump into creating an AKS cluster in Azure, setting up our local machine to use Radius, then build our first Radius application.
 
 ## What is Radius?
 
-Radius is an open-source cloud-native application platform that enables collaboration between developers and operators to build cloud-native applications across private and public clouds.
+[Radius](https://radapp.io/) is an open-source cloud-native application platform that enables collaboration between developers and operators to build cloud-native applications across private and public clouds.
 
 Using Radius, developers will define their applications, and the dependencies that their application relies on. Operators define the environments that those applications will run on. Radius brings both developers and operators together to help them build and deploy apps and infrastructure that meets the requirements of both the application, and the environment that those applications need to run on.
 
