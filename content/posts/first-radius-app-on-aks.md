@@ -1,5 +1,5 @@
 ---
-title: "Building our first Radius application on Azure Kubernetes Service"
+title: "Building your first Radius application on Azure Kubernetes Service"
 date: 2024-02-07
 draft: false
 tags: ["Azure","Radius","Cloud Native", "CNCF", "Bicep", "Platform Engineering", "Kubernetes"]
