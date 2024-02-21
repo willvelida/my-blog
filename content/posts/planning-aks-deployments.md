@@ -173,3 +173,11 @@ There are different components within an AKS deployment that we can monitor. Eac
 | Kubernetes objects and workloads | Kubernetes objects such as deployments, containers,and replica sets | Resource utilization and failures |
 | Applications | workloads that are running on the AKS cluster | The monitoring here depends on your architecture, but it includes app logs, service transactions etc.
 | External components | Components that aren't part of your AKS cluster | Again, specific to your components |
+
+## Conclusion
+
+In this article, we talked about the core components of AKS, how control plane nodes, node pools and workload resources work. How we can configure network access for our AKS clusters, and how we can monitor our AKS clusters at different component levels.
+
+If you have any questions on the above, feel free to reach out to me on twitter [@willvelida](https://twitter.com/willvelida)
+
+Until next time, Happy coding! 🤓🖥️
