@@ -6,7 +6,7 @@ tags: ["Azure","Cloud Native", "Platform Engineering", "Kubernetes", "CKAD"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4ai2a0dblhtwgfxcyd4f.png
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3hwgv1he508nqm0c3tqe.png
     alt: "Core Concepts in Kubernetes"
     caption: "Understanding the core concepts of Kubernetes, and how to use the kubectl to create primitives in Kubernetes, is an important first step in your Kubernetes journey"
 ---
