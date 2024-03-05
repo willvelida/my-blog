@@ -1,5 +1,5 @@
 ---
-title: "Creating Plugins for Semantic Kernel SDK"
+title: "Creating Plugins with the Semantic Kernel SDK and C#"
 date: 2024-03-05
 draft: false
 tags: ["Azure", "AI", "Azure OpenAI", "CSharp", "Semantic Kernel SDK"]
@@ -7,7 +7,7 @@ ShowToc: true
 TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hkz0hlcgrwnbnp3lgd98.png
-    alt: "Creating Plugins for Semantic Kernel SDK"
+    alt: "Creating Plugins with the Semantic Kernel SDK and C#"
     caption: "Using the Semantic Kernel SDK, we use plugins that act as the building blocks for our AI applications. Plugins essentially define the tasks that the kernel should complete, and the kernel interfaces with large language models and run the plugins we define."
 ---
 
