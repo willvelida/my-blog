@@ -1,14 +1,14 @@
 ---
 title: "Giving our AI Agents skills using native functions in the Semantic Kernel SDK"
-date: 2024-03-05
+date: 2024-03-07
 draft: false
 tags: ["Azure", "AI", "Azure OpenAI", "CSharp", "Semantic Kernel SDK"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hkz0hlcgrwnbnp3lgd98.png
-    alt: "Creating Plugins with the Semantic Kernel SDK and C#"
-    caption: "Using the Semantic Kernel SDK, we use plugins that act as the building blocks for our AI applications. Plugins essentially define the tasks that the kernel should complete, and the kernel interfaces with large language models and run the plugins we define."
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/54rb66thsa5th1mfe8es.png
+    alt: "Giving our AI Agents skills using native functions in the Semantic Kernel SDK"
+    caption: "Native functions are functions written in native code that can be called by the Semantic Kernel SDK in an artificially intelligent (AI) application. They're useful for performing tasks that large language models can't do on their own."
 ---
 
 [In my last post on Semantic Kernel](https://www.willvelida.com/posts/create-plugins-semantic-kernel/), I talked about how we interact with large language models (LLMs) through plugins that run with NLP prompts.
