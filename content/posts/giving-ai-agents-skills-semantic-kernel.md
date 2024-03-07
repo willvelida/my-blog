@@ -6,7 +6,7 @@ tags: ["Azure", "AI", "Azure OpenAI", "CSharp", "Semantic Kernel SDK"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/54rb66thsa5th1mfe8es.png
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xf5kt26h7m005qomtt5x.png
     alt: "Giving our AI Agents skills using native functions in the Semantic Kernel SDK"
     caption: "Native functions are functions written in native code that can be called by the Semantic Kernel SDK in an artificially intelligent (AI) application. They're useful for performing tasks that large language models can't do on their own."
 ---
