@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8n6l3sttn0x63o6gq417.png
     alt: "Managing Secrets in Azure Container Apps"
-    caption: "Using the Semantic Kernel SDK, we use plugins that act as the building blocks for our AI applications. Plugins essentially define the tasks that the kernel should complete, and the kernel interfaces with large language models and run the plugins we define."
+    caption: "In Azure Container Apps, we can use secrets to secure sensitive configuration. We can reference secrets directly in our Container Apps, or reference a secret in Azure Key Vault"
 ---
 
 Azure Container Apps allows your apps to secure sensitive configuration values as *secrets*. Once you define your secrets, you can pass them as configuration to revisions of your Container Apps, and as secured values to your scale rules.
