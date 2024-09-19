@@ -259,7 +259,7 @@ module "gh_federated_credential-pr" {
 }
 ```
 
-Notice the different between the *subject* values in the two federated identity credentials. The first one with the subject ```repo:${var.github_organization_target}/${var.github_repository}:environment:${var.environment}``` will grant my GitHub Actions workflow the ability to authenticate to Azure when we're deploying in our dev environment on GitHub. The second identity with the subject ```repo:${var.github_organization_target}/${var.github_repository}:pull_request``` will enable our workflow to authenticate to Azure whenever we are trigging our workflow as part of a pull request. 
+Notice the difference between the *subject* values in the two federated identity credentials. The first one with the subject ```repo:${var.github_organization_target}/${var.github_repository}:environment:${var.environment}``` will grant my GitHub Actions workflow the ability to authenticate to Azure when we're deploying in our dev environment on GitHub. The second identity with the subject ```repo:${var.github_organization_target}/${var.github_repository}:pull_request``` will enable our workflow to authenticate to Azure whenever we are trigging our workflow as part of a pull request. 
 
 With GitHub, you can also use a branch name as the subject, for example ```repo:my-github-user/my-repo:ref:refs/heads/main```.
 
