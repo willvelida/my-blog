@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t4h1vypr4rctr0n2h6c7.png
     alt: "Integrating Azure Policy in your AKS cluster"
-    caption: "Installing extensions on AKS with Terraform allows us to install different services on our cluster with ARM driven experiences"
+    caption: "Using Azure Policy, we can enforce compliance on our AKS clusters at the workload and Azure control plane levels"
 ---
 
 As part of my AKS lab, I wanted to see how I can enforce compliance on workloads and my AKS control plane so I get into the habit of creating secure and compliant sandbox environments. We can achieve this with Azure Policy! So in this article, I'll cover:
