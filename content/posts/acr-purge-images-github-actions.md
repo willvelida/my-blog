@@ -74,9 +74,9 @@ Let's break this down:
 
 With this ACR task, we can now look to run it as an inline script within our GitHub Actions workflow.
 
-### Running our bash script on a schedule via GitHub Actions
+### Running our ACR Task on a schedule via GitHub Actions
 
-Now that we have our bash script, let's create a GitHub Actions workflow file that runs nightly (and also on demand just so we don't have to wait to midnight if we need to clean up our images).
+Now that we have our ACR Task, let's create a GitHub Actions workflow file that runs nightly (and also on demand just so we don't have to wait to midnight if we need to clean up our images).
 
 We can run workflows in GitHub Actions by adding the `schedule` [event trigger](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule). We can pass through a CRON expression that will determine when our GitHub Action workflow. CRON jobs take the following format:
 
@@ -96,7 +96,7 @@ I use a tool like [crontab.guru](https://crontab.guru/) to help write a proper C
 
 To run jobs at midnight every day, we can use the following CRON job expression: `0 0 * * *`. If we want to run our GitHub Action workflow manually, we can use the `workflow_dispatch` trigger.
 
-As part of our workflow, we need to log into Azure, retrieve the name of our Azure Container Registry, log into the registry, and pass that value along with the resource group name into our script so we can clean up our images.
+As part of our workflow, we need to log into Azure, retrieve the name of our Azure Container Registry, log into the registry, and pass the name of our Azure Container Registry so that we can run our ACR Task.
 
 With that in mind, let's create our workflow.
 
