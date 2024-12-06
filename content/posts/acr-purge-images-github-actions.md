@@ -17,6 +17,8 @@ Depending on your build pipeline, you might be building multiple versions of the
 
 To do this, we can use [ACR tasks](https://learn.microsoft.com/azure/container-registry/container-registry-tasks-overview?WT.mc_id=MVP_400037) to clean up stale images. We can also use GitHub Actions to run scripts on a schedule, so this blog post outlines a solution that I've created that cleans up all the stale images within all the repositories in my Azure Container Registry.
 
+**UPDATE - Thanks to my friend [Jess Pomfret](https://bsky.app/profile/jpomfret.co.uk) for pointing out that I can use a wildcard for repositories, rather than using the AZ CLI to retrieve all my repositories in my container registry, and then perform a for loop over them in a bash script. This means I could get rid of the bash script, and just run the ACR Task inline in my GitHub Action! Thanks Jess!** 🙂
+
 ## What are ACR Tasks?
 
 ACR tasks provide the ability to perform compute execution workflows within ACR. You can use cloud-based container image building for platforms such as Linux, Windows, and ARM, enable automated builds triggered by source code updates, timer triggers, and updates to a container's base image, and perform on-demand container image builds.
@@ -30,7 +32,6 @@ In my scenario, I have a single Azure Container Registry with multiple repositor
 To achieve this, we need to complete the following steps:
 
 - Creating our ACR Task that cleans up our stale images.
-- Creating a bash script that can run the ACR Task over multiple repositories in our container registry.
 - Run a GitHub Actions workflow on a nightly schedule that logs into our ACR, retrieves all the repositories within our ACR, and cleans up all the stale images.
 
 ### Performing a 'dry run' of your task
@@ -38,9 +39,11 @@ To achieve this, we need to complete the following steps:
 ACR tasks allow us to perform a 'dry run' of our tasks before we actually commit them (similar to `BEGIN TRANSACTION` AND `ROLLBACK TRANSACTION` in T-SQL). It's a good idea to do this 'locally' in your terminal to see what would happen as a result of your task. So in my case, my ACR Task would look like this:
 
 ```bash
-PURGE_CMD="acr purge --filter 'biotrackr-auth-svc:.*' --ago 0d --keep 3 --untagged --dry-run"
+PURGE_CMD="acr purge --filter '*:.*' --ago 0d --keep 3 --untagged --dry-run"
 az acr run --cmd "$PURGE_CMD" --registry acrbiotrackrdev /dev/null
 ```
+
+Using a the `--filter` flag will target all repositories and images within our Azure Container Registry.
 
 Did you notice the `--dry-run` flag that we passed through? Yep, you guessed it - That means that this is just a dry run of our task, and nothing will actually happen. You should also see the following output in the terminal:
 
@@ -55,7 +58,7 @@ Now that we have an idea of what our ACR task will do, we can now run it within 
 The ACR task that we want to run will be as follows:
 
 ```bash
-az acr run --registry $ACR_NAME --cmd "acr purge --filter '$repository:.*' --ago 0d --keep 3 --untagged" /dev/null
+az acr run --registry $ACR_NAME --cmd "acr purge --filter '*:.*' --ago 0d --keep 3 --untagged" /dev/null
 ```
 
 Let's break this down:
@@ -63,36 +66,13 @@ Let's break this down:
 - `az acr run` will execute our command in the context of our Azure Container Registry.
 - `--registry $ACR_NAME` specifies the name of the Azure Container Registry to run the command against.
 - `--cmd "acr purge --filter '$repository:.*' --ago 0d --keep 3 --untagged"` will run the `acr purge` command with the following options.
-    - `--filter '$repository:.*'` will target all images in the specified repository.
+    - `--filter '*:.*'` will target all images in all repositories within our Azure Container Registry.
     - `--ago 0d` specifies the age of images to consider for purging. 0 days means all images within our repository.
     - `--keep 3` means that we will keep the 3 latest images.
     - `--untagged` includes untagged images in the purged operation. **If you don't do this, you'll just delete the tagged images within your repository**.
 - `/dev/null` discards the output of the `az acr run`.
 
-With this ACR Task, we need to be able to run it against all repositories within our Azure Container Registry. This can be achieved using a basic bash script like so:
-
-```bash
-#!/bin/bash
-
-# Variables
-ACR_NAME=${ACR_NAME}
-RESOURCE_GROUP=${RESOURCE_GROUP}
-
-# Get the list of repositories
-repositories=$(az acr repository list --name $ACR_NAME --resource-group $RESOURCE_GROUP --output tsv)
-
-# Loop through each repository and purge old images
-for repository in $repositories; do
-    echo "Purging old images in repository: $repository"
-    az acr run --registry $ACR_NAME --cmd "acr purge --filter '$repository:.*' --ago 0d --keep 3 --untagged" /dev/null
-done
-```
-
-Within this script, we:
-
-- Set variables for both our Container Registry name and resource group.
-- Use the AZ CLI to list all repositories within our Container Registry using the `az acr repository list` command and save that to tsv output.
-- Use a `for` loop to loop over all repositories within our Container Registry and run our ACR Task to clean up our stale images.
+With this ACR task, we can now look to run it as an inline script within our GitHub Actions workflow.
 
 ### Running our bash script on a schedule via GitHub Actions
 
@@ -157,21 +137,14 @@ jobs:
             - name: Login to Azure Container Registry
               run: az acr login --name ${{ steps.getacrname.outputs.acrName }}
 
-            - name: Run Purge Script
-              env:
-                ACR_NAME: ${{ steps.getacrname.outputs.acrName }}
-                RESOURCE_GROUP: ${{ secrets.AZURE_RG_NAME_DEV }}
+            - name: Purge old images from ACR            
               run: |
-                chmod +x infra/scripts/purge-old-images.sh
-                ./infra/scripts/purge-old-images.sh
-          
+                az acr run --registry ${{ steps.getacrname.outputs.acrName }} --cmd "acr purge --filter '*:.*' --ago 0d --keep 3 --untagged" /dev/null        
 ```
 
 In this workflow, we log into Azure using federated credentials (I've written a blog post on how to set that up [here](https://www.willvelida.com/posts/using-workload-identities-bicep-deployments-powershell/)). 
 
-We then run a couple of AZ CLI commands. First we retrieve the name of our Container Registry, and then use that to log into it so we can perform our ACR task in our bash script.
-
-With scripts, we can pass environment variables to them within GitHub Actions using the `env` parameter. Here, we pass through the name of our Container Registry that we retrieved in our `getacrname` step, along with the name of our resource group.
+We then run a couple of AZ CLI commands. First we retrieve the name of our Container Registry, and then use that to log into it so we can perform our ACR task. In our inline script that runs our ACR task, we pass through the name of our Azure Container Registry thanks to the output that we set in our `getacrname` step.
 
 **One thing to note about workflows that run on a schedule** - These won't run unless they've been [merged into your default branch](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule). This also includes workflows that are manually triggered (without a branch trigger).
 
@@ -235,7 +208,7 @@ Since we wanted to keep the latest 3 versions of our image in our repository, we
 
 ## Conclusion
 
-With ACR tasks, we can clean up stale images that we aren't using anymore, and save ourselves a bit of money on storage costs. In this article, I've integrated the AZ CLI, Bash and GitHub Actions to clean up our images in all of our repositories in our Container Registry.
+With ACR tasks, we can clean up stale images that we aren't using anymore, and save ourselves a bit of money on storage costs. In this article, I've integrated the AZ CLI and GitHub Actions to clean up our images in all of our repositories in our Container Registry.
 
 We can use the AZ CLI to run ACR Tasks on our Container Registry directly, we can create ACR tasks in Bicep. So no matter how you want to create and deploy ACR tasks, hopefully this article has explained how you can use them to perform container related actions on your Azure Container Registry.
 
