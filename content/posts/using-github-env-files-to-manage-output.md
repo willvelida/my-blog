@@ -38,7 +38,7 @@ However, during the workflow execution, you may have seen some warnings pop up i
 The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
 ```
 
-I was using the `set-output` command a lot in my Actions workflows, so this warning [came up](https://github.com/willvelida/biotrackr/actions/runs/12608745908) a lot!
+I was using the `set-output` command all over the place in my Actions workflows, so this warning [came up](https://github.com/willvelida/biotrackr/actions/runs/12608745908) a lot!
 
 GitHub announced back in October 2022 that they would be [deprecating save-state and set-output commands](https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/) in GitHub Actions. A lot of folks are still using these commands, so they postponed this change in July 2023, but in this blog post, I'll talk about what GitHub Environment files are, and how you can use them in your GitHub Actions workflows to manage state and output.
 
