@@ -44,6 +44,7 @@ params:
   author: "Will Velida"
   env: production
   ShowCodeCopyButtons: true
+  comments: true
 
 outputs:
   home:
