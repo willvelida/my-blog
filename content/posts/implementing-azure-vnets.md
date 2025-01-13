@@ -11,7 +11,7 @@ cover:
     caption: "Using Bicep, we can create Azure Virtual Networks (and subnets) for our private networking needs in Azure"
 ---
 
-Azure Virtual Networks (or VNETs) are the fundamental building block for private networks in Azure. We can built Azure VNETs that are similar to on-prem networks, with the benefit of Azure infrastructure.
+[Azure Virtual Networks (or VNETs)](https://learn.microsoft.com/azure/virtual-network/virtual-networks-overview?WT.mc_id=MVP_400037) are the fundamental building block for private networks in Azure. We can built Azure VNETs that are similar to on-prem networks, with the benefit of Azure infrastructure.
 
 We can create VNETs with their own CIDR block, and link them to other Azure VNETs and on-prem networks (providing that there's no overlap with CIDR blocks). We can also control DNS server settings, segmentation of VNETs into subnets, and more.
 
@@ -25,9 +25,9 @@ All resources integrated with our VNET can communicate outbound to the internet 
 
 Virtual Machines, AKS, App Services etc. can connect to VNETs. We can use service endpoints to connect to other Azure resources such as storage accounts, and when we create a VNET, we provide a mechanism for our services within our VNET to communicate with each other in a direct and secure manner.
 
-With connections to on-prem resources, we can use either Point-to-site virtual networks (VPNs), site-to-site VPNs, or ExpressRoute.
+With connections to on-prem resources, we can use either [Point-to-site virtual networks (VPNs)](https://learn.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways?WT.mc_id=MVP_400037), site-to-site VPNs, or [ExpressRoute](https://learn.microsoft.com/azure/expressroute/expressroute-introduction?WT.mc_id=MVP_400037).
 
-We can also use Azure VNETs to filter and route our network traffic. Using Network Security Groups (NSGs) and Network Virtual Appliances (NVAs), we can filter network traffic between subnets. By default, Azure routes traffic between subnets, connected VNETs, and the internet by default. To override this, we can implement route tables or border gateway protocol (BGP) routes.
+We can also use Azure VNETs to filter and route our network traffic. Using [Network Security Groups (NSGs)](https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview?WT.mc_id=MVP_400037) and [Network Virtual Appliances (NVAs)](https://learn.microsoft.com/azure/virtual-wan/how-to-nva-hub?WT.mc_id=MVP_400037), we can filter network traffic between subnets. By default, Azure routes traffic between subnets, connected VNETs, and the internet by default. To override this, we can implement [route tables or border gateway protocol (BGP) routes](https://learn.microsoft.com/azure/virtual-network/virtual-networks-udr-overview?WT.mc_id=MVP_400037).
 
 ## How can we design our Azure VNETs?
 
@@ -140,6 +140,9 @@ So in some situations, we'll get downtime during our deployment. In others, our 
 
 However, there may also be some situations where we need to access the resource ID of our subnet, so how can we do this **without** using child resources? As we define our subnets in our virtual network, we can use the `existing` keyword in Bicep to obtain a strongly typed reference to the subnet, and then retrieve its Id.
 
+> [!NOTE]
+> Read [this documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/scenarios-virtual-networks?WT.mc_id=MVP_400037) if you want to read more about how to deploy networking resources safely in Bicep!
+
 With all that in mind, here's our updated Bicep template:
 
 ```bicep
@@ -223,7 +226,7 @@ Bear in mind that this is a basic example. There's a whole lot more we can do wi
 
 In this post, I talked about what Azure Virtual Networks are, what we can do with them, how we can design virtual networks, and how we can define and deploy them in Bicep. This was a very basic example designed to keep it simple.
 
-As you get more familiar with networking resources in Azure, there are more complex deployment scenarios that companies of all sizes use to structure their networking resources, such as [hub and spoke](https://learn.microsoft.com/en-us/azure/architecture/networking/architecture/hub-spoke?tabs=cli).
+As you get more familiar with networking resources in Azure, there are more complex deployment scenarios that companies of all sizes use to structure their networking resources, such as [hub and spoke](https://learn.microsoft.com/azure/architecture/networking/architecture/hub-spoke?tabs=cli&WT.mc_id=MVP_400037).
 
 If you have any questions about this, please feel free to either **comment below** or reach out to me on [BlueSky](https://bsky.app/profile/willvelida.com)! If you just want to look at the code for this blog post, [it's on my GitHub!](https://github.com/willvelida/azure-networking-samples)
 
