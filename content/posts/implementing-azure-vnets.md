@@ -69,7 +69,7 @@ When it comes to naming our VNETs, VNETs have a resource group scope. So say we 
 
 An Azure resource (such as a web app, SQL database etc), can only be created in a VNET that exists in the same region and subscription as the resource. However, if we need to connect VNETs that exist in different subscriptions and regions, we can do so (I'll cover VNET peering in more detail in a future blog post).
 
-## How can we implementing our VNETs using Bicep?
+## How can we implement our VNETs using Bicep?
 
 Let's get our hands dirty and create a VNET with some subnets. We won't deploy any resources to integrate with our VNET just to keep things simple. All we'll do here is create a **single vnet with three subnets**. 
 
