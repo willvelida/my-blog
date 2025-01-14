@@ -2,7 +2,7 @@
 title: "Implementing a basic Azure Virtual Network with Bicep"
 date: 2025-01-13
 draft: false
-tags: ["Azure", "Networking", "Bicep", "", "AZ-700"]
+tags: ["Azure", "Networking", "Bicep", "AZ-700"]
 ShowToc: true
 TocOpen: true
 cover:
