@@ -1,7 +1,7 @@
 ---
 title: "Understanding Private and Public DNS in Azure"
 date: 2025-01-16
-draft: true
+draft: false
 tags: ["Azure", "Networking", "Bicep", "AZ-700"]
 ShowToc: true
 TocOpen: true
