@@ -11,7 +11,7 @@ cover:
     caption: "In distributed Azure architectures, we need to be able to communicate between virtual networks that are located in different regions, subscriptions, tenants etc. in a secure manner. We can achieve this with virtual network peering!"
 ---
 
-In large organizations, it's necessary to split up your virtual network infrastructure into different parts. This may happen over different Azure regions, or different subscriptions. Even in networks that are distributed, we'll need a mechanism to communicate between these different networks. For this, we can use **virtual network peering**.
+In distributed Azure architectures, it's necessary to split up your virtual network infrastructure into different parts. This may happen over different Azure regions, or different subscriptions. Even in networks that are distributed, we'll need a mechanism to communicate between these different networks. For this, we can use **virtual network peering**.
 
 Virtual network peering enables us to connect two or more [virtual networks in Azure](https://www.willvelida.com/posts/implementing-azure-vnets/), whether they are in the same Azure region or not. The traffic between peered virtual networks is private, and they appear as one for connectivity purposes. Traffic between virtual machines in peered networks uses the Microsoft backbone infrastructure.
 
