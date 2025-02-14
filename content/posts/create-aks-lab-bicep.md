@@ -13,6 +13,9 @@ cover:
 
 In this article, I'm going to show you how to build an [Azure Kubernetes Service](https://learn.microsoft.com/azure/aks/?WT.mc_id=MVP_400037) lab environment with Bicep. This sample was inspired by this [AKS Lab](https://azure-samples.github.io/aks-labs/docs/getting-started/setting-up-lab-environment) provided by the AKS team!
 
+> [!NOTE]
+> If you want to see a live demo of this instead, [check it out on my YouTube channel!](https://www.youtube.com/watch?v=iHI2M-TJefk)
+
 We're going to build the lab environment step by step using Bicep. Wherever possible, **we will avoid creating resources using the AZ CLI**, and instead take an opinionated approach to defining our infrastructure **declaratively** with Bicep instead. We will still need to use the AZ CLI to do some tasks, such as deploying our resources.
 
 If you want to follow along with this sample, you'll need the following tools and services:
