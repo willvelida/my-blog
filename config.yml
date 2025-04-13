@@ -4,7 +4,6 @@ theme: 'PaperMod'
 paginate: 5
 
 enableRobotsTXT: true
-googleAnalytics: G-PZBW0SKEMH
 enableEmoji: true
 
 params:
@@ -21,6 +20,10 @@ params:
           url: "/about"
         - name: Blog
           url: "/posts"
+
+  services:
+    googleAnalytics:
+      ID: G-PZBW0SKEMH
 
   socialIcons: # optional
       - name: "github"
