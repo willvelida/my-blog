@@ -191,7 +191,7 @@ As you can see, it's responded with some leg exercises that I could incorporate 
 
 No such luck with that one 🥲
 
-Now I'm pretty sure that any LLM could take a crack at the meaning of life **IF** you wanted it to, since we've instructed our bot not to answer any non-gym related questions, it's responded with *"I'm sorry, I can't help with that"* as we've told it to.
+Now I'm pretty sure that any LLM could take a crack at the meaning of life **IF** you wanted it to, but since we've instructed our bot not to answer any non-gym related questions, it's responded with *"I'm sorry, I can't help with that"* as we've told it to.
 
 *(As always, verify output from GenAI and don't take the advice to heart too literally. After all, you wouldn't change the direction of your life based on probability-based predictions of text......would you?)*
 
