@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t8xga4rvf0qd6gbdhejc.png
     alt: "Using GitHub Models with Semantic Kernel"
-    caption: "GitHub Models provide a simplier, and cheaper way to use call Large-Language-Models within our Semantic Kernel applications."
+    caption: "GitHub Models provide a simpler, and cheaper way to use call Large-Language-Models within our Semantic Kernel applications."
 ---
 
 I'm making a conscious effort to deepen my knowledge on [Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/), and I just want an easy way to access LLMs and SLMs without having to go through Azure OpenAI (and pay for it). [GitHub Models](https://github.blog/news-insights/product-news/introducing-github-models/) provides a number of AI models that you can use to build GenAI applications, particularly within Semantic Kernel.
