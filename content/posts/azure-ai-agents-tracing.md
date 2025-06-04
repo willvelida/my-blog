@@ -13,7 +13,7 @@ cover:
 
 Determining how Azure AI Foundry Agents makes decisions is important for troubleshooting and debugging purposes. However, it can get a little complicated when our agents perform complex workflows. Our agents could perform numerous executions, making it difficult to track decisions made by all or them, or some agents may invoke tools, that invoke other tools, which invoke more tools! (And so on and so forth).
 
-Tracing our agents helps us see the inputs and outputs involved in a particular agent run, as well as the order in which those agents were invoked. In this blog post, I'll talk about how tracing agents works, how we can do some simple tracing using the Azure AI Foundry Agents playground, and how we can implement tracing in our pro-code agents using OpenTelemetry
+Tracing our agents helps us see the inputs and outputs involved in a particular agent run, as well as the order in which those agents were invoked. In this blog post, I'll talk about how tracing agents works, how we can do some simple tracing using the Azure AI Foundry Agents playground, and how we can implement tracing in our pro-code agents using OpenTelemetry.
 
 ## Tracing in the Agents Playground
 
@@ -43,7 +43,7 @@ Finally, we can view information on any evaluators that we have selected for our
 
 ## Tracing agents with OpenTelemetry
 
-This is good for starters, but we can also trace our agents performace and behavior using OpenTelemetry and connecting an Application Insights resources to Azure AI Foundry.
+This is good for starters, but we can also trace our agents performance and behavior using OpenTelemetry and connecting an Application Insights resources to Azure AI Foundry.
 
 We can do this in the AI Foundry portal by selecting **Observability** from the left pane, select **Tracing** and then connecting an existing App Insights resource, or creating a new one:
 
@@ -107,7 +107,7 @@ opentelemetry-exporter-otlp
 azure-monitor-opentelemetry
 ```
 
-Now create a virtual environment for your Python Agent using the following commands (Powershell):
+Now create a virtual environment for your Python Agent using the following commands (PowerShell):
 
 ```powershell
 # Create a virtual environment
