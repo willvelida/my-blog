@@ -368,7 +368,7 @@ Hopefully I've given you a bit of insight into how we can use tracing within you
 
 One thing to note here is that at the time of writing, there is a bug in the tracing functionality that will cause the agent's function tool to call related information (which may include PII information) to be included in the traces even when content recording is not enabled.
 
-If you want to reac more about Observability in Azure AI Foundry Agent Service, check out the following documentation:
+If you want to read more about Observability in Azure AI Foundry Agent Service, check out the following documentation:
 
 - [Trace and observe agents](https://learn.microsoft.com/en-us/azure/ai-services/agents/concepts/tracing)
 
