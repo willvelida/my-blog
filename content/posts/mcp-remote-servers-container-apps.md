@@ -331,12 +331,14 @@ VS Code will then add the MCP server to the `mcp.json` configuration file. It sh
 "mcp": {
         "servers": {
             "aflmcpserver": {
-                "url": "https://yourcontainerappurl.io/sse",
+                "url": "https://yourcontainerappurl.io",
                 "type": "sse"
             }
         }
     },
 ```
+
+*N.B - I orginally had the `/sse` endpoint appended to the `url` value, which was causing some 405 errors to be thrown. It still worked, but by removing it, the client (VS Code), can now call GET on `/sse` to establish the sse connection, and use POST on `/message` to send MCP requests.*
 
 Next to the server in the JSON file, click `Start` and your MCP server should be connected to the server.
 
