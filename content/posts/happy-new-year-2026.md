@@ -135,7 +135,7 @@ Blog posts are also something I *should* get back into the habit of writing. One
 
 This seems like a good goal to set 😄
 
-### Pursue Happiness
+### Pursue happiness
 
 Plans are fragile things, and life often dashes expectations to the ground. That doesn't mean you shouldn't set goals, it just means that when you must adapt your plans, be gentle with yourself and view progress as a process, not just the end state.
 
