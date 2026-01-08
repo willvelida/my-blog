@@ -1,12 +1,12 @@
 ---
-title: "Exploring Azure SRE Agent Service"
+title: "Exploring Azure SRE Agent Preview Service"
 date: 2026-01-08
 draft: false
 tags: ["Azure", "Agents", "Azure Container Apps", "DevOps", "SRE"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n41y4csxavwi4bi9ioif.png
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/llcnq9yvlh9r9kofx9e4.png
     alt: "Azure SRE Agent automates operational work and reduces toil, so developers and operators can focus on high-value tasks."
     caption: "Azure SRE Agents aim to automate operational work and reduce toil. However, since it's still in Preview, there's a few gaps in functionality."
 ---
