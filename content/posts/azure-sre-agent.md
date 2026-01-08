@@ -231,7 +231,9 @@ However, beyond using Azure SRE Agent as a ChatGPT like interface for getting fa
 
 It's very early stages. The idea of an SRE Agent is promising, but at this stage of development, there's still a few gaps in SRE Agent that I'd like to see addressed.
 
-That being said, if you're on that product team and want to collaborate with me on solving those issues, please ping me on Teams! I'm here to help where I can 🙂
+Being able to provision agents with IaC us a must. It'd also be great to choose which model the SRE Agent uses.
+
+If you're on that product team and want to collaborate with me on solving those issues, please ping me on Teams! I'm here to help where I can 🙂
 
 I'd encourage everyone to have a play around with Azure SRE Agent and see how you find it. If you have had more success than me, let me know!
 
