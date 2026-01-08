@@ -1,5 +1,5 @@
 ---
-title: "Exploring Azure SRE Agent"
+title: "Exploring Azure SRE Agent Service"
 date: 2026-01-08
 draft: false
 tags: ["Azure", "Agents", "Azure Container Apps", "DevOps", "SRE"]
