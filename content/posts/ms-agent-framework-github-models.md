@@ -2,7 +2,7 @@
 title: "Using GitHub Models with the Microsoft Agent Framework"
 date: 2026-01-09
 draft: false
-tags: ["Agents", "Semantic Kernel", "AI", "CSharp", ".NET", "GitHub"]
+tags: ["Agents", "Microsoft Agent Framework", "AI", "CSharp", ".NET", "GitHub"]
 ShowToc: true
 TocOpen: true
 cover:
