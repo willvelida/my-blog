@@ -19,7 +19,7 @@ As agents become more capable of making decisions, they require own identities t
 
 Microsoft Entra Agent ID extends identity capabilities to agents, which help developers to build, govern, and protect agent identities. In this article, we're going to explore how Entra Agent ID gives agents security capabilities, such as control access policies, identity protection, and more.
 
-## Some core concepts
+## Core concepts
 
 Let's cover the basic concepts of Microsoft Entra Agent ID, starting with **Agent identity**.
 
@@ -69,7 +69,7 @@ This ensures that any authentication or authorization performed by the agent ide
 
 **Audit Logging** is when actions performed by the agent identity blueprint are recorded in audit logs as being executed by the principal. This ensures that there is accountability and traceability for operations that were performed by the agent identity blueprint.
 
-## Agent User
+### Agent User
 
 An agent user is a secondary account that an AI agent uses to authenticate to various systems. These are for when agents need to interact with systems that require user objects, essentially acting as a digital worker.
 
@@ -87,7 +87,7 @@ Agent users can act as human-user accounts, but they have a slightly different a
 
 Agent users are restricted to the credentials that they are provided through their parent relationships, rather than passwords. There are also impersonation mechanisms that agent identities have, as they can impersonate its child agent users.
 
-## Agent registry
+### Agent registry
 
 This is a centralized repository that maintains metadata about all registered agents within an organization. Using the registry, systems and services can discover agents based on their capabilities, roles, and other attributes.
 
@@ -95,14 +95,14 @@ Agent Registry integrates with Entra Agent ID and Core Directory to enforce iden
 
 The registry helps organizations secure agent discovery, apply Zero Trust principles, and maintain governance.
 
-## Operation Patterns
+### Operation Patterns
 
 The agent identity platform supports two primary patterns for how agents operate and authenticate:
 
 1. Interactive agents sign-in as a user and take action in response to user prompts, usually via a chat interface. These agents will act on behalf of the signed-in user, utilizing that user's authorization to perform actions. Interactive agents are granted Entra delegated permissions that allow them to act on behalf of users. Tokens that are issued to interactive agents are often called user token.
 2. Autonomous agents are agents that perform actions using their own identity, not a human one. These run in the background and take autonomous decisions about what actions to take. Tokens that are issued to autonomous agents are often called *agent tokens* when an agent identity is authenticated, or they can be called *agent user tokens* when an agent user is authenticated.
 
-## Owners, sponsors, and managers
+### Owners, sponsors, and managers
 
 The agent identity platform introduces an administrative model that separates technical admin from business accountability. These roles include *owners*, *sponsors*, and *managers*.
 
