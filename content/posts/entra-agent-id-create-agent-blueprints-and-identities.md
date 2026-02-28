@@ -102,7 +102,7 @@ Write-Host "Current user: $($user.DisplayName) ($($user.Id))"
 Write-Host "Sponsor user: $($user.DisplayName) ($($user.Id))"
 ```
 
-You might expect to use `Get-MgContext` to get the signed-in user, but its `Account` property can be empty when authenticating via Windows Web Account Manager (WAM). Calling the `/me` endpoint directly via `Invoke-MgGraphRequest` is more reliable — it always returns the authenticated user's profile regardless of which authentication method was used.
+You might expect to use `Get-MgContext` to get the signed-in user, but its `Account` property can be empty when authenticating via Windows Web Account Manager (WAM). Calling the `/me` endpoint directly via `Invoke-MgGraphRequest` is more reliable. It always returns the authenticated user's profile regardless of which authentication method was used.
 
 The user's object ID (`$user.Id`) is what we need for the `sponsors@odata.bind` and `owners@odata.bind` properties. In this sample, we assign the same user as both sponsor and owner, but in a production scenario you might assign a group or a different user for each role.
 
