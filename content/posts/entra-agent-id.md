@@ -2,7 +2,7 @@
 title: "Understanding Microsoft Entra Agent ID"
 date: 2026-02-27
 draft: false
-tags: ["Agents", "Security", "AI", "Identity", "Entra ID"]
+tags: ["Agents", "Security", "AI", "Identity", "Entra ID", "Entra Agent ID"]
 ShowToc: true
 TocOpen: true
 cover:

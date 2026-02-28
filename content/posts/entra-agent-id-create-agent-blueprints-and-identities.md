@@ -2,7 +2,7 @@
 title: "Creating Entra Agent ID Blueprints and Identities with PowerShell and .NET"
 date: 2026-02-28
 draft: false
-tags: ["Agents", "Security", "AI", "Identity", "Entra ID", "CSharp", "Azure Container Apps"]
+tags: ["Agents", "Security", "AI", "Identity", "Entra ID", "CSharp", "Azure Container Apps", "Entra Agent ID"]
 ShowToc: true
 TocOpen: true
 cover:
