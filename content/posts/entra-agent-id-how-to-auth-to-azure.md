@@ -204,7 +204,7 @@ The script also creates a temporary client secret on the blueprint. This is need
 
 After `azd provision` deploys the infrastructure, `hooks/postprovision.ps1` completes the identity wiring.
 
-**Step 1 — Federated Identity Credential.** Links the managed identity to the blueprint so the Container App can authenticate as the blueprint:
+**Step 1: Federated Identity Credential.** Links the managed identity to the blueprint so the Container App can authenticate as the blueprint:
 
 ```powershell
 $federatedCredential = @{
@@ -219,7 +219,7 @@ New-MgBetaApplicationFederatedIdentityCredential `
     -BodyParameter $federatedCredential
 ```
 
-**Step 2 — Agent Identity.** Uses the blueprint's client credentials to acquire a token, then calls the agent identity creation endpoint:
+**Step 2: Agent Identity.** Uses the blueprint's client credentials to acquire a token, then calls the agent identity creation endpoint:
 
 ```powershell
 # Acquire a token as the blueprint
@@ -253,7 +253,7 @@ $agentResponse = Invoke-RestMethod -Method POST `
     -ContentType "application/json"
 ```
 
-**Step 2b — Cosmos DB role assignment.** Grants the agent identity data-plane access to Cosmos DB:
+**Step 2b: Cosmos DB role assignment.** Grants the agent identity data-plane access to Cosmos DB:
 
 ```powershell
 az cosmosdb sql role assignment create `
@@ -266,7 +266,7 @@ az cosmosdb sql role assignment create `
 
 The role definition ID `00000000-0000-0000-0000-000000000002` is the Cosmos DB Built-in Data Contributor role which is a data-plane role (not a standard Azure RBAC role) that grants read/write access to Cosmos DB data.
 
-**Step 3 — Frontend app registration.** Registers the Blazor frontend with a delegated `access_agent` permission to the blueprint, grants admin consent, and adds its own FIC so the frontend can also use the managed identity for token acquisition (no client secrets on the frontend either).
+**Step 3: Frontend app registration.** Registers the Blazor frontend with a delegated `access_agent` permission to the blueprint, grants admin consent, and adds its own FIC so the frontend can also use the managed identity for token acquisition (no client secrets on the frontend either).
 
 After all steps complete, the script re-provisions infrastructure to inject the newly created `FRONTEND_APP_ID` and `AGENT_IDENTITY_ID` into the Container App environment variables, which is how the .NET code picks them up at runtime.
 
@@ -352,7 +352,7 @@ private CosmosClient GetCosmosClient()
 
 The two lines that matter are:
 
-- **`.WithAgentIdentity(agentIdentityId)`** — tells MSAL to include the agent identity's app ID in the token request. Without this, you'd get a token for the blueprint, not the agent.
+- **`.WithAgentIdentity(agentIdentityId)`** tells MSAL to include the agent identity's app ID in the token request. Without this, you'd get a token for the blueprint, not the agent.
 - **`RequestAppToken = true`** requests a client-credentials-style token (no user context). This is the autonomous agent pattern. If you wanted the interactive agent pattern (on-behalf-of-user), you'd omit this or set it to `false`.
 
 When the Cosmos SDK calls `_credential.GetTokenAsync()` under the hood, here's what actually happens:
@@ -436,15 +436,15 @@ Now let's trace what actually happens on the wire when `GetCosmosClient()` is ca
 
 Let's walk through each step:
 
-**Step 1 — Managed identity assertion.** The Container App runtime exposes the IMDS (Instance Metadata Service) endpoint at `169.254.169.254`. When MSAL needs a token, it first calls IMDS to get a signed assertion from the user-assigned managed identity. This assertion is a short-lived JWT that proves the caller is running on the specific Container App instance associated with that MI. No secrets are involved, the IMDS endpoint is only accessible from within the compute instance itself.
+**Step 1: Managed identity assertion.** The Container App runtime exposes the IMDS (Instance Metadata Service) endpoint at `169.254.169.254`. When MSAL needs a token, it first calls IMDS to get a signed assertion from the user-assigned managed identity. This assertion is a short-lived JWT that proves the caller is running on the specific Container App instance associated with that MI. No secrets are involved, the IMDS endpoint is only accessible from within the compute instance itself.
 
-**Step 2 — FIC token exchange.** MSAL posts the MI assertion to Entra ID's `/oauth2/v2.0/token` endpoint as a `client_assertion`. This is a standard OAuth 2.0 client credentials flow, but instead of a client secret, MSAL presents the MI token as a JWT bearer assertion. Crucially, because `.WithAgentIdentity()` was called, MSAL also includes the agent identity ID in the token request claims. The `scope` is set to the Cosmos DB resource URI (`.default`), telling Entra which resource the token is for.
+**Step 2: FIC token exchange.** MSAL posts the MI assertion to Entra ID's `/oauth2/v2.0/token` endpoint as a `client_assertion`. This is a standard OAuth 2.0 client credentials flow, but instead of a client secret, MSAL presents the MI token as a JWT bearer assertion. Crucially, because `.WithAgentIdentity()` was called, MSAL also includes the agent identity ID in the token request claims. The `scope` is set to the Cosmos DB resource URI (`.default`), telling Entra which resource the token is for.
 
-**Step 3 — FIC validation and token issuance.** Entra ID looks up the federated identity credential on the blueprint application. It checks three things: that the issuer matches (`login.microsoftonline.com`), that the subject matches the MI's principal ID, and that the audience is `api://AzureADTokenExchange`. If all three match, Entra issues a new access token. Because the request includes the agent identity ID, the `sub` claim in the issued token is the **agent identity's** service principal, not the managed identity, not the blueprint. The `appid` claim still references the blueprint, establishing the parent-child relationship.
+**Step 3: FIC validation and token issuance.** Entra ID looks up the federated identity credential on the blueprint application. It checks three things: that the issuer matches (`login.microsoftonline.com`), that the subject matches the MI's principal ID, and that the audience is `api://AzureADTokenExchange`. If all three match, Entra issues a new access token. Because the request includes the agent identity ID, the `sub` claim in the issued token is the **agent identity's** service principal, not the managed identity, not the blueprint. The `appid` claim still references the blueprint, establishing the parent-child relationship.
 
-**Step 4 — Bearer token to Cosmos DB.** The Cosmos SDK receives the token from `_credential.GetTokenAsync()` and attaches it as a `Bearer` header on every HTTP request to the Cosmos DB data plane. From the SDK's perspective, this is just a standard `TokenCredential`, it has no idea that agent identities or FICs are involved.
+**Step 4: Bearer token to Cosmos DB.** The Cosmos SDK receives the token from `_credential.GetTokenAsync()` and attaches it as a `Bearer` header on every HTTP request to the Cosmos DB data plane. From the SDK's perspective, this is just a standard `TokenCredential`, it has no idea that agent identities or FICs are involved.
 
-**Step 5 — Cosmos DB authorization.** Cosmos DB's data plane extracts the `sub` claim from the token, looks up the corresponding service principal, and checks whether it has a SQL role assignment. The post-provision script assigned the agent identity the Built-in Data Contributor role (definition ID `00000000-0000-0000-0000-000000000002`) scoped to the Cosmos DB account — so access is granted.
+**Step 5: Cosmos DB authorization.** Cosmos DB's data plane extracts the `sub` claim from the token, looks up the corresponding service principal, and checks whether it has a SQL role assignment. The post-provision script assigned the agent identity the Built-in Data Contributor role (definition ID `00000000-0000-0000-0000-000000000002`) scoped to the Cosmos DB account.
 
 ### What would happen without Agent ID?
 
@@ -460,7 +460,7 @@ If you used the managed identity directly (passing `new DefaultAzureCredential()
 
 The managed identity approach works fine when you have a single application doing a single thing. But the moment you run multiple agents on the same compute, or need to answer "which agent accessed this data?" in an incident, the shared identity becomes a liability. Agent ID gives you the separation without requiring separate infrastructure per agent.
 
-## Tool Calling — Where the Agent Identity Comes Alive
+## Tool Calling: Where the Agent Identity Comes Into Play
 
 We've showed how the API authenticates to Cosmos DB as the agent identity. But what *triggers* those Cosmos DB calls? The LLM does through tool calling. This is where the agent identity becomes more useful.
 
@@ -735,7 +735,7 @@ Microsoft Entra Agent ID gives agents a first-class identity in the Microsoft id
 1. **A blueprint** that serves as the template and credential holder for agent identities.
 2. **A federated identity credential** that links your compute's managed identity to the blueprint, no secrets required.
 3. **An agent identity** (a service principal) created from the blueprint, with its own RBAC assignments.
-4. **Three lines of .NET code** — `AddMicrosoftIdentityAzureTokenCredential()`, `AddAgentIdentities()`, and `.WithAgentIdentity(agentIdentityId)` that wire the credential into any Azure SDK client.
+4. **Three lines of .NET code** `AddMicrosoftIdentityAzureTokenCredential()`, `AddAgentIdentities()`, and `.WithAgentIdentity(agentIdentityId)` that wire the credential into any Azure SDK client.
 
 The result: Cosmos DB sees the *agent*, not the app. Audit logs attribute data access to a specific agent identity. Multiple agents on the same compute get independent permissions. And not a single client secret is stored or rotated anywhere in the process.
 
