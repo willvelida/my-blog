@@ -1,6 +1,6 @@
 ---
 title: "How to Call Azure Services from an AI Agent Using Entra Agent ID and the .NET Azure SDK"
-date: 2026-02-28
+date: 2026-03-02
 draft: false
 tags: ["Agents", "Security", "AI", "Identity", "Entra ID", "CSharp", "Azure Container Apps", "Entra Agent ID"]
 ShowToc: true
