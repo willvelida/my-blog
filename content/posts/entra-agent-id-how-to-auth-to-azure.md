@@ -759,7 +759,7 @@ If you want to learn more about topics covered in this blog post, please check o
 - [Introduction to Entra Agent ID](https://www.willvelida.com/posts/entra-agent-id/)
 - [Creating Entra Agent ID Blueprints and Identities with PowerShell and .NET](https://www.willvelida.com/posts/entra-agent-id-create-agent-blueprints-and-identities/)
 - [Microsoft Agent Framework overview](https://learn.microsoft.com/en-us/agent-framework/overview/)
-- [Sample repo: Azure-Samples/agent-identity-samples](https://github.com/Azure-Samples/agent-identity-samples)
+- [Sample repo: willvelida/agent-identity-samples](https://github.com/willvelida/agent-identity-samples)
 
 If you have any questions about the content here, please feel free to reach out to me on [Bluesky](https://bsky.app/profile/willvelida.com) or comment below.
 
