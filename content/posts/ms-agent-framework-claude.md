@@ -322,3 +322,7 @@ If you want to dive deeper into some of the concepts I talked about in this post
 - [AG-UI Protocol documentation](https://docs.ag-ui.com/)
 - [Anthropic pricing](https://www.anthropic.com/pricing)
 - [Biotrackr source code — GitHub](https://github.com/willvelida/biotrackr)
+
+If you have any questions about the content here, please feel free to reach out to me on [Bluesky](https://bsky.app/profile/willvelida.com) or comment below.
+
+Until next time, Happy coding! 🤓🖥️
