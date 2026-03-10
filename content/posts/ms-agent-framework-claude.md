@@ -219,12 +219,22 @@ app.MapAGUI("/", persistentAgent);
 
 The `MapAGUI()` handles:
 
-- Accepting POST requests with the AG-UI payload (session ID, messages, etc.)
-- Running the agent via `RunStreamingAsync`
-- Formatting each `AgentResponseUpdate` as an SSE event
-- Session lifecycle management
+- Accepting POST requests with the AG-UI payload (session ID, messages, etc.).
+- Running the agent via `RunStreamingAsync`.
+- Formatting each `AgentResponseUpdate` as an SSE event.
+- Session lifecycle management.
 
 On the client side, the UI doesn't need custom SSE parsing. It consumes standard AG-UI events. This makes it straightforward to build a Blazor, React, or any other frontend that speaks the AG-UI protocol.
+
+## Chat Agent in Action
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jkclcb9u19cxq2j216g2.png)
+
+Here's what this all looks like in my dashboard. In the screenshot above, I'm asking the agent about my activity data and it responds with a summary pulled directly from Biotrackr's APIs. Behind the scenes, the agent receives my message, determines which tool to call (in this case, one of the activity tools), invokes the API through the function tool, and streams the response back to the UI via the AG-UI protocol.
+
+The entire round trip, from user message to streamed response, is handled by the framework. The agent selects the right tool based on Claude's interpretation of the question, calls the underlying API, and formats the result into a natural language response. If I ask a follow-up question about the same data, the in-memory cache kicks in and the tool returns the cached result instead of hitting the API again.
+
+What I like about this setup is that the chat interface feels responsive despite the number of moving parts underneath. The AG-UI streaming means the response starts appearing in the UI as soon as Claude begins generating it, rather than waiting for the full response to complete. It makes the agent feel snappy, even when it needs to make multiple tool calls to answer a complex question.
 
 ## Designing a System Prompt for Biotrackr
 
