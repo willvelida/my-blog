@@ -1,6 +1,6 @@
 ---
 title: "Preventing Insecure Inter-Agent Communication in AI Agents"
-date: 2026-03-11
+date: 2026-03-12
 draft: false
 tags: ["Agents", "AI", ".NET", "OWASP", "Security", "Microsoft Agent Framework", "APIM", "Managed Identity", "Entra Agent ID", "A2A", "MCP"]
 ShowToc: true
