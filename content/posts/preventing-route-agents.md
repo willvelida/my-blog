@@ -15,7 +15,7 @@ What happens when the agent itself becomes the threat? Not because of a prompt i
 
 Throughout this series, we've covered controls that protect the agent from external threats (hijacked goals, misused tools, stolen identities, supply chain poisoning, code execution, context poisoning, cascading failures, and trust exploitation). But what do you do when everything else fails and the agent itself starts behaving in ways you didn't intend?
 
-For my side project (Biotrackr), this is the "what if everything breaks?" scenario. The agent is designed to be a helpful health data assistant, but if the underlying model drifts, the framework has a bug, or a dependency is compromised, the agent could start producing harmful analysis, calling tools excessively, or leaking system internals — all without a single prompt injection attack.
+For my side project (Biotrackr), this is the "what if everything breaks?" scenario. The agent is designed to be a helpful health data assistant, but if the underlying model drifts, the framework has a bug, or a dependency is compromised, the agent could start producing harmful analysis, calling tools excessively, or leaking system internals, all without a single prompt injection attack.
 
 Rogue Agents (ASI10) is about designing for containment. It's the set of controls that kick in when the agent deviates from its intended behaviour, and how you minimise the blast radius before you even notice something is wrong.
 
