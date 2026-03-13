@@ -1,12 +1,12 @@
 ---
-title: "Securing AI Agents: Implementing the OWASP Agentic Top 10 in a Real .NET Application"
+title: "Securing AI Agents: Implementing the OWASP Top 10 for Agentic Applications to my Health Data Agent"
 date: 2026-03-13
 draft: false
 tags: ["Agents", "AI", ".NET", "OWASP", "Security", "Microsoft Agent Framework"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/twzlimea8ny3tfuou2jq.png
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hzwe4hgc9p98fey45mkt.png
     alt: "Overview of the OWASP Agentic Top 10 implemented in a .NET AI agent with practical security controls."
     caption: "A practical walkthrough of the OWASP Agentic Top 10, implemented in a real .NET 10 AI agent built with the Microsoft Agent Framework."
 ---
@@ -26,6 +26,8 @@ The standard OWASP Top 10 for web apps doesn't cover agent-specific risks like g
 ## The Biotrackr Chat Agent
 
 Biotrackr is my side project that tracks health data from Fitbit, which includes data for sleep, activity, food, and weight. The chat agent is a .NET 10 Minimal API running as an Azure Container App, using Microsoft Agent Framework with Claude Sonnet 4.6 via the Anthropic provider. It has 12 function tools that call existing health data APIs through Azure API Management, persists chat history in Cosmos DB, and streams responses to a Blazor UI via the AG-UI protocol.
+
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zvglbru4j9p5jww6pbuw.png)
 
 There's a chat interface that I use to query to agent, and the agent decides which tools to call, tool results come back as LLM context, and the agent responds. Every step in that pipeline is a potential attack surface.
 
