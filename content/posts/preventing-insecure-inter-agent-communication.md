@@ -6,7 +6,7 @@ tags: ["Agents", "AI", ".NET", "OWASP", "Security", "Microsoft Agent Framework",
 ShowToc: true
 TocOpen: true
 cover:
-    image: hhttps://dev-to-uploads.s3.amazonaws.com/uploads/articles/p3wpof34c8y2b5lox81v.png
+    image: https://dev-to-uploads.s3.amazonaws.com/uploads/articles/p3wpof34c8y2b5lox81v.png
     alt: "Preventing OWASP ASI07 Insecure Inter-Agent Communication in a .NET AI agent with mutual authentication, signed messages, anti-replay, typed contracts, and protocol pinning."
     caption: "Implementing OWASP ASI07 mitigations against Insecure Inter-Agent Communication in a .NET 10 AI agent built with the Microsoft Agent Framework."
 ---
