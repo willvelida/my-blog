@@ -11,7 +11,7 @@ cover:
     caption: "Implementing OWASP ASI08 mitigations against Cascading Failures in a .NET 10 AI agent built with the Microsoft Agent Framework."
 ---
 
-Your AI agent depends on a chain of services. In my side project (Biotrackr), the chain looks like this: Claude API for reasoning, APIM for routing, downstream APIs for health data, and Cosmos DB for chat history. When one link in that chain fails, things can get ugly fast.
+Your AI agent depends on a chain of services. In my side project ([Biotrackr](https://github.com/willvelida/biotrackr)), the chain looks like this: Claude API for reasoning, APIM for routing, downstream APIs for health data, and Cosmos DB for chat history. When one link in that chain fails, things can get ugly fast.
 
 Imagine this: Claude API returns a 429 (rate limited). The agent retries the same request. Each retry consumes more tokens. More 429s. The conversation times out. The user sees an error and submits again, doubling the load. A single rate limit hit has cascaded into a degraded experience, wasted tokens, and a frustrated user (in my case, just me screaming at my own agent 😅 For you however, that would be your customers!).
 

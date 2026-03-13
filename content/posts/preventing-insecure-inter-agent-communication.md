@@ -11,7 +11,7 @@ cover:
     caption: "Implementing OWASP ASI07 mitigations against Insecure Inter-Agent Communication in a .NET 10 AI agent built with the Microsoft Agent Framework."
 ---
 
-Biotrackr is a single-agent system. One agent, twelve tools, one identity. That is an architectural choice that eliminates an entire vulnerability class **Insecure Inter-Agent Communication (ASI07)**. But what happens when the system grows?
+[Biotrackr](https://github.com/willvelida/biotrackr) is a single-agent system. One agent, twelve tools, one identity. That is an architectural choice that eliminates an entire vulnerability class **Insecure Inter-Agent Communication (ASI07)**. But what happens when the system grows?
 
 Imagine Biotrackr evolves into a multi-agent platform: a **Data Retrieval Agent** that fetches health records, a **Health Advisor Agent** that provides wellness recommendations based on trends, and an **Orchestrator Agent** that coordinates them. Suddenly, agents are talking to each other, passing data, delegating tasks, sharing context. Every message between them is a potential attack surface.
 
