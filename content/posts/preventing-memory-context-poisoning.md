@@ -13,7 +13,7 @@ cover:
 
 Every time your AI agent saves a conversation, you're creating a potential attack vector. ASI06 (Memory and Context Poisoning) asks a deceptively simple question: "can previous conversations corrupt future ones?"
 
-For my side project (Biotrackr), this is one of the more interesting risks. The chat agent persists conversation history to Cosmos DB, and those persisted conversations become context when a user continues an old chat. A poisoned message from 2 weeks ago could influence today's analysis. The `IMemoryCache` used for tool response caching is shared across sessions. A cached response could influence a different session's results.
+For my side project ([Biotrackr](https://github.com/willvelida/biotrackr)), this is one of the more interesting risks. The chat agent persists conversation history to Cosmos DB, and those persisted conversations become context when a user continues an old chat. A poisoned message from 2 weeks ago could influence today's analysis. The `IMemoryCache` used for tool response caching is shared across sessions. A cached response could influence a different session's results.
 
 ASI06 extends the persistence and memory dimensions that LLM02:2025 (Sensitive Information Disclosure) identifies, focusing on how stored context can be weaponised. The OWASP specification defines 9 prevention and mitigation guidelines. Let's walk through each one and see how Biotrackr implements (or could implement) them.
 

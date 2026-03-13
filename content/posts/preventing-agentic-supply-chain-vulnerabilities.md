@@ -13,7 +13,7 @@ cover:
 
 Your AI Agent's security is only as strong as its weakest dependency. Whatever packages you are using within your agents, you're trusting that those packages that have been published haven't been tampered with and that they don't contain vulnerabilities. The same applies for every transitive dependency in your graph.
 
-In Biotrackr, I'm using a couple of packages that are still in preview, so there may be flaky APIs that could affect my agent's security and reliability. Agentic Supply Chain Vulnerabilities are amplified in agents because AI frameworks are in preview (at time of writing). The technology is evolving rapidly, and these frameworks have deep dependency trees that are harder to audit.
+In [Biotrackr](https://github.com/willvelida/biotrackr), I'm using a couple of packages that are still in preview, so there may be flaky APIs that could affect my agent's security and reliability. Agentic Supply Chain Vulnerabilities are amplified in agents because AI frameworks are in preview (at time of writing). The technology is evolving rapidly, and these frameworks have deep dependency trees that are harder to audit.
 
 In this article, we'll cover **Agentic Supply Chain Vulnerabilities**, and how we can implement prevention and mitigation strategies to prevent vulnerabilities from affecting our supply chain, using Biotrackr as an example.
 

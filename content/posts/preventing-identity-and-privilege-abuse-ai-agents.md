@@ -11,7 +11,7 @@ cover:
     caption: "Implementing OWASP ASI03 mitigations against Identity and Privilege Abuse in a .NET 10 AI agent built with the Microsoft Agent Framework."
 ---
 
-One of the challenges I faced developing an agent for my side project (Biotrackr) was how do I manage identity. Some AI Agents share the same service principals or managed identity with the application, which is used to authenticate API calls, access databases etc.
+One of the challenges I faced developing an agent for my side project ([Biotrackr](https://github.com/willvelida/biotrackr)) was how do I manage identity. Some AI Agents share the same service principals or managed identity with the application, which is used to authenticate API calls, access databases etc.
 
 This is an issue, because if the application has contributor access to a database, so does the agent. If the agent gets compromised, then the blast radius extends to the entire application's permission scope.
 

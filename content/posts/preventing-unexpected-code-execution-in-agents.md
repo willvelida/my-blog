@@ -15,7 +15,7 @@ Can your AI Agent run code? If not, you probably don't think that unexpected cod
 
 Even an Agent with read-only capabilities and no code interpreter has an execution environment, tool parameters that flow from LLM output, and a CI/CD pipeline that needs to be secure.
 
-For my little side project (Biotrackr), I just designed the agent to be a read-only chat bot. There's no code interpreter, no shell access, no dynamic code generation. However the controls still apply!
+For my little side project ([Biotrackr](https://github.com/willvelida/biotrackr)), I just designed the agent to be a read-only chat bot. There's no code interpreter, no shell access, no dynamic code generation. However the controls still apply!
 
 ASI05 builds on the mitigations of LLM05:2025 (Improper Output Handling) by extending them to agentic code generation and execution pipelines. The OWASP specification defines 7 prevention and mitigation guidelines. Let's walk through each one and see how Biotrackr implements (or could implement) them.
 
