@@ -11,11 +11,13 @@ cover:
     caption: "Implementing OWASP MCP01 mitigations against Token Mismanagement and Secret Exposure in a .NET 10 MCP server built with the Model Context Protocol SDK."
 ---
 
-When building an MCP server for my side project (Biotrackr), one of the first things I had to think about was how to manage secrets. The MCP server needs an APIM subscription key to call downstream health data APIs, and it also exposes an API key for clients connecting to it. That's two secrets that need to be stored, distributed, and protected and if either one leaks, the blast radius could extend across the entire platform.
+When building an MCP server for my side project ([Biotrackr](https://github.com/willvelida/biotrackr)), one of the first things I had to think about was how to manage secrets. The MCP server needs an APIM subscription key to call downstream health data APIs, and it also exposes an API key for clients connecting to it. That's two secrets that need to be stored, distributed, and protected and if either one leaks, the blast radius could extend across the entire platform.
 
 Tokens and credentials are the primary authentication mechanism between models, tools, and servers in MCP systems. If they're mishandled, embedded in config files, persisted in model context memory, or logged without redaction, the MCP server becomes an unintentional secret repository. Long-lived sessions and stateful agents make this worse, because tokens can be inadvertently stored, indexed, or retrieved through prompts, system recalls, or log inspection.
 
 In this article, we'll cover **Token Mismanagement and Secret Exposure (MCP01:2025)** and how Biotrackr implements prevention and mitigation strategies to keep secrets out of places they shouldn't be.
+
+If you want to take a look at the code for the MCP server I built for Biotrackr, [check it out on my GitHub!](https://github.com/willvelida/biotrackr/tree/main/src/Biotrackr.Mcp.Server)
 
 ## What is Token Mismanagement and Secret Exposure?
 
