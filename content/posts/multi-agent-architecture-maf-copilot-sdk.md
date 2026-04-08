@@ -1,7 +1,7 @@
 ---
 title: "Building a Multi-Agent System in .NET using the Microsoft Agent Framework, GitHub Copilot SDK, and Entra Agent ID"
 date: 2026-04-08
-draft: true
+draft: false
 tags: ["Agents", "AI", ".NET", "Microsoft Agent Framework", "GitHub Copilot SDK", "Entra Agent ID", "MCP"]
 ShowToc: true
 TocOpen: true
