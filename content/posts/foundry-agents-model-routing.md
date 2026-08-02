@@ -11,7 +11,8 @@ cover:
     caption: "A technical walkthrough of four Foundry agents using Model Router deployments to select models per request across Cost, Balanced, and Quality modes, without custom model-selection logic."
 ---
 
-If you prefer to watch vidoes over reading, check out this video on my YouTube channel:
+If you prefer to watch videos over reading, check out this video on my YouTube channel:
+
 {{< youtube iQ6TDvYG7KU >}}
 
 About a year ago I got back into skateboarding. Probably not the safest midlife crisis ever, but I can travel from my house to the gym, I can kickturn, and even manage a nose stall 1 out of 10 times. Look at this footage for an example
