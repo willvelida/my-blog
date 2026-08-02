@@ -39,7 +39,7 @@ In single-agent architectures, there is a tendency to pick powerful models to to
 
 Model routing acts as an automated decision-making layer that analyzes incoming tasks and directs them to the appropriate model. So instead of hard-coding every request to use an expensive, high-end model like Fable, model routing matches the complexity of the task to the optimal model.
 
-![Deck Check's two routing layers: application code selects the specialist agent, then each agent's Model Router deployment selects a model from its configured subset.](../assets/routing-concept.png)
+![Deck Check's two routing layers: application code selects the specialist agent, then each agent's Model Router deployment selects a model from its configured subset.](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/xrwigk2aa0npz2rpmh4h.png)
 
 Model routing is ideal in multi-agent architectures, as different tasks fall into different complexity categories, so they would be better served being handled by models that are appropriate to the task they are given, rather than just burning tokens to use powerful models for simple tasks. The complexity of each request is assessed by the model router before models are invoked, and *then* the model router will decide which model matches the requirement of the request. 
 
