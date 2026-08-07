@@ -11,13 +11,13 @@ cover:
     caption: "One package format for Agent Skills and MCP servers that works across VS Code, Copilot, Cursor, and more"
 ---
 
-Implementing Agent Skills and MCP servers as part of my development workflow has been a huge boost to my productivity. Long gone are the days where I'd actually have to leave my IDE to raise a pull request in GitHub, and then manually add that PR to a Jira ticket that's still impossible to find in 2026. 
+Implementing [Agent Skills](https://agentskills.io/) and [MCP servers](https://modelcontextprotocol.io/) as part of my development workflow has been a huge boost to my productivity. Long gone are the days where I'd actually have to leave my IDE to raise a pull request in GitHub, and then manually add that PR to a Jira ticket that's still impossible to find in 2026. 
 
 Now it's just a matter of me asking GitHub Copilot to create the PR using my `create-pr` Agent Skill, then use the Atlassian MCP Server to link the PR to the appropriate Jira ticket. All of which I can do without ever having to leave my IDE.
 
 However, I use different coding agents for my development. I'll use GitHub Copilot heavily for work, but I'll use Claude Code and Cursor for my side-projects. For those of you who've used both tools in anger will know that configuring Agent Skills, MCP servers, agents and other agentic components differ slightly between the two tools, which was a bit of a pain to deal with every time I wanted to use the same components in different tools.
 
-The Agent Plugins standard was announced on August 6th 2026, which defined a packaging layer that sits on top of both Agent Skills and MCP Servers, giving developers a way of installing agentic coding components in a standardized format across different coding agent clients.
+The [Agent Plugins](https://agent-plugins.org/) standard was announced on August 6th 2026, which defined a packaging layer that sits on top of both Agent Skills and MCP Servers, giving developers a way of installing agentic coding components in a standardized format across different coding agent clients.
 
 Considering it's only a day old (at time of writing), I decided to look at the docs, and see if I could develop a plugin for my health project using it's MCP server. There are some gaps that need to be addressed, but I think it's a big step towards a standard for giving developers what they need, rather than having to configure every individual component themselves.
 
@@ -27,7 +27,7 @@ In this blog post, I'll talk about what Agent Plugins are, why we need them, how
 
 Agent Plugins are an open, vendor-neutral standard for packaging reusable agent components into portable plugins. It defines a shared format for Agent Skills and MCP servers that compatible clients can discover and load.
 
-This is an initiative from AWS, Cursor, Microsoft, OpenAI, and Vercel, who are part of the Technical Steering Committee. Google has also joined as a Core Maintainer.
+This is an initiative from AWS, Cursor, Microsoft, OpenAI, and Vercel, who are part of the [Technical Steering Committee](https://github.com/agentplugins/agent-plugins-spec/blob/main/GOVERNANCE.md). Google has also joined as a Core Maintainer.
 
 Agent Plugins are just directories that include a required manifest and optional components. Take the following as an example:
 
@@ -50,7 +50,7 @@ The `plugin.json` identifies the plugin and the Agent Plugins version it targets
 
 ## Why do we need them?
 
-Agent Skills and MCP servers have been fantastic in augmenting our coding agents. The problem was that each client had their own way of implementing them. For example, in VS Code you have native support for the `SKILL.md` format. They live in `.github/skills/<name>`, `.agents/skills/` (project level), or `~/.copilot/skills/` (personal), and you define them like so:
+Agent Skills and MCP servers have been fantastic in augmenting our coding agents. The problem was that each client had their own way of implementing them. For example, in VS Code you have [native support](https://code.visualstudio.com/docs/agent-customization/agent-skills) for the `SKILL.md` format. They live in `.github/skills/<name>`, `.agents/skills/` (project level), or `~/.copilot/skills/` (personal), and you define them like so:
 
 ```markdown
 ---
@@ -65,7 +65,7 @@ description: Run and debug integration tests for the web app. Use when asked to 
 ...
 ```
 
-In Cursor, you don't have native support for `SKILL.md`. Instead, Cursor's equivalent is something called **Rules** (that live in `.cursor/rules/*.mdc`) or just the `AGENTS.md` file. A rule is markdown and frontmatter controlling *when* it applies:
+In Cursor, you don't have native support for `SKILL.md`. Instead, Cursor's equivalent is something called [**Rules**](https://cursor.com/docs/context/rules) (that live in `.cursor/rules/*.mdc`) or just the `AGENTS.md` file. A rule is markdown and frontmatter controlling *when* it applies:
 
 ```markdown
 ---
@@ -79,12 +79,12 @@ alwaysApply: false
 - Reference @service-template.ts when creating a new service.
 ```
 
-Agent Plugins is a good step towards solving this problem, as the specification defines a small interoperability floor for parts that can be portable across different coding agents. Shared components can use a predictable structure, while things like distribution, installation, permissions, UX and client-specifics can be handled by the clients themselves.
+Agent Plugins is a good step towards solving this problem, as the [specification](https://agent-plugins.org/specification) defines a small interoperability floor for parts that can be portable across different coding agents. Shared components can use a predictable structure, while things like distribution, installation, permissions, UX and client-specifics can be handled by the clients themselves.
 
 
 ## Building a minimal plugin
 
-For Biotrackr, I have an MCP server that exposes tools from across my various APIs. All this plugin will do is use that MCP server to retrieve information from my health data, as there are no write operations that the MCP Server exposes. Pretty basic, but good enough to see how Plugins work without potentially deleting any data.
+For [Biotrackr](https://github.com/willvelida/biotrackr), I have an MCP server that exposes tools from across my various APIs. All this plugin will do is use that MCP server to retrieve information from my health data, as there are no write operations that the MCP Server exposes. Pretty basic, but good enough to see how Plugins work without potentially deleting any data.
 
 Since we're just exploring Plugins, I'll keep the directory simple:
 
@@ -174,7 +174,7 @@ In VS Code, we can load our plugin via our user settings json file. Within it, w
 }
 ```
 
-The `chat.plugins.enabled` setting turns the Agent Plugin feature on. The `chat.pluginLocations` maps the plugin's root directory to `true`. VS Code auto-detects the Agent Plugins format from the `$schema` in the `plugin.json` file, then it loads the `weekly-health-brief` skill and the `biotrackr` MCP server from the `mcp.json`.
+The `chat.plugins.enabled` setting turns the Agent Plugin feature on. The `chat.pluginLocations` maps the plugin's root directory to `true`. VS Code [auto-detects the Agent Plugins format](https://code.visualstudio.com/docs/agent-customization/agent-plugins) from the `$schema` in the `plugin.json` file, then it loads the `weekly-health-brief` skill and the `biotrackr` MCP server from the `mcp.json`.
 
 You can manage the plugin in the **Extensions** view. Search `@agentPlugins` in the Extensions view to see the **Agent Plugins** that have been installed:
 
@@ -217,7 +217,7 @@ For my local plugin, it was fine to hardcode the `X-Api-Key` header just to get 
 
 There are a list of [future considerations](https://github.com/agentplugins/agent-plugins-spec/blob/main/FUTURE_CONSIDERATIONS.md) that the Agent Plugin team are working on, so I expect these questions to be answered over time.
 
-Another gap is support for Claude Code. Claude has its own plugin system which already comes with skills, agents, hooks, commands, and MCP servers. What differs between Claude Code plugins and Agent Plugins are the manifest and discovery. Agent Plugins uses a root `plugin.json` with the canonical `$schema`; Claude Code uses `.claude-plugin/plugin.json`.
+Another gap is support for [Claude Code](https://code.claude.com/docs/en/plugins-reference). Claude has its own plugin system which already comes with skills, agents, hooks, commands, and MCP servers. What differs between Claude Code plugins and Agent Plugins are the manifest and discovery. Agent Plugins uses a root `plugin.json` with the canonical `$schema`; Claude Code uses `.claude-plugin/plugin.json`.
 
 ## Conclusion
 
