@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/sbs5takkk9v4i70j7m23.png
     alt: "Running multiple GitHub Copilot agents in parallel with tmux"
-    caption: "One terminal, several Copilot agents, each in its own worktree. A beginner's guide to using tmux to run more than one AI coding agent without losing your mind (or your work)."
+    caption: "One terminal for several Copilot agents, each in its own git worktree. A beginner's guide to using tmux to run more than one AI coding agent without losing your mind (or your work)."
 ---
 
 When I first started using GitHub Copilot, I kept to the chat window, as I wasn't too comfortable with the idea of using the CLI for long prompts. The chat interface in VS Code was more friendly and intuitive for me, and I felt more in control using the chat UI.
