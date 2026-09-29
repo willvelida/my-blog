@@ -1,5 +1,5 @@
 ---
-title: "Last week in Agent Security 1: We are not-a-mused!"
+title: "Last week in Agent Security Update 1: We are not-a-mused!"
 date: 2026-09-29
 draft: false
 tags: ["OWASP", "Agents", "AI", "Security"]
