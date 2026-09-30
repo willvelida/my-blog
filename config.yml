@@ -6,6 +6,10 @@ paginate: 5
 enableRobotsTXT: true
 enableEmoji: true
 
+services:
+  googleAnalytics:
+    ID: G-PZBW0SKEMH
+
 params:
   profileMode:
       enabled: true
@@ -20,10 +24,6 @@ params:
           url: "/about"
         - name: Blog
           url: "/posts"
-
-  services:
-    googleAnalytics:
-      ID: G-PZBW0SKEMH
 
   socialIcons: # optional
       - name: "github"
