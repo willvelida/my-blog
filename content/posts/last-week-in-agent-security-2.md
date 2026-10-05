@@ -1,6 +1,6 @@
 ---
 title: "Last week in Agent Security Update 2: Zam-mad Max"
-date: 2026-10-06
+date: 2026-10-05
 draft: false
 tags: ["OWASP", "Agents", "AI", "Security"]
 ShowToc: true
