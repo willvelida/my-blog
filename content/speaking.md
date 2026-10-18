@@ -21,4 +21,4 @@ I've given many talks in a variety of different formats over the years. Here's a
 
 ## Speaking at your event
 
-I plan my talks so that I can either do other talks or workshops at the same time, particularly because I'm usually travelling all the way from Australia! If you'd like me to speak at your event, please get in touch via the [contact page](contact.md).
+I plan my talks so that I can either do other talks or workshops at the same time, particularly because I'm usually travelling all the way from Australia! If you'd like me to speak at your event, please get in touch via the [contact page](https://www.willvelida.com/contact/).

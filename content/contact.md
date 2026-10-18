@@ -6,6 +6,8 @@ draft: false
 
 ## Getting in touch
 
+![](https://media.licdn.com/dms/image/v2/D5622AQGwXTgbGdovTg/feedshare-shrink_1280/B56ZyNJkJMKUAc-/0/1771894621224?e=1793836800&v=beta&t=MG_DMNKY4coAJ2mskmzCsx0xdYcwelPeIy9StZyWHio)
+
 First off, thanks for wanting to chat! I get busy from time to time (as do we all), but I'd like to think I respond fairly quickly to folks.
 
 ## What I won't respond to
