@@ -24,6 +24,10 @@ params:
           url: "/about"
         - name: Blog
           url: "/posts"
+        - name: Speaking
+          url: "/speaking"
+        - name: Contact
+          url: "/contact"
 
   socialIcons: # optional
       - name: "github"
@@ -65,11 +69,19 @@ menu:
       name: Blog
       url: /posts/
       weight: 20
+    - identifier: speaking
+      name: Speaking
+      url: /speaking/
+      weight: 30
+    - identifier: contact
+      name: Contact
+      url: /contact/
+      weight: 40
     - identifier: tags
       name: Tags
       url: /tags/
-      weight: 20
+      weight: 50
     - identifier: search
       name: Search
       url: /search/
-      weight: 30
+      weight: 60
