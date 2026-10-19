@@ -6,7 +6,7 @@ tags: ["OWASP", "Agents", "AI", "Security"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/1bsiadmivw0imsn9f1mx.png
+    image: https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/f497czmudzgiy5k27nka.png
     alt: "Last week in Agent Security Update 3: That's not Aoki!"
     caption: "More Test agents going where they shouldn’t, an MCP flaw under active attack, and infostealers going after your coding agent’s keys."
 ---
