@@ -6,14 +6,14 @@ tags: ["OWASP", "Agents", "AI", "Security"]
 ShowToc: true
 TocOpen: true
 cover:
-    image: https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/9ukj0m60yyv2iovayn70.png
+    image: https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/1bsiadmivw0imsn9f1mx.png
     alt: "Last week in Agent Security Update 3: That's not Aoki!"
     caption: "More Test agents going where they shouldn’t, an MCP flaw under active attack, and infostealers going after your coding agent’s keys."
 ---
 
 An apology to start off with! I was too busy having fun in Sydney last week hacking with customers, building agents and agent harnesses. I got to experiment with [Entra Agent ID](https://learn.microsoft.com/en-us/entra/agent-id/what-is-microsoft-entra-agent-id) and [Agent Governance Toolkit](https://github.com/microsoft/agent-governance-toolkit), two technologies I'm looking forward to building with more over the next few months.
 
-We're slowly starting to see governments around the world catch up to the dangers that AI Agents can present to organizations around the world. The EU AI office has declared that they've "started enforcing" the EU AI Act, and it has sent formal requests to both OpenAI and Anthropic about security, external evaluations and post-market monitoring. In the US, the FTC has sent civil investigative demands to both OpenAI and Anthropic, seeking records on security incidents, safeguards, marketing, and privacy. Whether this goes anywhere is anyone's guess. I'm pretty pesimistic about it, but hopefully I'm wrong.
+We're slowly starting to see governments around the world catch up to the dangers that AI Agents can present to organizations around the world. The EU AI office has declared that they've "started enforcing" the EU AI Act, and it has sent formal requests to both OpenAI and Anthropic about security, external evaluations and post-market monitoring. In the US, the FTC has sent civil investigative demands to both OpenAI and Anthropic, seeking records on security incidents, safeguards, marketing, and privacy. Whether this goes anywhere is anyone's guess. I'm pretty pessimistic about it, but hopefully I'm wrong.
 
 This week, the theme of agents drifting from their original goals (whether it's unintentional or not) continue to be a issue for governments and businesses alike. MCP servers remain a potential gateway to organizations and developer environments, and coding assistant credentials are increasing in value to potential attackers. 
 
@@ -23,7 +23,7 @@ Here’s some incidents that have happened over the period 12th October to 19th 
 
 ## CERT-In: test agents read confidential data at Indian organisations
 
-CERT-In issued an advisory that AI agents under research and evaluation by multiple AI model providers went beyond thier assigned tasks and reached live systems at numerous Indian organizations. CERT-In haven't explicitly named the providers, models, victims, sectors, or number of cases. However, they were able to determine that agents accessed business records that contained personal and confidential data.
+CERT-In issued an advisory that AI agents under research and evaluation by multiple AI model providers went beyond their assigned tasks and reached live systems at numerous Indian organizations. CERT-In haven't explicitly named the providers, models, victims, sectors, or number of cases. However, they were able to determine that agents accessed business records that contained personal and confidential data.
 
 This data included credentials and connection strings left in application configuration files and public code repositories, and over-permissive cloud roles. The advisory also states that agents sometimes reused the same exposed credentials in multiple waves of attacks.
 
@@ -33,7 +33,7 @@ CERT-In are recommending that affected targets enforce network-enforced isolatio
 
 More countries are being impacted by rogue agents (ASI10) where agents are either drifting from their original tasks or being directed to do so through their system prompt. While CERT-In provides some good guidance on how to protect your systems from rogue agents, there's clearly work to be done to prevent agents from drifting from their original tasks.
 
-Developers also need to be mindful about leaving credentials lying there for attackers to steal. Both Azure and AWS provide strong RBAC controls that can be used over permissive connection strings and API keys. This is also a good reminder to consider how agents use tools that are available to them. In the case of goal drift, agents using legitimate tools available to them won't be flagged in retrospect. They're allowed to use the tools that you configure, so think about the design of your agents and wether or not the tools you give them are too permissive.
+Developers also need to be mindful about leaving credentials lying there for attackers to steal. Both Azure and AWS provide strong RBAC controls that can be used over permissive connection strings and API keys. This is also a good reminder to consider how agents use tools that are available to them. In the case of goal drift, agents using legitimate tools available to them won't be flagged in retrospect. They're allowed to use the tools that you configure, so think about the design of your agents and whether or not the tools you give them are too permissive.
 
 - [CERT-In advisory CIAD-2026-0049](https://www.cert-in.org.in/s2cMainServlet?VLCODE=CIAD-2026-0049&pageid=PUBVLNOTES02)
 - [CERT-In Warns AI Agents Accessed Sensitive Data at Indian Organizations During Testing](https://thehackernews.com/2026/10/cert-in-warns-ai-agents-accessed.html)
@@ -47,7 +47,7 @@ A bad actor could exploit this by logging in as a regular non adminuser, and add
 
 Previdian have found that 1,423 exploitation attempts have been recorded since September 19th from 27 unique IP addresses located in Belgium, China, Germany, Hong Kong, Japan, Nigeria, the Philippines, Russia, Seychelles, Singapore, South Korea, Taiwan, Tanzania, the U.S., and Vietnam. In one observed attack, attackers checked the Langflow version, attempted to auto-login, then immediately use the resulting bearer token to access the vulnerable MCP server configuration endpoint. Some of the captured payloads included attempts to extract environment variables and sensitive Langflow configurations, Docker commands attempting to access the host filesystem and read password file contents `/etc/passwd`, and command execution probes using id, whoami, and other commands.
 
-Mapping this back to OWASP, a configuration string flaw in Langflow has become a arbitary shell exection on the agent platform's host. The playload planted as an MCP server definition also is a threat to the agent's supply chain. Exploitation also depends on the use of weak or default credentials, which leads to the theft of platform secrets and superuser access.
+Mapping this back to OWASP, a configuration string flaw in Langflow has become a arbitrary shell execution on the agent platform's host. The payload planted as an MCP server definition also is a threat to the agent's supply chain. Exploitation also depends on the use of weak or default credentials, which leads to the theft of platform secrets and superuser access.
 
 - [CVE-2026-105740: langflow Authenticated RCE Remote Code Execution](https://previdian.com/CVE-2026-105740)
 - [Langflow's Critical Authenticated RCE Flaw Targeted in 1,423 Honeypot Exploit Attempts](https://thehackernews.com/2026/10/langflows-critical-authenticated-rce.html)
@@ -58,7 +58,7 @@ On October 15th, the folks at Symantec reported that the Aoki infostealer is now
 
 An infostealer is a type of malicious software designed to covertly harvest sensitive data from a victim's computer or device without thier knowledge. Once an infostealer infects a machine, it scans the system for valuable data, bundles it into an archive, and then exfiltrates it to a command-and-control server controlled by the attacker.
 
-If an attacker is able to steal credentials from their victims, they'd be able to carry out activity under thier legitimate user's identity and API quota. That includes access to linked repositories, CI/CD pipelines and paid API quota. This is just as valuable as payment card data, as it can be cashed in on directly, and provider the attacker a route to the developer's environment.
+If an attacker is able to steal credentials from their victims, they'd be able to carry out activity under their legitimate user's identity and API quota. That includes access to linked repositories, CI/CD pipelines and paid API quota. This is just as valuable as payment card data, as it can be cashed in on directly, and provider the attacker a route to the developer's environment.
 
 Symantec doesn't know who is behind the attack, nor can they link it to any existing malware. However the nature of the attack indicates that this is a financially motivated attack.
 
@@ -78,7 +78,7 @@ OpenCode have emailed affected users and later confirmed the breach on X.
 
 ![Image description](https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/08rq5s8u7bz7y6u7kdsx.png)
 
-OpenCode have said that the breach was connected to a large-scale distilation attack, however it hasn't provided any technical evidence to how it was linked. Distilation can involve using the outputs of one AI model to train or improve another model. OpenCode hasn't said whether any exposed credentials were used to generate such requests, and it has yet to identify the attacker.
+OpenCode have said that the breach was connected to a large-scale distillation attack, however it hasn't provided any technical evidence to how it was linked. Distillation can involve using the outputs of one AI model to train or improve another model. OpenCode hasn't said whether any exposed credentials were used to generate such requests, and it has yet to identify the attacker.
 
 If agents were used here for the attack, stolen keys that are used to call LLMs are already being exploited (with some unfortunate victims receiving hefty AI-spend bills!)
 
