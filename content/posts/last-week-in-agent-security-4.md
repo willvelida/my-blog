@@ -43,6 +43,10 @@ The operator provided short instructions to agents to attempt code execution and
 
 NorForge estimates that 10% of attacks were successful. One large US retailer was independently confirmed that they were compromised, and one shell URL serving a uploader shell has been successful. The volume of data that has been taken is currently unknown. The panels also leaked secrets and some legitimate pentest firms have had client data exposed on those open panels.
 
+![AIA0001 target selection by sector, showing retail and wholesale as the largest target group.](https://norforge.com/blog/inside_cairn/images/aia0001-target-selection.webp)
+
+*Source: [NorForge — Inside Cairn: Open Windows into massive AI-Driven Cyber Operations](https://norforge.com/blog/inside_cairn).*
+
 A couple of weeks ago, I described how [Cairn](https://www.willvelida.com/posts/last-week-in-agent-security-1/#gambit-strixcairnhermes-autonomous-card-skimming-campaign) was being used in a multi-agentic attack targeting retail websites in the US. We're going to see more sophisticated rogue agent attacks using specialized frameworks to perform malicious, specific attacks on their targets, utilizing these specialized tools to successfully breach them with minimal effort from the human operator. The maker of Cairn told Reuters that the tools was not designed for hacking attacks, but we've already seen multiple instances where agents can use legitimate tools to do harm, and how attackers can exploit them to do damage.
 
 - [Inside Cairn: Open Windows into massive AI-Driven Cyber Operations - NorForge blog](https://norforge.com/blog/inside_cairn)
@@ -56,6 +60,10 @@ ARTEX, an open-source multi-agent LLM pentest framework, was used to automate th
 
 These ARTEX-driven attempts reached more than 2,250 tenants and peaks of up to 2,900 attempts per minute. Between 10th-14th October, the spray generated more than 151,000 failed logins. After the 15th, agents were able to reach Microsoft Graph and were able to change identities, groups, roles, and app credentials. In several cases, they were able to gain privileged access in under 3 hours. 
 
+![Illustration accompanying The Hacker News report on China-linked hackers using ARTEX AI agents.](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihyvW6Vi5XS9EzEem8mWZ6I1vdQwHj9pQWyIdJMAgk2HxEegqxF3tCKtOw7REdJ_V27mKU6pm6LbGcSKl5zkvy3wdEoNS3hbdGj9LnNXTuuR-g5cWisW5tp7YTHPJTJWEkyl2iDQAF2oAA9IU7tlw7d5n8hNuHwlSq49zCctuAkuI-omxB8NMByUzipUnd/s1700-nu-rw-lo-l85-e365/zz.jpg)
+
+*Source: [The Hacker News — China-Linked Hackers Use ARTEX AI Agents in ConnectWise Supply Chain Attack](https://thehackernews.com/2026/10/china-linked-hackers-use-artex-ai.html).*
+
 Looking at the prompt histories, it appears that the motive is financial, and Wiz have reported that the campaign has expanded to other software vendors. ConnectWise has responded by shutting down services and restoring them, and Microsoft Security have published a [list of immediate actions and mitigations](https://www.microsoft.com/en-us/security/blog/2026/10/21/storm-0940-uses-artex-agentic-ai-connectwise-supply-chain-compromise/) that affected customers should take.
 
 This attack managed to abuse OAuth app identities and delegated trust across multiple tenants at machine speed, using ARTEX as the multi-agentic attack vector, exploiting the tools that the framework provides to repurpose them for an offensive campaign.
@@ -68,6 +76,10 @@ This attack managed to abuse OAuth app identities and delegated trust across mul
 In more examples of rogue agents and tool misuse and exploitation, the folks at SOCRadar traced an exposed command-and-control server, and six more adversary servers, to Russian-speaking operators. This was an AI-driven intrusion ecosystem run by affiliates of the INC Ransomware and The Gentlemen Ransomware groups. The operation runs on an AI-executed, human-approved model, where a human writes a victim-specific prompt and approves each step, while commercial models that are accessed through OpenRouter carry out intrusions via a OpenCode coding agent.
 
 The toolkit includes a tool called "Phantom", which is an autonomous red-team framework, and "WormGPT-MCP", a set of MCP servers that cover reconnaissance through extortion. When a model would refuse the request, the operator would reframe it as an authorized red-team engagement, and the model would continue.
+
+![Tooling overview of an AI-executed operating structure associated with INC and The Gentlemen ransomware affiliates.](https://socradar.io/wp-content/uploads/2026/10/tooling-overview-ai-executed-operating-structure.jpg.webp)
+
+*Source: [SOCRadar — INC / The Gentlemen ransomware AI infrastructure](https://socradar.io/blog/inc-gentlemen-ransomware-ai-infrastructure/).*
 
 62 names organizations have been listed as victims, with 36 in the United States. The operators gained access by exploiting public-facing edge devices, and then moved towards ransomware deployments. This was followed by credential reuse, lateral movement, and data exfiltration.
 
@@ -88,7 +100,11 @@ The honeypoint logged more than 127,000 requests from tens of thousands of addre
 
 Turning towards vulnerabilities on the supply chain, a malicious version fo LiteLLM `litelmm==1.107.0` was published to PyPI, Docker Hub, and GHCR images. This was caused by a master key for its internal Agent Platform that was exposed in a `opencode.json` file that was committed to a public repository back on May 27th (*We've all been there before*).
 
-The commit was force-pushed over, but the key wasn't actually revoked. Attackers were able to use the key against the Agent Platform API, which returned a GitHub CLI OAuth token belonging to an organization owner. From there, the attackers were able to steal maintainer tokens, push secret-harvesting workflows, and repoint releases to lookalike repositories. 
+The commit was force-pushed over, but the key wasn't actually revoked. Attackers were able to use the key against the Agent Platform API, which returned a GitHub CLI OAuth token belonging to an organization owner. From there, the attackers were able to steal maintainer tokens, push secret-harvesting workflows, and repoint releases to lookalike repositories.
+
+![Image accompanying The Hacker News report on a leaked LiteLLM master key.](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgxQfhCGuRZSHUo3sGckM9x3uvri__keVPtpF7jfOcKP-VPZnk_7p15ZxWr_N-WMn2ZCzs-VToqNjhTtHKyLBIBXzgWDLvAowr3VLhKxX75P-7E4skEXvq14_XDT4s-wkyinfA7OI7QxOyU7KrTmpJaWLNy4f5fMLzV_9xJIftNrV8dvct2MpBoDPteqDRg/s1700-nu-rw-lo-l85-e365/litellm1.1.jpg)
+
+*Source: [The Hacker News — Report on a leaked LiteLLM master key](https://thehackernews.com/2026/10/leaked-litellm-master-key-let-attackers.html).*
 
 The malicious version runs a credential stealer at start up that takes information like SSH keys, cloud tokens, git tokens, browser data, AI tool credentials, and environment variables, and sends them to `litellm[.]dev`. It also installs a Unix backdoor that polls the code hourly for new code.
 
@@ -131,6 +147,10 @@ In Meta's Muse AI assistant, you can share conversations. These conversations ar
 However, the folks at Claroc's research team found that these links were pretty easy to find, because what Muse names each share's web address after the conversation's own title, and that address is written into public DNS. One passive-DNS search brings back thousands of them, listed by name, like a table of contents.
 
 *To be fair, this isn't a new type of leak. This has also happened to both ChatGPT and Grok conversations*
+
+![Flow diagram accompanying Claroc’s GhostShares article.](https://blog.claroc.io/img/ghostshares-flow.png)
+
+*Source: [Claroc — GhostShares article](https://blog.claroc.io/ghostshares-muse-passive-dns/).*
 
 This type of leak can lead to some pretty dangerous situations. One conversation included a candidate's notes preparing for a confidential executive-search call with a frontier AI lab, which included naming the lab's internal contact and the meeting time. Another included a to-do list that included a bank fraud alert, with partial account number and transaction information.
 
