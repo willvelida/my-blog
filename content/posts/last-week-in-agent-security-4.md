@@ -149,4 +149,6 @@ With these types of attacks being able to be executed at machine speed, more foc
 
 This also wasn't a great week for vendors. I hope that Anomaly come to the table and at least issue an advisory. This helps vulnerability and dependency scanners pick up issues in code, and help make everyone a little safer. Until then, security teams and developers need to be extra vigilant in what models, gateways etc. they are using, so they can prevent vulnerabilities causing harm.
 
-If you have any questions, feel free to reach out to me on X @willvelida or on Bluesky
+If you have any questions, feel free to reach out to me on X [@willvelida](https://twitter.com/willvelida) or on [Bluesky](https://bsky.app/profile/willvelida.com)
+
+Until next time, Happy coding! 🤓🖥️
