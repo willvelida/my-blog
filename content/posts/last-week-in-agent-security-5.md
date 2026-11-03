@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/nyjbums24ih0cqysj6ar.png
     alt: "Spider-Man pointing meme with Cursor and Anthropic pointing at each other."
-    caption: "This week: a contractor’s Claude agent allegedly leaks Pentagon network details, Cursor serves a backdoored Claude Code extension, Cathedral’s agents get inside Anthropic, 123 Reg reports an “AI-driven” breach, a worm arms 42 GitHub repos with agent hooks, embedded browsers expose five AI dev tools, and CyberStrikeAI sends 44 agents at Japan.."
+    caption: "This week: a contractor’s Claude agent allegedly leaks Pentagon network details, Cursor serves a backdoored Claude Code extension, Cathedral’s agents get inside Anthropic, 123 Reg reports an “AI-driven” breach, a worm arms 42 GitHub repos with agent hooks, embedded browsers expose five AI dev tools, and CyberStrikeAI sends rogue agents at Japanese Businesses."
 ---
 
 Last week I spoke at API Days in Melbourne, where I gave a talk on the OWASP Top 10 for Agents and how you can mitigate the risks using tools such as the [Agent Governance Toolkit](https://github.com/microsoft/agent-governance-toolkit) and [Microsoft Entra Agent ID](https://learn.microsoft.com/en-us/entra/agent-id/what-is-microsoft-entra-agent-id).
