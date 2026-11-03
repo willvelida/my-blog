@@ -8,7 +8,7 @@ TocOpen: true
 cover:
     image: https://dev-to-uploads.s3.us-east-2.amazonaws.com/uploads/articles/l6ykh06zolz2adry2jo9.png
     alt: "Last week in Agent Security Update 2: Zam-mad Max"
-    caption: "Implement and manage authentication methods in Microsoft Entra ID, including MFA, passwordless authentication, and SSPR"
+    caption: "Using Privileged Identity Management, we can implement Just-in-Time access to Entra and Azure resources that improve our security posture"
 ---
 
 Imagine if an attacker was able to compromise a privileged user at your company. The damage they could do with that identity could have permanent effects and they can continue to do that damage until someone notices.
