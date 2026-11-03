@@ -2,7 +2,7 @@
 title: "Last week in Agent Security Update 1: We are not-a-mused!"
 date: 2026-09-29
 draft: false
-tags: ["OWASP", "Agents", "AI", "Security"]
+tags: ["OWASP", "Agents", "AI", "Security", "LWIAS"]
 ShowToc: true
 TocOpen: true
 cover:

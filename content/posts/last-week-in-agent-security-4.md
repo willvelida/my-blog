@@ -2,7 +2,7 @@
 title: "Last week in Agent Security Update 4: Cairn’t Touch This"
 date: 2026-10-26
 draft: false
-tags: ["OWASP", "Agents", "AI", "Security"]
+tags: ["OWASP", "Agents", "AI", "Security", "LWIAS"]
 ShowToc: true
 TocOpen: true
 cover:

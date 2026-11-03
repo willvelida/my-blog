@@ -2,7 +2,7 @@
 title: "Last week in Agent Security Update 3: That's not Aoki!"
 date: 2026-10-19
 draft: false
-tags: ["OWASP", "Agents", "AI", "Security"]
+tags: ["OWASP", "Agents", "AI", "Security", "LWIAS"]
 ShowToc: true
 TocOpen: true
 cover:

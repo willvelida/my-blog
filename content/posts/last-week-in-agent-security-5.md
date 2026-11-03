@@ -2,7 +2,7 @@
 title: "Last week in Agent Security Update 5: The Pentagon Prompts"
 date: 2026-11-02
 draft: false
-tags: ["OWASP", "Agents", "AI", "Security"]
+tags: ["OWASP", "Agents", "AI", "Security", "LWIAS"]
 ShowToc: true
 TocOpen: true
 cover:
