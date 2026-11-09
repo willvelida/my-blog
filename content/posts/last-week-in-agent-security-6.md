@@ -45,7 +45,7 @@ Here’s some incidents that have happened over the period 2nd November to 8th N
 
 On November 2nd, [WorkOS](https://workos.com/) disclosed that an attacker using the [ARTEX](https://github.com/IlyassCODEX/ARTEX) offensive framework had accessed one of their internal sales tools. Rather than this originating from a state-sponsored attacker, a security researcher had come forward and accepted responsibility for it.
 
-The research said that their ARTEX agent had escaped the isolated environment that they were doing cybersecurity benchmark evaluation and interacted with WorkOS unintentionally. WorkOS was able to match request details provided by the researcher against company's logs, confirming that they were responsible for the unauthorized activity.
+The researcher said that their ARTEX agent had escaped the isolated environment that they were doing cybersecurity benchmark evaluation and interacted with WorkOS unintentionally. WorkOS was able to match request details provided by the researcher against company's logs, confirming that they were responsible for the unauthorized activity.
 
 While the researcher confirmed that all data obtained by the agent had been deleted, no details on how the agent escaped its testing environment have been revealed. The exposed data includes business contact details, customer account histories, product information, and summaries from customer support.
 
@@ -97,15 +97,13 @@ Finally, Censys found that more than 1,400 ARTEX control consoles were sitting o
 
 The headline number needs a little context. About 650 of those servers were set up identically across two blocks of hosting, which looks more like one or two people running lots of copies than 650 separate attackers. So Censys estimates roughly 815 distinct deployments, and says the real number is likely higher, since ARTEX works perfectly well with the console hidden away.
 
-Then it gets a bit embarrassing for the attackers (sorry, not sorry). Censys found 32 servers with open directories, which are web folders that anyone can browse and download from. Inside were exploit kits and reverse-shell scripts, an operator’s entire home folder (including their SSH and command history), a private key for a root certificate authority used to intercept encrypted traffic, and, on a server linked to the attacks on South Korean financial firms, the operator’s `.claude` folder containing their AI prompts, session histories and ARTEX configuration files. 
-
-*Yes, at least one attacker left their AI chat logs on the open internet.*
+However, it does get a bit embarrassing for the attackers. Censys found 32 servers with open directories, which are web folders that anyone can browse and download from. Inside were exploit kits and reverse-shell scripts, an operator’s entire home folder (including their SSH and command history), a private key for a root certificate authority used to intercept encrypted traffic, and, on a server linked to the attacks on South Korean financial firms, the operator’s `.claude` folder containing their AI prompts, session histories and ARTEX configuration files. 
 
 Censys also found that 155 of the hosts (about 10.6%) were running other attack infrastructure such as Cobalt Strike, vshell and AdaptixC2, so ARTEX is being bolted onto existing criminal toolkits rather than used on its own. Most of these directories were only up for hours or days, but Censys kept a record of what it saw.
 
 Strip away the AI, and the root causes are very familiar: secrets in code, over-permissioned identities, and internet-facing services with weak spots. What the agents change is the economics. Finding a leaked key, working out what it can reach and squeezing every secret out of it used to take a skilled human hours or days. Now it takes minutes and costs the attacker next to nothing (ASI03 Identity and Privilege Abuse). The agents also bend legitimate cloud APIs on the fly until something works, which is tool misuse at machine speed (ASI02 Tool Misuse and Exploitation).
 
-So if you’re running anything in Azure with app registrations you haven’t looked at in a while, now’s a good time to go through them. The agents certainly will.
+So if you’re running anything in Azure with app registrations you haven’t looked at in a while, now’s a good time to go through them.
 
 - [Threat actors use agentic AI tooling to find and abuse exposed secrets - Microsoft Security Blog](https://www.microsoft.com/en-us/security/blog/2026/11/05/threat-actors-use-agentic-ai-tooling-to-find-and-abuse-exposed-secrets/)
 - [ARTEX abuse expands as cybercriminals target financial sector - Microsoft Security Blog](https://www.microsoft.com/en-us/security/blog/2026/11/06/artex-abuse-expands-as-cybercriminals-target-financial-sector/)
