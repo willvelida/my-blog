@@ -86,15 +86,16 @@ Mapping this back to OWASP, the agent's config became the delivery mechanism in 
 I said it in Update 5 and I'll say it again: agent config files are code. Put [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) on `.claude/`, `.cursor/`, [`AGENTS.md`](https://agents.md/) and your MCP configs, alert on any change that adds a hook, and use [managed settings](https://code.claude.com/docs/en/settings) to control which hooks can run. And if there's a PAT called "Copilot" in your GitHub org that nobody remembers creating, start asking questions.
  
 - [GTIG AI Threat Tracker: Agentic Threat Activity Crosses a Significant Threshold: Google Cloud](https://cloud.google.com/blog/topics/threat-intelligence/agentic-threat-activity-crosses-a-significant-threshold)
+
 ## California sues OpenAI over agent testing and containment
  
 On November 16th, California's Attorney General Rob Bonta [sued OpenAI](https://oag.ca.gov/news/press-releases/it%E2%80%99s-golden-state-not-wild-west-attorney-general-bonta-sues-openai-over), alleging its failure to secure and monitor model testing created a public nuisance and breached California's Unfair Competition Law.
  
 The case centres on the **[Hugging Face attack](https://openai.com/index/hugging-face-incident-and-the-road-ahead/)** from July 2026, when hundreds of agents running on experimental OpenAI models escaped OpenAI's research environment and attacked Hugging Face over the internet for more than two days.
  
-The AG argues the attack was foreseeable, that OpenAI ignored its own policies, and that it misled the public about how tightly testing was controlled. He also says OpenAI's agents have since hit government health databases and even **OpenAI's own internal infrastructure**. The line that'll get quoted everywhere is that OpenAI admitted losing control of its agents **at least 80 times** during testing.
+The AG argues the attack was foreseeable, that OpenAI ignored its own policies, and that it misled the public about how tightly testing was controlled. He also says OpenAI's agents have since hit government health databases and even **OpenAI's own internal infrastructure**. OpenAI themselves have admitted losing control of its agents **at least 80 times** during testing.
  
-According to the [Cloud Security Alliance's summary](https://labs.cloudsecurityalliance.org/research/frontier-ready-daily-20261117/), the alleged failures include no egress monitoring and alerts nobody acted on. These are ordinary security controls, not exotic AI-safety problems. To be clear, none of this has been tested in court yet.
+According to the [Cloud Security Alliance's summary](https://labs.cloudsecurityalliance.org/research/frontier-ready-daily-20261117/), the alleged failures include no egress monitoring and alerts nobody acted on. These are ordinary security controls, not exotic AI-safety problems.
  
 Mapping this back to OWASP, this is agents acting outside their intended containment ([ASI10 Rogue Agents](https://www.willvelida.com/posts/preventing-route-agents/)), using access they should never have had (ASI03 Identity and Privilege Abuse).
  
@@ -119,12 +120,11 @@ It's the same story as last week's ARTEX campaigns: leaked, over-permissioned id
  
 The exposed apps included SpaceXSI's own sales territory map, a confidential X ad proposal to a US federal agency, an ICU patient's lab results (oof), a hospital group's staff list, and a timesheet that hands out employees' passwords. All good stuff….
  
-SpaceXSI took down its own employees' apps, but plenty of others are still up. A lot of people clearly picked "Anyone with the link" without thinking about what "anyone" means.
- 
-Now, my hatred for Elmo might be creating some bias here. But tools like this mean your staff are shipping production apps your security team has never heard of.
+SpaceXSI took down its own employees' apps, but plenty of others are still up. A lot of people clearly picked "Anyone with the link" without thinking about what "anyone" means. Tools like this mean it's easier for your staff to ship apps to production without your security team knowing what's been deployed.
  
 - [GhostShares 2: Grok Apps Exposed xAI's Business Secrets and People's Private Data: Claroc](https://blog.claroc.io/ghostshares-grok-build-apps/)
 - [Grok's security blind spot exposed users and Musk's company secrets: Cybernews](https://cybernews.com/security/groks-data-leak-spacexsi/)
+
 ## BluePhishing turns Entra agent blueprints into a consent-phishing identity factory
  
 Consent phishing is nothing new, but Microsoft has given us a new kind of identity to consent to. Proofpoint's Rachel Rabin has shown the old trick works on it too. Proofpoint calls it [BluePhishing](https://www.proofpoint.com/us/blog/threat-insight/BluePhishing-Initial-Access-via-Third-Party-Agent-Blueprint-Consent). It's a proof of concept that hasn't been seen in the wild, but Microsoft's MC1506733 notice says default Entra users can create agent blueprints from November 2026, so I'd rather we talk about it now.
@@ -159,24 +159,26 @@ Apply your [user consent restrictions](https://learn.microsoft.com/en-us/entra/i
  
 - [BluePhishing: Initial Access via Third-Party Agent Blueprint Consent: Proofpoint](https://www.proofpoint.com/us/blog/threat-insight/BluePhishing-Initial-Access-via-Third-Party-Agent-Blueprint-Consent)
 - [BluePhishing Entra agent consent attack: Agentbeam](https://agentbeam.com/)
+
 ## Cairn agents find and exploit a MONAI Label zero-day on their own
  
-Cairn's back! In [Update 4](https://www.willvelida.com/posts/last-week-in-agent-security-4/#cairn-agents-break-into-100-company-websites), its exposed control panels showed agents breaking into 100+ company websites. This week it levels up.
+Cairn's back! In [Update 4](https://www.willvelida.com/posts/last-week-in-agent-security-4/#cairn-agents-break-into-100-company-websites), its exposed control panels showed agents breaking into 100+ company websites. ==
  
 On November 20th, [Amazon Threat Intelligence published](https://aws.amazon.com/blogs/security/chinese-nexus-actors-cairn-ai-agents-found-a-zero-day-on-their-own/) what it found on an unauthenticated, public Cairn instance discovered back on September 10th. It held a Chinese-speaking operator's prompts and agent output from a 48-hour campaign against East Asian universities. The operator's goal was simply "obtain shell access".
  
-The failures are just as interesting. Against an open Redis server, the agents spent **16 hours and 148 actions** trying every known takeover trick. Against a GPU server, they tried 30,000+ credential combinations built from faculty directories. None of it worked, but no human grinds through 16 hours of Redis exploitation without a coffee break.
+The failures are just as interesting. Against an open Redis server, the agents spent **16 hours and 148 actions** trying every known takeover trick. Against a GPU server, they tried 30,000+ credential combinations built from faculty directories.
  
 Against [MONAI Label](https://github.com/Project-MONAI/MONAILabel), an open-source medical imaging AI app, things went differently. The agents mapped the API, found a path traversal in an upload endpoint, and went from mapping to arbitrary file write in **about 11 minutes**. Later, they wrote a reverse shell into [`sitecustomize.py`](https://docs.python.org/3/library/site.html#module-sitecustomize) (which Python imports on every start), called the app's training endpoint to spawn a new Python process, and got a shell back as **root**. Sound familiar? It's the same Python startup trick as the `.pth` file in the agent-framework compromise.
  
-On patching, the sources don't agree. Amazon says a fix and advisory ([GHSA-qc22-rmgc-vg94](https://github.com/Project-MONAI/MONAILabel/security/advisories/GHSA-qc22-rmgc-vg94)) were released, but the [CSA found](https://labs.cloudsecurityalliance.org/research/frontier-ready-daily-20261121/) PyPI still serving the vulnerable 0.8.5 on November 21st. There's no CVE, so scanners won't flag it. If you installed MONAI Label with `pip`, assume you're exposed.
+Amazon says a fix and advisory ([GHSA-qc22-rmgc-vg94](https://github.com/Project-MONAI/MONAILabel/security/advisories/GHSA-qc22-rmgc-vg94)) were released, but the [CSA found](https://labs.cloudsecurityalliance.org/research/frontier-ready-daily-20261121/) PyPI still serving the vulnerable 0.8.5 on November 21st. There's no CVE, so scanners won't flag it. If you installed MONAI Label with `pip`, assume you're exposed.
  
 Mapping this back to OWASP, an attacker's agent framework chained tools to discover and exploit a zero-day (ASI02 Tool Misuse and Exploitation), then wrote and ran its own payload to get root (ASI05 Unexpected Code Execution).
  
-This isn't vibe-hacking anymore. The agents got an IP and a goal, and *discovered* a new bug. Find the ML tools your data science teams have stood up, take them off untrusted networks, turn on authentication, and stop running them as root.
+This isn't a case of vibe-hacking. The agents got an IP and a goal, and *discovered* a new bug. Find the ML tools your data science teams have stood up, take them off untrusted networks, turn on authentication, and stop running them as root.
  
 - [Chinese-nexus actor's Cairn AI agents found a zero-day on their own: AWS Security Blog](https://aws.amazon.com/blogs/security/chinese-nexus-actors-cairn-ai-agents-found-a-zero-day-on-their-own/)
 - [Frontier Ready Daily – 21 November 2026: Cloud Security Alliance](https://labs.cloudsecurityalliance.org/research/frontier-ready-daily-20261121/)
+
 ## Meta Muse: browser bug to silent exfiltration to VM root
  
 Oh Meta…. We're back again!
