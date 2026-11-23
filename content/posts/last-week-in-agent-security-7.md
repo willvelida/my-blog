@@ -1,6 +1,6 @@
 ---
 title: "Last week in Agent Security Update 7: This is fine"
-date: 2026-11-24
+date: 2026-11-23
 draft: false
 tags: ["OWASP", "Agents", "AI", "Security", "LWIAS"]
 ShowToc: true
