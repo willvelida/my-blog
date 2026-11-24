@@ -162,7 +162,7 @@ Apply your [user consent restrictions](https://learn.microsoft.com/en-us/entra/i
 
 ## Cairn agents find and exploit a MONAI Label zero-day on their own
  
-Cairn's back! In [Update 4](https://www.willvelida.com/posts/last-week-in-agent-security-4/#cairn-agents-break-into-100-company-websites), its exposed control panels showed agents breaking into 100+ company websites. ==
+Cairn's back! In [Update 4](https://www.willvelida.com/posts/last-week-in-agent-security-4/#cairn-agents-break-into-100-company-websites), its exposed control panels showed agents breaking into 100+ company websites.
  
 On November 20th, [Amazon Threat Intelligence published](https://aws.amazon.com/blogs/security/chinese-nexus-actors-cairn-ai-agents-found-a-zero-day-on-their-own/) what it found on an unauthenticated, public Cairn instance discovered back on September 10th. It held a Chinese-speaking operator's prompts and agent output from a 48-hour campaign against East Asian universities. The operator's goal was simply "obtain shell access".
  
